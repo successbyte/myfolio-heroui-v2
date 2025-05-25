@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { Card, CardContent } from '@/components/ui/card';
 
 const quickInfo = [
   { label: 'Age', value: '25' },
@@ -9,7 +11,7 @@ const quickInfo = [
 
 export const About = () => {
   return (
-    <section id="about" className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+    <section id="about" className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -35,7 +37,7 @@ export const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                   viewport={{ once: true }}
-                  className="text-lg font-mono text-gray-300"
+                  className="text-lg font-mono text-muted-foreground"
                 >
                   {text}
                 </motion.p>
@@ -51,10 +53,10 @@ export const About = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/5 p-4 rounded-lg backdrop-blur-sm"
-                >
-                  <p className="text-sm font-mono text-gray-400">{info.label}</p>
-                  <p className="text-lg font-grotesk font-bold">{info.value}</p>
+                  className="bg-secondary/50 p-4 rounded-lg backdrop-blur-sm border border-border"
+                >  
+                  <p className="text-sm font-mono text-muted-foreground">{info.label}</p>
+                  <p className="text-lg font-grotesk font-bold text-foreground">{info.value}</p>
                 </motion.div>
               ))}
             </div>
@@ -67,32 +69,28 @@ export const About = () => {
             viewport={{ once: true }}
             className="relative aspect-square"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-2xl overflow-hidden">
-              <div className="absolute inset-0 backdrop-blur-3xl" />
-              <div className="absolute inset-0 bg-black/50" />
-              <div className="absolute inset-0 p-8">
-                <div className="h-full w-full border-2 border-white/20 rounded-xl" />
-              </div>
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                animate={{
-                  scale: [1, 1.1, 1],
-                  rotate: [0, 5, -5, 0],
-                }}
-                transition={{
-                  duration: 10,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-                className="text-9xl font-bold font-grotesk"
-              >
-                SK
-              </motion.div>
-            </div>
+            <Card className="w-full h-full overflow-hidden">
+              <CardContent className="p-8 relative h-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background rounded-xl" />
+                <div className="relative h-full w-full border-2 border-border rounded-xl overflow-hidden">
+                  <Image
+                    src="/images/avatar-1.png"
+                    alt="Profile"
+                    width={500}
+                    height={500}
+                    className="object-contain w-full h-full grayscale"
+                    priority
+                  />
+                </div>
+                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 bg-background/80 backdrop-blur-md px-6 py-3 rounded-full border border-border">
+                  <h3 className="text-xl font-grotesk font-bold">Andrew Paulson</h3>
+                  <p className="text-sm font-mono text-center text-muted-foreground">Full-Stack Developer</p>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </div>
     </section>
   );
-}; 
+};

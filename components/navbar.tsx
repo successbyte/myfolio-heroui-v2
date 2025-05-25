@@ -4,17 +4,29 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Dancing_Script } from 'next/font/google';
+
+const dancing = Dancing_Script({ subsets: ['latin'] });
 
 const navLinks = [
   { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
   { name: 'Projects', href: '/projects' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Marketplace', href: '/marketplace' },
   { name: 'Contact', href: '/contact' },
+];
+
+const chatSuggestions = [
+  "Tell me about your development process",
+  "What's your tech stack?",
+  "Can you help with my project?",
+  "What are your rates?",
+  "When are you available?",
 ];
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -31,7 +43,7 @@ export const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
         scrolled ? 'py-4 bg-background/80 backdrop-blur-lg border-b border-border' : 'py-6'
       }`}
     >
@@ -40,23 +52,23 @@ export const Navbar = () => {
           {/* Logo */}
           <Link 
             href="/" 
-            className="text-2xl font-bold hover:text-primary transition-colors"
+            className={`text-3xl font-bold hover:text-primary transition-colors ${dancing.className}`}
           >
-            Portfolio
+            Andrew Paulson
           </Link>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-2">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors relative ${
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors relative group ${
                     isActive 
                       ? 'text-primary-foreground' 
-                      : 'hover:text-primary'
+                      : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
                   {isActive && (
@@ -66,10 +78,15 @@ export const Navbar = () => {
                       transition={{ type: "spring", duration: 0.6 }}
                     />
                   )}
-                  {link.name}
+                  <span className="relative z-10">{link.name}</span>
+                  {!isActive && (
+                    <span className="absolute inset-0 rounded-full bg-secondary/0 group-hover:bg-secondary/50 transition-colors -z-10" />
+                  )}
                 </Link>
               );
             })}
+
+          
           </div>
 
           {/* Mobile Menu Button */}

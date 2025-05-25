@@ -3,32 +3,42 @@
 import { motion } from 'framer-motion';
 import { Button } from '@heroui/button';
 import { CustomCursor } from '@/components/CustomCursor';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Badge } from '@heroui/react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const blogPosts = [
   {
-    title: 'The Future of Web Development',
-    excerpt: 'Exploring the latest trends and technologies shaping the future of web development.',
-    category: 'Development',
-    date: 'Mar 15, 2024',
-    readTime: '5 min read',
-    image: '/blog1.jpg',
-  },
-  {
-    title: 'Mastering TypeScript',
-    excerpt: 'A comprehensive guide to TypeScript features and best practices.',
-    category: 'Tutorial',
-    date: 'Mar 12, 2024',
+    slug: 'building-modern-web-applications-with-nextjs-13',
+    title: 'Building Modern Web Applications with Next.js 13',
+    description: 'Learn how to leverage the power of Next.js 13 to build fast, SEO-friendly web applications with great developer experience.',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97',
+    date: 'March 15, 2024',
     readTime: '8 min read',
-    image: '/blog2.jpg',
+    category: 'Development',
+    tags: ['Next.js', 'React', 'Web Development']
   },
   {
-    title: 'UI Design Principles',
-    excerpt: 'Essential principles for creating beautiful and functional user interfaces.',
-    category: 'Design',
-    date: 'Mar 10, 2024',
+    slug: 'future-of-ui-design-trends-2024',
+    title: 'The Future of UI Design: Trends to Watch in 2024',
+    description: 'Explore the latest UI design trends that are shaping the future of digital experiences and how to implement them in your projects.',
+    image: 'https://images.unsplash.com/photo-1618788372246-79faff0c3742',
+    date: 'March 10, 2024',
     readTime: '6 min read',
-    image: '/blog3.jpg',
+    category: 'Design',
+    tags: ['UI/UX', 'Design Trends', 'Web Design']
   },
+  {
+    slug: 'mastering-typescript-advanced-tips',
+    title: 'Mastering TypeScript: Advanced Tips and Tricks',
+    description: 'Deep dive into advanced TypeScript features and patterns that will help you write better, more maintainable code.',
+    image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea',
+    date: 'March 5, 2024',
+    readTime: '10 min read',
+    category: 'Programming',
+    tags: ['TypeScript', 'JavaScript', 'Programming']
+  }
 ];
 
 const BlogCard = ({ post, index }: { post: typeof blogPosts[0]; index: number }) => {
@@ -51,7 +61,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0]; index: number })
         </h2>
 
         <p className="text-gray-400 font-mono text-sm line-clamp-2">
-          {post.excerpt}
+          {post.description}
         </p>
 
         <Button
@@ -73,7 +83,7 @@ const BlogCard = ({ post, index }: { post: typeof blogPosts[0]; index: number })
 
 const BlogPage = () => {
   return (
-    <main className="bg-black text-white min-h-screen relative">
+    <main className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-background">
       <CustomCursor />
 
       {/* Animated background */}
@@ -113,14 +123,58 @@ const BlogPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Thoughts, tutorials, and insights about web development and design.
+              Thoughts, learnings, and insights about web development, design, and technology.
             </motion.p>
           </motion.div>
 
-          {/* Blog grid */}
+          {/* Blog Posts Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
-              <BlogCard key={post.title} post={post} index={index} />
+            {blogPosts.map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`}>
+                <Card className="h-full hover:shadow-lg transition-shadow overflow-hidden group">
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    <Badge 
+                      variant="flat" 
+                      className="absolute top-4 left-4 bg-primary/90 text-primary-foreground"
+                    >
+                      {post.category}
+                    </Badge>
+                  </div>
+                  <CardHeader>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground font-mono mb-2">
+                      <span>{post.date}</span>
+                      <span>•</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
+                      {post.title}
+                    </CardTitle>
+                    <CardDescription className="line-clamp-2">
+                      {post.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {post.tags.map((tag) => (
+                        <Badge 
+                          key={tag} 
+                          variant="flat" 
+                          className="bg-secondary/50 text-foreground border border-border"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>

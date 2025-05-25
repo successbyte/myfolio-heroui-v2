@@ -1,16 +1,12 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { CustomCursor } from '@/components/CustomCursor';
-import { useParams } from 'next/navigation';
 import { Badge } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 // This would typically come from a database or CMS
-const blogPosts = {
-  'building-modern-web-applications-with-nextjs-13': {
+const blogPosts = [
+  {
+    id: 1,
     title: 'Building Modern Web Applications with Next.js 13',
     description: 'Learn how to leverage the power of Next.js 13 to build fast, SEO-friendly web applications with great developer experience.',
     content: `
@@ -60,40 +56,11 @@ const blogPosts = {
       role: 'Senior Developer'
     }
   },
-  'future-of-ui-design-trends-2024': {
-    title: 'The Future of UI Design: Trends to Watch in 2024',
-    description: 'Explore the latest UI design trends that are shaping the future of digital experiences and how to implement them in your projects.',
-    image: 'https://images.unsplash.com/photo-1618788372246-79faff0c3742',
-    date: 'March 10, 2024',
-    readTime: '6 min read',
-    category: 'Design',
-    tags: ['UI/UX', 'Design Trends', 'Web Design'],
-    author: {
-      name: 'Dale Anderson',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-      role: 'Senior Developer'
-    }
-  },
-  'mastering-typescript-advanced-tips': {
-    title: 'Mastering TypeScript: Advanced Tips and Tricks',
-    description: 'Deep dive into advanced TypeScript features and patterns that will help you write better, more maintainable code.',
-    image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea',
-    date: 'March 5, 2024',
-    readTime: '10 min read',
-    category: 'Programming',
-    tags: ['TypeScript', 'JavaScript', 'Programming'],
-    author: {
-      name: 'Dale Anderson',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-      role: 'Senior Developer'
-    }
-  }
-};
+  // Add more blog posts...
+];
 
-const BlogPost = () => {
-  const params = useParams();
-  const slug = params.slug as string;
-  const post = blogPosts[slug as keyof typeof blogPosts];
+export default function BlogPost({ params }: { params: { id: string } }) {
+  const post = blogPosts.find(p => p.id === parseInt(params.id));
 
   if (!post) {
     notFound();
@@ -185,6 +152,4 @@ const BlogPost = () => {
       </article>
     </main>
   );
-};
-
-export default BlogPost; 
+} 
