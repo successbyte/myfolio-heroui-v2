@@ -1,12 +1,31 @@
+'use client';
+
 import { Badge } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 
-// This would typically come from a database or CMS
-const blogPosts = [
+interface Author {
+  name: string;
+  image: string;
+  role: string;
+}
+
+interface BlogPost {
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  image: string;
+  date: string;
+  readTime: string;
+  category: string;
+  tags: string[];
+  author: Author;
+}
+
+const blogPosts: BlogPost[] = [
   {
-    id: 1,
+    slug: 'building-modern-web-applications-with-nextjs-13',
     title: 'Building Modern Web Applications with Next.js 13',
     description: 'Learn how to leverage the power of Next.js 13 to build fast, SEO-friendly web applications with great developer experience.',
     content: `
@@ -56,14 +75,18 @@ const blogPosts = [
       role: 'Senior Developer'
     }
   },
-  // Add more blog posts...
+  // ... other blog posts ...
 ];
 
-export default function BlogPost({ params }: { params: { id: string } }) {
-  const post = blogPosts.find(p => p.id === parseInt(params.id));
+interface Props {
+  slug: string;
+}
+
+export default function BlogPost({ slug }: Props) {
+  const post = blogPosts.find(post => post.slug === slug);
 
   if (!post) {
-    notFound();
+    return <div>Post not found</div>;
   }
 
   return (
@@ -130,7 +153,7 @@ export default function BlogPost({ params }: { params: { id: string } }) {
         <div className="prose prose-invert max-w-none">
           {post.content.split('\n').map((paragraph, index) => (
             <p key={index} className="text-lg text-muted-foreground leading-relaxed">
-              {paragraph}
+              {paragraph.trim()}
             </p>
           ))}
         </div>

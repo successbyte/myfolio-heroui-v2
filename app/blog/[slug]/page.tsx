@@ -1,16 +1,32 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { CustomCursor } from '@/components/CustomCursor';
-import { useParams } from 'next/navigation';
 import { Badge } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
-// This would typically come from a database or CMS
-const blogPosts = {
-  'building-modern-web-applications-with-nextjs-13': {
+interface Author {
+  name: string;
+  image: string;
+  role: string;
+}
+
+interface BlogPost {
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  image: string;
+  date: string;
+  readTime: string;
+  category: string;
+  tags: string[];
+  author: Author;
+}
+
+const blogPosts: BlogPost[] = [
+  {
+    slug: 'building-modern-web-applications-with-nextjs-13',
     title: 'Building Modern Web Applications with Next.js 13',
     description: 'Learn how to leverage the power of Next.js 13 to build fast, SEO-friendly web applications with great developer experience.',
     content: `
@@ -60,7 +76,8 @@ const blogPosts = {
       role: 'Senior Developer'
     }
   },
-  'future-of-ui-design-trends-2024': {
+  {
+    slug: 'future-of-ui-design-trends-2024',
     title: 'The Future of UI Design: Trends to Watch in 2024',
     description: 'Explore the latest UI design trends that are shaping the future of digital experiences and how to implement them in your projects.',
     content: `
@@ -92,7 +109,8 @@ const blogPosts = {
       role: 'Senior Developer'
     }
   },
-  'mastering-typescript-advanced-tips': {
+  {
+    slug: 'mastering-typescript-advanced-tips',
     title: 'Mastering TypeScript: Advanced Tips and Tricks',
     description: 'Deep dive into advanced TypeScript features and patterns that will help you write better, more maintainable code.',
     content: `
@@ -127,15 +145,14 @@ const blogPosts = {
       role: 'Senior Developer'
     }
   }
-};
+];
 
-const BlogPost = () => {
+export default function Page() {
   const params = useParams();
-  const slug = params.slug as string;
-  const post = blogPosts[slug as keyof typeof blogPosts];
+  const post = blogPosts.find(post => post.slug === params.slug);
 
   if (!post) {
-    notFound();
+    return <div>Post not found</div>;
   }
 
   return (
@@ -200,9 +217,9 @@ const BlogPost = () => {
 
         {/* Content */}
         <div className="prose prose-invert max-w-none">
-          {post.content.split('\n').map((paragraph: string, index: number) => (
+          {post.content.split('\n').map((paragraph, index) => (
             <p key={index} className="text-lg text-muted-foreground leading-relaxed">
-              {paragraph}
+              {paragraph.trim()}
             </p>
           ))}
         </div>
@@ -224,6 +241,4 @@ const BlogPost = () => {
       </article>
     </main>
   );
-};
-
-export default BlogPost; 
+} 
