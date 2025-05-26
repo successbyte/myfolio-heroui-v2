@@ -12,7 +12,7 @@ const quickInfo = [
 export const About = () => {
   return (
     <section id="about" className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-background">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}

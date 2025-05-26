@@ -147,7 +147,7 @@ export const Skills = () => {
                 return (
                   <div
                     key={i}
-                    className="w-3 h-3 rounded-sm transition-colors duration-200 hover:scale-125"
+                    className="w-3 h-3 rounded-[2px] transition-colors duration-200 hover:scale-125"
                     style={{
                       backgroundColor: `rgb(var(--primary) / ${opacity})`,
                     }}
@@ -159,11 +159,11 @@ export const Skills = () => {
             <div className="mt-6 flex justify-between items-center text-xs">
               <span className="text-muted-foreground">Less</span>
               <div className="flex gap-1">
-                <div className="w-3 h-3 rounded-sm bg-primary/10" />
-                <div className="w-3 h-3 rounded-sm bg-primary/30" />
-                <div className="w-3 h-3 rounded-sm bg-primary/50" />
-                <div className="w-3 h-3 rounded-sm bg-primary/70" />
-                <div className="w-3 h-3 rounded-sm bg-primary" />
+                <div className="w-3 h-3 rounded-[2px] bg-primary/10" />
+                <div className="w-3 h-3 rounded-[2px] bg-primary/30" />
+                <div className="w-3 h-3 rounded-[2px] bg-primary/50" />
+                <div className="w-3 h-3 rounded-[2px] bg-primary/70" />
+                <div className="w-3 h-3 rounded-[2px] bg-primary" />
               </div>
               <span className="text-muted-foreground">More</span>
             </div>

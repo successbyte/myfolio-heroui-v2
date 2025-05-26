@@ -12,7 +12,7 @@ export const Hero = () => {
   });
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden">
+    <section ref={ref} className="relative min-h-screen flex items-start py-10 justify-center  overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <motion.div
@@ -49,7 +49,7 @@ export const Hero = () => {
           >
             <Chip
               variant="flat"
-              color="success"
+              color="default"
               startContent={
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
