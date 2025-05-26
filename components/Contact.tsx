@@ -40,9 +40,9 @@ export const Contact = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold font-grotesk mb-4">Let's Work Together</h2>
+            <h2 className="text-4xl md:text-5xl font-bold font-grotesk mb-4">Let&apos;s Work Together</h2>
             <p className="text-muted-foreground font-mono max-w-2xl mx-auto">
-              Have a project in mind? Fill out the form below and I'll get back to you within 24-48 hours.
+              Have a project in mind? Fill out the form below and I&apos;ll get back to you within 24-48 hours.
             </p>
           </motion.div>
 
@@ -218,13 +218,14 @@ export const Contact = () => {
                   className="absolute inset-0 w-full h-full border-0 filter grayscale contrast-125"
                   allowFullScreen
                   loading="lazy"
+                  title="Location"
                 />
               </div>
 
               {/* Social Links Below Map */}
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-grotesk font-bold mb-4">Let's Connect</h3>
+                  <h3 className="text-xl font-grotesk font-bold mb-4">Let&apos;s Connect</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     <a
                       href="https://github.com"

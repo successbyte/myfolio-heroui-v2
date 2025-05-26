@@ -50,7 +50,7 @@ export const Footer = () => {
   return (
     <footer className="relative overflow-hidden bg-background">
       {/* Marquee Section */}
-      <MarqueeText>LET'S WORK TOGETHER — LET'S CREATE SOMETHING AMAZING —</MarqueeText>
+      <MarqueeText>LET&apos;S WORK TOGETHER — LET&apos;S CREATE SOMETHING AMAZING —</MarqueeText>
 
       {/* Main Footer Content */}
       <div className="container py-16 md:py-24">
@@ -71,8 +71,8 @@ export const Footer = () => {
                 </span>
               </h2>
               <p className="text-muted-foreground font-mono text-lg max-w-md leading-relaxed">
-                Let's collaborate and create something extraordinary together. 
-                I'm always open to new projects and opportunities.
+                Let&apos;s collaborate and create something extraordinary together. 
+                I&apos;m always open to new projects and opportunities.
               </p>
             </motion.div>
 

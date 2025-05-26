@@ -63,6 +63,24 @@ const blogPosts = {
   'future-of-ui-design-trends-2024': {
     title: 'The Future of UI Design: Trends to Watch in 2024',
     description: 'Explore the latest UI design trends that are shaping the future of digital experiences and how to implement them in your projects.',
+    content: `
+      The landscape of UI design is constantly evolving, with new trends emerging that reshape how we think about digital interfaces. Let's explore the key trends that will define 2024.
+
+      ## 1. Advanced Motion Design
+      Motion design is becoming more sophisticated, with micro-interactions and fluid animations enhancing user experience.
+
+      ## 2. AI-Driven Personalization
+      AI is enabling more personalized interfaces that adapt to individual user preferences and behaviors.
+
+      ## 3. Immersive 3D Elements
+      With improved web technologies, 3D elements are becoming more prevalent in web interfaces.
+
+      ## 4. Dark Mode Evolution
+      Dark mode is evolving beyond simple color inversion to more nuanced and branded experiences.
+
+      ## Conclusion
+      These trends represent just the beginning of what's possible in modern UI design.
+    `,
     image: 'https://images.unsplash.com/photo-1618788372246-79faff0c3742',
     date: 'March 10, 2024',
     readTime: '6 min read',
@@ -77,6 +95,27 @@ const blogPosts = {
   'mastering-typescript-advanced-tips': {
     title: 'Mastering TypeScript: Advanced Tips and Tricks',
     description: 'Deep dive into advanced TypeScript features and patterns that will help you write better, more maintainable code.',
+    content: `
+      TypeScript continues to evolve, offering powerful features for building robust applications. Here are some advanced techniques to level up your TypeScript skills.
+
+      ## Generic Type Constraints
+      Understanding and implementing generic type constraints for more flexible code.
+
+      ## Conditional Types
+      Leveraging conditional types to create more dynamic type relationships.
+
+      ## Mapped Types
+      Using mapped types to transform existing types into new ones.
+
+      ## Best Practices
+      - Strict null checks
+      - Discriminated unions
+      - Type guards
+      - Utility types
+
+      ## Conclusion
+      Mastering these TypeScript features will help you write more maintainable and type-safe code.
+    `,
     image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea',
     date: 'March 5, 2024',
     readTime: '10 min read',

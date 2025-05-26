@@ -95,7 +95,7 @@ export const CustomCursor = () => {
         </div>
       </motion.div>
 
-      <style jsx global>{`
+      <style>{`
         * {
           cursor: none !important;
         }

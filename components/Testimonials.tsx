@@ -89,7 +89,7 @@ export const Testimonials = () => {
             viewport={{ once: true }}
             className="text-muted-foreground/80 font-mono max-w-2xl mx-auto"
           >
-            Real feedback from clients who've experienced the impact of my work firsthand
+            Real feedback from clients who&apos;ve experienced the impact of my work firsthand
           </motion.p>
         </div>
 
@@ -152,11 +152,11 @@ export const Testimonials = () => {
 
                   {/* Testimonial Content */}
                   <div className="relative">
-                    <div className="absolute -top-2 -left-2 text-4xl text-primary/20">"</div>
+                    <div className="absolute -top-2 -left-2 text-4xl text-primary/20">&quot;</div>
                     <p className="text-white/70 text-sm leading-relaxed mb-4 line-clamp-4 group-hover:line-clamp-none transition-all duration-300">
                       {testimonial.content}
                     </p>
-                    <div className="absolute -bottom-2 -right-2 text-4xl text-primary/20">"</div>
+                    <div className="absolute -bottom-2 -right-2 text-4xl text-primary/20">&quot;</div>
                   </div>
 
                   {/* Stats Grid */}

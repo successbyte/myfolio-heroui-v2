@@ -58,7 +58,7 @@ const ProjectsPage = () => {
         <Projects />
       </div>
 
-      <style jsx global>{`
+      <style >{`
         @keyframes moveAround {
           0% { transform: translate(0, 0) rotate(0deg); }
           33% { transform: translate(100px, 50px) rotate(120deg); }
