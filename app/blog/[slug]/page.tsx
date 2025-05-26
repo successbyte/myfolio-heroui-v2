@@ -161,7 +161,7 @@ const BlogPost = () => {
 
         {/* Content */}
         <div className="prose prose-invert max-w-none">
-          {post.content.split('\n').map((paragraph, index) => (
+          {post.content.split('\n').map((paragraph: string, index: number) => (
             <p key={index} className="text-lg text-muted-foreground leading-relaxed">
               {paragraph}
             </p>

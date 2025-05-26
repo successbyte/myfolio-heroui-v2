@@ -37,9 +37,9 @@ const CodeSnippet = () => (
         <br /><br />
         <span className="text-blue-400">const</span> <span className="text-green-400">webDev</span>: Service = {"{"}<br />
         <div className="pl-4">
-          id: <span className="text-orange-400">'web-development'</span>,<br />
-          name: <span className="text-orange-400">'Web Development'</span>,<br />
-          technologies: [<span className="text-orange-400">'React'</span>, <span className="text-orange-400">'Next.js'</span>, <span className="text-orange-400">'Node'</span>],<br />
+          id: <span className="text-orange-400">&apos;web-development&apos;</span>,<br />
+          name: <span className="text-orange-400">&apos;Web Development&apos;</span>,<br />
+          technologies: [<span className="text-orange-400">&apos;React&apos;</span>, <span className="text-orange-400">&apos;Next.js&apos;</span>, <span className="text-orange-400">&apos;Node&apos;</span>],<br />
           pricing: {"{"} basic: 2999, pro: 5999, enterprise: 9999 {"}"}
         </div>
         {"}"};

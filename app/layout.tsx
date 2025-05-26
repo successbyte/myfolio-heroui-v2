@@ -18,11 +18,11 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Max Potential | Modern Developer Portfolio',
-  description: 'A showcase of innovative web development and design projects by Max Potential',
+  authors: [{ name: 'Andrew Paulson' }],
+  creator: 'Andrew Paulson',
+  description: 'A showcase of innovative web development and design projects by Andrew Paulson',
   keywords: 'web development, frontend, backend, full stack, React, Next.js, portfolio',
-  authors: [{ name: 'Max Potential' }],
-  creator: 'Max Potential',
+  title: 'Andrew Paulson | Modern Developer Portfolio',
 };
 
 export default function RootLayout({

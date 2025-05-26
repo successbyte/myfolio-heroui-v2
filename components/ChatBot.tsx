@@ -19,60 +19,60 @@ type PortfolioSection = {
   tags: string[];
 };
 
+const suggestionCategories = [
+  { icon: '👨‍💻', label: 'About Me', value: 'about' },
+  { icon: '💼', label: 'Experience', value: 'experience' },
+  { icon: '🛠️', label: 'Skills', value: 'skills' },
+  { icon: '🚀', label: 'Projects', value: 'projects' },
+  { icon: '📧', label: 'Contact', value: 'contact' }
+];
+
 const portfolioInfo: Record<string, PortfolioSection> = {
   about: {
-    title: "About Me",
     description: "I'm a Full Stack Developer specializing in modern web technologies, passionate about creating beautiful and performant web applications.",
     progress: 95,
-    tags: ['Full Stack', 'Web Dev', 'UI/UX']
-  },
-  experience: {
-    title: "Experience",
-    description: "5+ years of experience in web development, working with startups and enterprise clients to deliver high-quality solutions.",
-    progress: 90,
-    tags: ['Leadership', 'Agile', 'Team Work']
-  },
-  skills: {
-    title: "Technical Skills",
-    description: "Proficient in React, Next.js, Node.js, TypeScript, and modern web development practices. Strong focus on performance and user experience.",
-    progress: 88,
-    tags: ['React', 'Next.js', 'Node.js', 'TypeScript']
-  },
-  projects: {
-    title: "Projects",
-    description: "Portfolio of diverse projects including e-commerce platforms, SaaS applications, and interactive web experiences.",
-    progress: 92,
-    tags: ['Portfolio', 'Case Studies', 'Live Demos']
+    tags: ['Full Stack', 'Web Dev', 'UI/UX'],
+    title: 'About Me'
   },
   contact: {
-    title: "Contact",
     description: "Available for freelance and full-time opportunities. Let's discuss how I can help with your project.",
     progress: 100,
-    tags: ['Freelance', 'Full-time', 'Remote']
+    tags: ['Freelance', 'Full-time', 'Remote'],
+    title: 'Contact'
+  },
+  experience: {
+    description: "5+ years of experience in web development, working with startups and enterprise clients to deliver high-quality solutions.",
+    progress: 90,
+    tags: ['Leadership', 'Agile', 'Team Work'],
+    title: 'Experience'
+  },
+  projects: {
+    description: "Portfolio of diverse projects including e-commerce platforms, SaaS applications, and interactive web experiences.",
+    progress: 92,
+    tags: ['Portfolio', 'Case Studies', 'Live Demos'],
+    title: 'Projects'
+  },
+  skills: {
+    description: "Proficient in React, Next.js, Node.js, TypeScript, and modern web development practices. Strong focus on performance and user experience.",
+    progress: 88,
+    tags: ['React', 'Next.js', 'Node.js', 'TypeScript'],
+    title: 'Technical Skills'
   }
 };
-
-const suggestionCategories = [
-  { label: 'About Me', value: 'about', icon: '👨‍💻' },
-  { label: 'Experience', value: 'experience', icon: '💼' },
-  { label: 'Skills', value: 'skills', icon: '🛠️' },
-  { label: 'Projects', value: 'projects', icon: '🚀' },
-  { label: 'Contact', value: 'contact', icon: '📧' }
-];
 
 export const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { 
       type: 'bot', 
-      content: "Hi! I'm your portfolio assistant. What would you like to know about?" 
+      content: 'Hi! I&apos;m your portfolio assistant. What would you like to know about?' 
     }
   ]);
   const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
