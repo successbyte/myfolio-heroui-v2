@@ -74,10 +74,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="bg-background border border-border rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-primary/50 rounded-xl opacity-0 group-hover:opacity-20 transition duration-300" />
+      <div className="bg-background  border border-border rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+        <div className="absolute  -inset-0.5 bg-gradient-to-r from-primary to-primary/50 rounded-xl opacity-0 group-hover:opacity-20 transition duration-300" />
         
-        <div className="relative">
+        <div className="relative ">
           <span className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 rounded-full mb-4">
             {product.category}
           </span>

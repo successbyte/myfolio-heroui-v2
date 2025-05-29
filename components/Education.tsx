@@ -12,7 +12,8 @@ const educationData = [
     description: 'Specialized in Artificial Intelligence and Machine Learning with focus on Neural Networks and Computer Vision.',
     color: 'bg-[#151515]',
     skills: ['Machine Learning', 'Neural Networks', 'Computer Vision', 'Research'],
-    progress: 100
+    progress: 100,
+    image: '/images/stanford.png'
   },
   {
     degree: 'Bachelor of Engineering',
@@ -21,7 +22,8 @@ const educationData = [
     description: 'Major in Computer Science with minor in Mathematics. Focus on algorithms and data structures.',
     color: 'bg-[#111111]',
     skills: ['Algorithms', 'Data Structures', 'Software Engineering', 'Mathematics'],
-    progress: 100
+    progress: 100,
+    image: '/images/mit.png'
   },
   {
     degree: 'Full Stack Development',
@@ -30,7 +32,8 @@ const educationData = [
     description: 'Intensive program covering modern web development technologies and best practices.',
     color: 'bg-[#151515]',
     skills: ['React', 'Node.js', 'MongoDB', 'DevOps'],
-    progress: 100
+    progress: 100,
+    image: '/images/bootcamp.png'
   }
 ];
 
@@ -56,7 +59,7 @@ export const Education = () => {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="container">
+      <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
           <motion.span
@@ -87,24 +90,17 @@ export const Education = () => {
 
         {/* Timeline Progress Bar */}
         <motion.div
-          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50"
-          style={{ 
-            scaleX: progress,
-            transformOrigin: "0%"
-          }}
+          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 origin-[0%] z-50"
+          style={{ scaleX: progress }}
         />
 
         {/* Education Timeline */}
         <div ref={containerRef} className="relative max-w-7xl mx-auto">
-          {/* Timeline Line with Progress */}
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full">
             <div className="w-px h-full bg-white/10" />
             <motion.div 
               className="absolute top-0 left-0 w-px bg-gradient-to-b from-primary via-primary to-primary/20"
-              style={{ 
-                height: progress,
-                transformOrigin: "top"
-              }}
+              style={{ height: progress }}
             />
           </div>
 
@@ -115,7 +111,7 @@ export const Education = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-32"
+              className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-32 last:mb-0"
             >
               {/* Timeline Node */}
               <div className="absolute left-1/2 top-12 transform -translate-x-1/2 z-10">
@@ -132,17 +128,17 @@ export const Education = () => {
 
               {/* Content */}
               <div className={`relative ${index % 2 === 0 ? 'md:text-right md:order-1' : 'md:order-2'}`}>
-                <Card className={`${edu.color} border border-white/5 hover:border-primary/20 transition-all duration-300 backdrop-blur-sm`}>
+                <Card className={`${edu.color} border border-white/5 hover:border-primary/20 transition-all duration-300 backdrop-blur-sm group`}>
                   <div className="p-8 space-y-6">
                     <div className="space-y-3">
-                      <h3 className="text-2xl font-bold font-grotesk bg-clip-text text-transparent bg-gradient-to-r from-white to-white/90">
+                      <h3 className="text-2xl font-bold font-grotesk bg-clip-text text-transparent bg-gradient-to-r from-white to-white/90 group-hover:from-primary group-hover:to-primary/90 transition-all duration-300">
                         {edu.degree}
                       </h3>
                       <p className="text-lg text-primary/90">{edu.school}</p>
                       <p className="text-sm font-mono text-white/50">{edu.period}</p>
                     </div>
 
-                    <div className="h-px bg-white/10" />
+                    <div className="h-px bg-white/10 group-hover:bg-primary/20 transition-all duration-300" />
 
                     <p className="text-white/70 leading-relaxed">{edu.description}</p>
 
@@ -150,7 +146,7 @@ export const Education = () => {
                       {edu.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-3 py-1 bg-white/5 rounded-full text-xs font-mono text-white/60"
+                          className="px-3 py-1 bg-white/5 rounded-full text-xs font-mono text-white/60 group-hover:bg-primary/10 group-hover:text-primary/90 transition-all duration-300"
                         >
                           {skill}
                         </span>
@@ -158,7 +154,7 @@ export const Education = () => {
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                    <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden group-hover:bg-primary/20 transition-all duration-300">
                       <motion.div
                         className="h-full bg-primary"
                         initial={{ width: 0 }}

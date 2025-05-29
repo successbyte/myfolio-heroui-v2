@@ -7,7 +7,7 @@ const skills = [
   {
     category: 'Frontend',
     description: 'Building beautiful, responsive user interfaces',
-    image: '/images/sections/frontend.svg',
+    image: '/images/skills-frontend.jpeg',
     items: [
       { name: 'React', level: 95, icon: '/tech/react.svg' },
       { name: 'Next.js', level: 90, icon: '/tech/nextjs.svg' },
@@ -18,7 +18,7 @@ const skills = [
   {
     category: 'Backend',
     description: 'Creating robust server-side applications',
-    image: '/images/sections/backend.svg',
+    image: '/images/skills-backend.jpeg',
     items: [
       { name: 'Node.js', level: 85, icon: '/tech/node.svg' },
       { name: 'Python', level: 80, icon: '/tech/python.svg' },
@@ -29,7 +29,7 @@ const skills = [
   {
     category: 'Tools & DevOps',
     description: 'Streamlining development and deployment',
-    image: '/images/sections/devops.svg',
+    image: '/images/skills-devops.jpeg',
     items: [
       { name: 'Git', level: 90, icon: '/tech/git.svg' },
       { name: 'Docker', level: 75, icon: '/tech/docker.svg' },
@@ -76,7 +76,7 @@ export const Skills = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-background border border-border rounded-lg p-6 space-y-6"
+                className="bg-background border border-border rounded-lg group  p-6 space-y-6"
               >
                 <div className="space-y-4">
                   <div className="relative h-40 w-full rounded-lg overflow-hidden bg-muted/50 p-8">
@@ -84,7 +84,7 @@ export const Skills = () => {
                       src={category.image}
                       alt={category.category}
                       fill
-                      className="object-contain"
+                      className="object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
                     />
                   </div>
                   <h3 className="text-xl font-semibold">{category.category}</h3>

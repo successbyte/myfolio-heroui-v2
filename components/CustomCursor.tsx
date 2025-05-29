@@ -6,10 +6,11 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 export const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
+  const [isText, setIsText] = useState(false);
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
-  const springConfig = { damping: 15, stiffness: 150, mass: 0.1 };
+  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
@@ -23,20 +24,32 @@ export const CustomCursor = () => {
     const handleMouseLeave = () => setIsVisible(false);
 
     const handlePointerElements = () => {
-      const elements = document.querySelectorAll('button, a, input, textarea, [role="button"], [role="link"]');
+      const buttons = document.querySelectorAll('button, a, input, textarea, [role="button"], [role="link"]');
+      const textElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span');
       
-      const handleMouseEnter = () => setIsPointer(true);
-      const handleMouseLeave = () => setIsPointer(false);
+      const handleButtonEnter = () => setIsPointer(true);
+      const handleButtonLeave = () => setIsPointer(false);
+      const handleTextEnter = () => setIsText(true);
+      const handleTextLeave = () => setIsText(false);
 
-      elements.forEach(el => {
-        el.addEventListener('mouseenter', handleMouseEnter);
-        el.addEventListener('mouseleave', handleMouseLeave);
+      buttons.forEach(el => {
+        el.addEventListener('mouseenter', handleButtonEnter);
+        el.addEventListener('mouseleave', handleButtonLeave);
+      });
+
+      textElements.forEach(el => {
+        el.addEventListener('mouseenter', handleTextEnter);
+        el.addEventListener('mouseleave', handleTextLeave);
       });
 
       return () => {
-        elements.forEach(el => {
-          el.removeEventListener('mouseenter', handleMouseEnter);
-          el.removeEventListener('mouseleave', handleMouseLeave);
+        buttons.forEach(el => {
+          el.removeEventListener('mouseenter', handleButtonEnter);
+          el.removeEventListener('mouseleave', handleButtonLeave);
+        });
+        textElements.forEach(el => {
+          el.removeEventListener('mouseenter', handleTextEnter);
+          el.removeEventListener('mouseleave', handleTextLeave);
         });
       };
     };
@@ -62,7 +75,7 @@ export const CustomCursor = () => {
   return (
     <>
       <motion.div
-        className="fixed pointer-events-none z-50 mix-blend-difference will-change-transform"
+        className="fixed pointer-events-none z-[1000] mix-blend-difference will-change-transform"
         style={{
           left: cursorXSpring,
           top: cursorYSpring,
@@ -74,24 +87,47 @@ export const CustomCursor = () => {
           <motion.div 
             className="w-8 h-8 bg-white rounded-full"
             animate={{
-              scale: isPointer ? 1.5 : 1,
+              scale: isPointer ? 2 : isText ? 0.5 : 1,
               opacity: isPointer ? 0.5 : 1,
             }}
-            transition={{ type: "spring", damping: 15, stiffness: 150 }}
+            transition={{ 
+              type: "spring", 
+              damping: 20, 
+              stiffness: 200,
+              mass: 0.5 
+            }}
           />
           
           {/* Outer ring */}
           <motion.div
-            className="absolute inset-0 border-2 border-white rounded-full"
+            className="absolute inset-0 border border-white rounded-full"
             animate={{
-              scale: isPointer ? 1.2 : [1, 1.2, 1],
-              opacity: isPointer ? 0.2 : 1,
+              scale: isPointer ? 1.5 : isText ? 2 : [1, 1.2, 1],
+              opacity: isPointer ? 0.2 : isText ? 0.1 : 0.3,
             }}
-            transition={isPointer ? 
-              { type: "spring", damping: 15, stiffness: 150 } : 
-              { duration: 1.5, repeat: Infinity }
+            transition={isPointer || isText ? 
+              { type: "spring", damping: 20, stiffness: 200, mass: 0.5 } : 
+              { duration: 2, repeat: Infinity }
             }
           />
+
+          {/* Additional ring for text */}
+          {isText && (
+            <motion.div
+              className="absolute inset-0 border border-white rounded-full"
+              initial={{ scale: 1, opacity: 0 }}
+              animate={{
+                scale: 2.5,
+                opacity: 0.05,
+              }}
+              transition={{ 
+                type: "spring", 
+                damping: 20, 
+                stiffness: 200,
+                mass: 0.5 
+              }}
+            />
+          )}
         </div>
       </motion.div>
 
@@ -108,6 +144,11 @@ export const CustomCursor = () => {
           * {
             cursor: auto !important;
           }
+        }
+
+        ::selection {
+          background: rgba(255, 255, 255, 0.1);
+          color: inherit;
         }
       `}</style>
     </>

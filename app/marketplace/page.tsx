@@ -42,7 +42,7 @@ const ProductCard = ({ product, index }: { product: typeof products[0]; index: n
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group relative bg-white/5 rounded-xl overflow-hidden border border-white/10"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute  inset-0 bg-gradient-to-b from-transparent via-black/50 to-black opacity-0 group-hover:opacity-100 transition-opacity" />
 
       <div className="p-6 space-y-4 relative z-10">
         <div className="flex items-center justify-between">
@@ -108,7 +108,7 @@ const ProductCard = ({ product, index }: { product: typeof products[0]; index: n
 
 const MarketplacePage = () => {
   return (
-    <main className="bg-black text-white min-h-screen relative">
+    <main className="bg-black container mx-auto text-white min-h-screen relative">
       <CustomCursor />
 
       {/* Animated background */}
