@@ -231,10 +231,10 @@ export default function AboutPage() {
                 className="space-y-6 relative z-10"
               >
                 <h2 className="text-4xl md:text-5xl font-bold font-grotesk">
-                  Let's Work Together
+                  Let&apos;s Work Together
                 </h2>
                 <p className="text-lg text-muted-foreground font-mono max-w-2xl mx-auto">
-                  Have a project in mind? Let's create something amazing together.
+                  Have a project in mind? Let&apos;s create something amazing together.
                 </p>
                 <div className="flex gap-4 justify-center">
                   <Button size="lg" className="bg-primary/90 hover:bg-primary">

@@ -2,9 +2,9 @@
 
 import { Badge } from '@heroui/react';
 import { Card } from '@heroui/react';
-import { Snippet } from '@heroui/snippet';
 import { Button } from '@heroui/button';
 import { Link } from '@heroui/link';
+import { CodeBlock } from '@/components/ui/CodeBlock';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -21,8 +21,9 @@ import {
   Twitter,
   Facebook,
   Linkedin,
-  Copy,
-  Eye
+  Eye,
+  Heart,
+  MessageSquare
 } from 'lucide-react';
 
 interface Author {
@@ -484,43 +485,12 @@ export default function Page() {
         const [language, ...codeLines] = part.split('\n');
         const code = codeLines.join('\n').trim();
         return (
-          <motion.div
+          <CodeBlock
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="my-8"
-          >
-            <Card className="bg-black/50 backdrop-blur-xl border-white/10">
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <Badge
-                    size="sm"
-                    className="bg-primary/10 text-primary border-primary/20"
-                  >
-                    {language.trim()}
-                  </Badge>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    color="default"
-                    className="text-white/40 hover:text-white"
-                    startContent={<Copy className="w-4 h-4" />}
-                  >
-                    Copy
-                  </Button>
-                </div>
-                <Snippet
-                  hideSymbol
-                  variant="flat"
-                  color="default"
-                  className="bg-black/50 w-full font-mono"
-                >
-                  {code}
-                </Snippet>
-              </div>
-            </Card>
-          </motion.div>
+            code={code}
+            language={language.trim()}
+            showLineNumbers={true}
+          />
         );
       }
     });
@@ -738,9 +708,9 @@ export default function Page() {
                       size="sm"
                       color="default"
                       variant="ghost"
-                      className="w-full flex-col gap-2 h-auto py-4"
+                      className="w-full flex-col gap-2 h-auto py-4 group"
                     >
-                      <ThumbsUp className="w-5 h-5" />
+                      <Heart className="w-5 h-5 group-hover:text-red-500 transition-colors" />
                       <div className="text-sm font-mono">
                         <div className="font-bold">{post.likes}</div>
                         <div className="text-white/60">Likes</div>
@@ -750,9 +720,9 @@ export default function Page() {
                       size="sm"
                       color="default"
                       variant="ghost"
-                      className="w-full flex-col gap-2 h-auto py-4"
+                      className="w-full flex-col gap-2 h-auto py-4 group"
                     >
-                      <MessageCircle className="w-5 h-5" />
+                      <MessageSquare className="w-5 h-5 group-hover:text-primary transition-colors" />
                       <div className="text-sm font-mono">
                         <div className="font-bold">{post.comments}</div>
                         <div className="text-white/60">Comments</div>
@@ -762,9 +732,9 @@ export default function Page() {
                       size="sm"
                       color="default"
                       variant="ghost"
-                      className="w-full flex-col gap-2 h-auto py-4"
+                      className="w-full flex-col gap-2 h-auto py-4 group"
                     >
-                      <Share2 className="w-5 h-5" />
+                      <Share2 className="w-5 h-5 group-hover:text-blue-500 transition-colors" />
                       <div className="text-sm font-mono">
                         <div className="font-bold">Share</div>
                         <div className="text-white/60">Post</div>
@@ -795,21 +765,17 @@ export default function Page() {
                 <div className="p-6">
                   <h3 className="text-lg font-grotesk font-bold mb-4">Contents</h3>
                   <nav className="space-y-2">
-                    <a href="#key-features" className="block text-sm font-mono text-white/60 hover:text-primary transition-colors">
-                      Key Features
-                    </a>
-                    <a href="#server-components" className="block text-sm font-mono text-white/60 hover:text-primary transition-colors pl-4">
-                      Server Components
-                    </a>
-                    <a href="#streaming" className="block text-sm font-mono text-white/60 hover:text-primary transition-colors pl-4">
-                      Streaming
-                    </a>
-                    <a href="#best-practices" className="block text-sm font-mono text-white/60 hover:text-primary transition-colors">
-                      Best Practices
-                    </a>
-                    <a href="#conclusion" className="block text-sm font-mono text-white/60 hover:text-primary transition-colors">
-                      Conclusion
-                    </a>
+                    {post.content.split('\n').filter(line => line.startsWith('#')).map((heading, index) => (
+                      <a 
+                        key={index}
+                        href={`#${heading.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`}
+                        className={`block text-sm font-mono text-white/60 hover:text-primary transition-colors ${
+                          heading.startsWith('###') ? 'pl-4' : ''
+                        }`}
+                      >
+                        {heading.replace(/#/g, '').trim()}
+                      </a>
+                    ))}
                   </nav>
                 </div>
               </Card>
