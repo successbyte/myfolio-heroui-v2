@@ -2,8 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
-export const CustomCursor = () => {
+interface CustomCursorProps {
+  className?: string;
+}
+
+export const CustomCursor = ({ className }: CustomCursorProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
   const [isText, setIsText] = useState(false);
@@ -75,11 +80,15 @@ export const CustomCursor = () => {
   return (
     <>
       <motion.div
-        className="fixed pointer-events-none z-[1000] mix-blend-difference will-change-transform"
+        className={cn(
+          "pointer-events-none z-[1000] mix-blend-difference will-change-transform",
+          className
+        )}
         style={{
           left: cursorXSpring,
           top: cursorYSpring,
           opacity: isVisible ? 1 : 0,
+          position: 'fixed',
         }}
       >
         <div className="relative">
@@ -131,15 +140,7 @@ export const CustomCursor = () => {
         </div>
       </motion.div>
 
-      <style>{`
-        * {
-          cursor: none !important;
-        }
-        
-        body {
-          overflow-x: hidden;
-        }
-
+      <style jsx global>{`
         @media (max-width: 768px) {
           * {
             cursor: auto !important;

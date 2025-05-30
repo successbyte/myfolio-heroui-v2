@@ -1,30 +1,38 @@
-'use client';
+"use client";
 
-import { Badge } from '@heroui/react';
-import { Card } from '@heroui/react';
-import { Button } from '@heroui/button';
-import { Link } from '@heroui/link';
-import { CodeBlock } from '@/components/ui/CodeBlock';
-import Image from 'next/image';
-import { useParams } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { 
-  ArrowLeft, 
-  Calendar, 
-  Clock, 
+import { Badge, Chip } from "@heroui/react";
+import { Card } from "@heroui/react";
+import { Button } from "@heroui/button";
+import { Link } from "@heroui/link";
+import { CodeBlock } from "@/components/ui/CodeBlock";
+import { CustomCursor } from "@/components/CustomCursor";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
   Share2,
-  Bookmark,
-  ThumbsUp,
-  MessageCircle,
+  Heart,
+  MessageSquare,
+  Eye,
+  ExternalLink,
   ChevronLeft,
   ChevronRight,
   Twitter,
   Facebook,
   Linkedin,
-  Eye,
-  Heart,
-  MessageSquare
-} from 'lucide-react';
+  Bookmark,
+  Link as LinkIcon,
+  Code,
+  Image as ImageIcon,
+  Quote,
+  ListOrdered,
+  FileText,
+  Video,
+} from "lucide-react";
+import { useState } from "react";
 
 interface Author {
   name: string;
@@ -38,11 +46,21 @@ interface Author {
   };
 }
 
+interface ContentBlock {
+  type: "paragraph" | "heading" | "code" | "image" | "quote" | "list" | "video";
+  content: string;
+  language?: string;
+  level?: number;
+  caption?: string;
+  items?: string[];
+  url?: string;
+}
+
 interface BlogPost {
   slug: string;
   title: string;
   description: string;
-  content: string;
+  content: ContentBlock[];
   image: string;
   date: string;
   readTime: string;
@@ -52,452 +70,689 @@ interface BlogPost {
   views: number;
   likes: number;
   comments: number;
+  demoUrl?: string;
+  featured?: boolean;
 }
 
 const blogPosts: BlogPost[] = [
   {
-    slug: 'building-modern-web-applications-with-nextjs-13',
-    title: 'Building Modern Web Applications with Next.js 13',
-    description: 'Learn how to leverage the power of Next.js 13 to build fast, SEO-friendly web applications with great developer experience.',
-    content: `
-      Next.js 13 introduces groundbreaking features that revolutionize how we build web applications. From the new App Router to Server Components, these changes significantly improve both developer experience and application performance.
+    slug: "building-modern-web-applications-with-nextjs-13",
+    title: "Building Modern Web Applications with Next.js 13",
+    description:
+      "Learn how to leverage the power of Next.js 13 to build fast, SEO-friendly web applications with great developer experience.",
+    content: [
+      {
+        type: "paragraph",
+        content:
+          "Next.js 13 introduces groundbreaking features that revolutionize how we build web applications. From the new App Router to Server Components, these changes significantly improve both developer experience and application performance.",
+      },
+      {
+        type: "heading",
+        content: "Key Features",
+        level: 2,
+      },
+      {
+        type: "heading",
+        content: "App Router",
+        level: 3,
+      },
+      {
+        type: "paragraph",
+        content:
+          "The new App Router provides a more intuitive way to handle routing in your application. It's built on top of React Server Components and supports layouts, nested routing, and more.",
+      },
+      {
+        type: "code",
+        language: "typescript",
+        content: `// app/page.tsx
+export default function HomePage() {
+  return (
+    <main>
+      <h1>Welcome to Next.js 13</h1>
+    </main>
+  );
+}
 
-      ## Key Features
-
-      ### 1. App Router
-      The new App Router provides a more intuitive way to handle routing in your application. It's built on top of React Server Components and supports layouts, nested routing, and more.
-
-      Here's a basic example of how to set up routing:
-
-      \`\`\`typescript
-      // app/page.tsx
-      export default function HomePage() {
-        return (
-          <main>
-            <h1>Welcome to Next.js 13</h1>
-          </main>
-        );
-      }
-
-      // app/blog/[slug]/page.tsx
-      export default function BlogPost({ params }) {
-        return (
-          <article>
-            <h1>{params.slug}</h1>
-          </article>
-        );
-      }
-      \`\`\`
-
-      ### 2. Server Components
-      React Server Components allow you to write UI that can be rendered on the server and streamed to the client. This results in faster page loads and reduced JavaScript bundle sizes.
-
-      Here's how to use Server Components:
-
-      \`\`\`typescript
-      // app/components/ServerComponent.tsx
-      async function ServerComponent() {
-        const data = await fetchData(); // This runs on the server
-        
-        return (
-          <div>
-            {data.map(item => (
-              <div key={item.id}>{item.name}</div>
-            ))}
-          </div>
-        );
-      }
-      \`\`\`
-
-      ### 3. Streaming
-      Next.js 13 supports streaming server rendering, allowing you to progressively render pages from the server. This means users see content sooner and enjoy a more responsive experience.
-
-      Example implementation:
-
-      \`\`\`typescript
-      // app/loading.tsx
-      export default function Loading() {
-        return <div>Loading...</div>;
-      }
-
-      // app/page.tsx
-      import { Suspense } from 'react';
-      import SlowComponent from './SlowComponent';
-
-      export default function Page() {
-        return (
-          <div>
-            <h1>Instant Load</h1>
-            <Suspense fallback={<Loading />}>
-              <SlowComponent />
-            </Suspense>
-          </div>
-        );
-      }
-      \`\`\`
-
-      ## Best Practices
-
-      1. Use Server Components by default
-      2. Implement proper loading and error states
-      3. Leverage the new data fetching methods
-      4. Optimize images using the Next.js Image component
-      5. Implement proper caching strategies
-
-      Here's an example of implementing these best practices:
-
-      \`\`\`typescript
-      // Simple example of using Next.js Image component
-      function ExampleComponent() {
-        return (
-          <div className="card">
-            <Image
-              src="/example.jpg"
-              alt="Example"
-              width={300}
-              height={200}
-              priority
-            />
-            <h2>Example Title</h2>
-            <p>Example content</p>
-          </div>
-        );
-      }
-      \`\`\`
-
-      ## Conclusion
-
-      Next.js 13 represents a significant step forward in web development, providing developers with powerful tools to build better web applications. By following these patterns and best practices, you can create fast, scalable, and maintainable applications that provide an excellent user experience.
-
-      Remember to:
-      - Start with Server Components
-      - Use the App Router for better organization
-      - Implement streaming for better UX
-      - Follow TypeScript best practices
-      - Optimize for performance
-    `,
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c',
-    date: 'March 15, 2024',
-    readTime: '8 min read',
-    category: 'Development',
-    tags: ['Next.js', 'React', 'Web Development'],
+// app/blog/[slug]/page.tsx
+export default function BlogPost({ params }) {
+  return (
+    <article>
+      <h1>{params.slug}</h1>
+    </article>
+  );
+}`,
+      },
+      {
+        type: "heading",
+        content: "Server Components",
+        level: 3,
+      },
+      {
+        type: "paragraph",
+        content:
+          "React Server Components allow you to write UI that can be rendered on the server and streamed to the client. This results in faster page loads and reduced JavaScript bundle sizes.",
+      },
+      {
+        type: "image",
+        content: "/blog/server-components.png",
+        caption: "Server Components Architecture",
+      },
+      {
+        type: "quote",
+        content:
+          "Server Components represent a paradigm shift in how we think about building React applications. They enable us to move complex logic to the server while maintaining the interactivity we love about React.",
+      },
+      {
+        type: "heading",
+        content: "Performance Improvements",
+        level: 3,
+      },
+      {
+        type: "list",
+        content: "Performance Improvements List",
+        items: [
+          "Reduced JavaScript bundle sizes",
+          "Faster page loads with streaming",
+          "Improved SEO with server-side rendering",
+          "Better caching strategies",
+          "Optimized image loading",
+        ],
+      },
+      {
+        type: "video",
+        content: "https://www.youtube.com/embed/xyz123",
+        caption: "Next.js 13 Performance Demo",
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+    date: "March 15, 2024",
+    readTime: "8 min read",
+    category: "Development",
+    tags: ["Next.js", "React", "Web Development"],
     author: {
-      name: 'Dale Anderson',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-      role: 'Senior Developer',
-      bio: 'Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.',
+      name: "Dale Anderson",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+      role: "Senior Developer",
+      bio: "Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.",
       social: {
-        twitter: 'https://twitter.com/daleanderson',
-        github: 'https://github.com/daleanderson',
-        linkedin: 'https://linkedin.com/in/daleanderson'
-      }
+        twitter: "https://twitter.com/daleanderson",
+        github: "https://github.com/daleanderson",
+        linkedin: "https://linkedin.com/in/daleanderson",
+      },
     },
     views: 987,
     likes: 76,
-    comments: 15
+    comments: 15,
+    demoUrl: "https://nextjs-demo.vercel.app",
+    featured: true,
   },
   {
-    slug: 'future-of-ui-design-trends-2024',
-    title: 'The Future of UI Design: Trends to Watch in 2024',
-    description: 'Explore the latest UI design trends that are shaping the future of digital experiences and how to implement them in your projects.',
-    content: `
-      The landscape of UI design is constantly evolving, with new trends emerging that reshape how we think about digital interfaces. Let's explore the key trends that will define 2024.
-
-      ## 1. Advanced Motion Design
-      Motion design is becoming more sophisticated, with micro-interactions and fluid animations enhancing user experience.
-
-      ## 2. AI-Driven Personalization
-      AI is enabling more personalized interfaces that adapt to individual user preferences and behaviors.
-
-      ## 3. Immersive 3D Elements
-      With improved web technologies, 3D elements are becoming more prevalent in web interfaces.
-
-      ## 4. Dark Mode Evolution
-      Dark mode is evolving beyond simple color inversion to more nuanced and branded experiences.
-
-      ## Conclusion
-      These trends represent just the beginning of what's possible in modern UI design.
-    `,
-    image: 'https://images.unsplash.com/photo-1618788372246-79faff0c3742',
-    date: 'March 10, 2024',
-    readTime: '6 min read',
-    category: 'Design',
-    tags: ['UI/UX', 'Design Trends', 'Web Design'],
+    slug: "future-of-ui-design-trends-2024",
+    title: "The Future of UI Design: Trends to Watch in 2024",
+    description:
+      "Explore the latest UI design trends that are shaping the future of digital experiences and how to implement them in your projects.",
+    content: [
+      {
+        type: "paragraph",
+        content:
+          "The landscape of UI design is constantly evolving, with new trends emerging that reshape how we think about digital interfaces.",
+      },
+      {
+        type: "heading",
+        content: "Advanced Motion Design",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Motion design is becoming more sophisticated, with micro-interactions and fluid animations enhancing user experience.",
+      },
+      {
+        type: "heading",
+        content: "AI-Driven Personalization",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "AI is enabling more personalized interfaces that adapt to individual user preferences and behaviors.",
+      },
+      {
+        type: "heading",
+        content: "Immersive 3D Elements",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "With improved web technologies, 3D elements are becoming more prevalent in web interfaces.",
+      },
+      {
+        type: "heading",
+        content: "Dark Mode Evolution",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Dark mode is evolving beyond simple color inversion to more nuanced and branded experiences.",
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1618788372246-79faff0c3742",
+    date: "March 10, 2024",
+    readTime: "6 min read",
+    category: "Design",
+    tags: ["UI/UX", "Design Trends", "Web Design"],
     author: {
-      name: 'Dale Anderson',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-      role: 'Senior Developer',
-      bio: 'Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.',
+      name: "Dale Anderson",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+      role: "Senior Developer",
+      bio: "Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.",
       social: {
-        twitter: 'https://twitter.com/daleanderson',
-        github: 'https://github.com/daleanderson',
-        linkedin: 'https://linkedin.com/in/daleanderson'
-      }
+        twitter: "https://twitter.com/daleanderson",
+        github: "https://github.com/daleanderson",
+        linkedin: "https://linkedin.com/in/daleanderson",
+      },
     },
     views: 856,
     likes: 67,
-    comments: 12
+    comments: 12,
   },
   {
-    slug: 'mastering-typescript-advanced-tips',
-    title: 'Mastering TypeScript: Advanced Tips and Tricks',
-    description: 'Deep dive into advanced TypeScript features and patterns that will help you write better, more maintainable code.',
-    content: `
-      TypeScript continues to evolve, offering powerful features for building robust applications. Here are some advanced techniques to level up your TypeScript skills.
-
-      ## Generic Type Constraints
-      Understanding and implementing generic type constraints for more flexible code.
-
-      ## Conditional Types
-      Leveraging conditional types to create more dynamic type relationships.
-
-      ## Mapped Types
-      Using mapped types to transform existing types into new ones.
-
-      ## Best Practices
-      - Strict null checks
-      - Discriminated unions
-      - Type guards
-      - Utility types
-
-      ## Conclusion
-      Mastering these TypeScript features will help you write more maintainable and type-safe code.
-    `,
-    image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea',
-    date: 'March 5, 2024',
-    readTime: '10 min read',
-    category: 'Programming',
-    tags: ['TypeScript', 'JavaScript', 'Programming'],
+    slug: "mastering-typescript-advanced-tips",
+    title: "Mastering TypeScript: Advanced Tips and Tricks",
+    description:
+      "Deep dive into advanced TypeScript features and patterns that will help you write better, more maintainable code.",
+    content: [
+      {
+        type: "paragraph",
+        content:
+          "TypeScript continues to evolve, offering powerful features for building robust applications.",
+      },
+      {
+        type: "heading",
+        content: "Generic Type Constraints",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Understanding and implementing generic type constraints for more flexible code.",
+      },
+      {
+        type: "heading",
+        content: "Conditional Types",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Leveraging conditional types to create more dynamic type relationships.",
+      },
+      {
+        type: "heading",
+        content: "Mapped Types",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Using mapped types to transform existing types into new ones.",
+      },
+      {
+        type: "heading",
+        content: "Best Practices",
+        level: 2,
+      },
+      {
+        type: "list",
+        content: "TypeScript Best Practices List",
+        items: [
+          "Strict null checks",
+          "Discriminated unions",
+          "Type guards",
+          "Utility types",
+        ],
+      },
+      {
+        type: "heading",
+        content: "Conclusion",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Mastering these TypeScript features will help you write more maintainable and type-safe code.",
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea",
+    date: "March 5, 2024",
+    readTime: "10 min read",
+    category: "Programming",
+    tags: ["TypeScript", "JavaScript", "Programming"],
     author: {
-      name: 'Dale Anderson',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-      role: 'Senior Developer',
-      bio: 'Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.',
+      name: "Dale Anderson",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+      role: "Senior Developer",
+      bio: "Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.",
       social: {
-        twitter: 'https://twitter.com/daleanderson',
-        github: 'https://github.com/daleanderson',
-        linkedin: 'https://linkedin.com/in/daleanderson'
-      }
+        twitter: "https://twitter.com/daleanderson",
+        github: "https://github.com/daleanderson",
+        linkedin: "https://linkedin.com/in/daleanderson",
+      },
     },
     views: 743,
     likes: 54,
-    comments: 9
+    comments: 9,
   },
   {
-    slug: 'modern-web-animation-techniques',
-    title: 'Modern Web Animation Techniques',
-    description: 'Discover the latest techniques for creating smooth and engaging web animations.',
-    content: `
-      Web animations are a powerful way to enhance user experience and create a more engaging web experience. Here are some modern techniques to create smooth and engaging animations.
-
-      ## 1. CSS Animations
-      CSS animations are a simple and effective way to create animations without JavaScript.
-
-      ## 2. JavaScript Animations
-      JavaScript animations can be used to create more complex and interactive animations.
-
-      ## 3. Web Animations API
-      The Web Animations API provides a powerful way to control animations using JavaScript.
-
-      ## 4. SVG Animations
-      SVG animations can be used to create animations with vector graphics.
-
-      ## Conclusion
-      These techniques can help you create smooth and engaging animations for your web projects.
-    `,
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c',
-    date: 'March 15, 2024',
-    readTime: '8 min read',
-    category: 'Development',
-    tags: ['Web Development', 'JavaScript', 'CSS'],
+    slug: "modern-web-animation-techniques",
+    title: "Modern Web Animation Techniques",
+    description:
+      "Discover the latest techniques for creating smooth and engaging web animations.",
+    content: [
+      {
+        type: "paragraph",
+        content:
+          "Web animations are a powerful way to enhance user experience and create a more engaging web experience.",
+      },
+      {
+        type: "heading",
+        content: "1. CSS Animations",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "CSS animations are a simple and effective way to create animations without JavaScript.",
+      },
+      {
+        type: "heading",
+        content: "2. JavaScript Animations",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "JavaScript animations can be used to create more complex and interactive animations.",
+      },
+      {
+        type: "heading",
+        content: "3. Web Animations API",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "The Web Animations API provides a powerful way to control animations using JavaScript.",
+      },
+      {
+        type: "heading",
+        content: "4. SVG Animations",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "SVG animations can be used to create animations with vector graphics.",
+      },
+      {
+        type: "heading",
+        content: "Conclusion",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "These techniques can help you create smooth and engaging animations for your web projects.",
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
+    date: "March 15, 2024",
+    readTime: "8 min read",
+    category: "Development",
+    tags: ["Web Development", "JavaScript", "CSS"],
     author: {
-      name: 'Dale Anderson',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-      role: 'Senior Developer',
-      bio: 'Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.',
+      name: "Dale Anderson",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+      role: "Senior Developer",
+      bio: "Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.",
       social: {
-        twitter: 'https://twitter.com/daleanderson',
-        github: 'https://github.com/daleanderson',
-        linkedin: 'https://linkedin.com/in/daleanderson'
-      }
+        twitter: "https://twitter.com/daleanderson",
+        github: "https://github.com/daleanderson",
+        linkedin: "https://linkedin.com/in/daleanderson",
+      },
     },
     views: 1234,
     likes: 89,
-    comments: 23
+    comments: 23,
   },
   {
-    slug: 'ai-driven-development-tools',
-    title: 'AI-Driven Development Tools',
-    description: 'Explore the latest AI-driven development tools that can help you build better applications faster.',
-    content: `
-      AI-driven development tools are revolutionizing how we build applications. Here are some of the latest tools that can help you build better applications faster.
-
-      ## 1. AI Code Generators
-      AI code generators can help you write code faster and more efficiently.
-
-      ## 2. AI-Powered Testing
-      AI-powered testing tools can help you catch bugs and issues before they become problems.
-
-      ## 3. AI-Driven Documentation
-      AI-driven documentation tools can help you generate documentation for your projects.
-
-      ## 4. AI-Driven Project Management
-      AI-driven project management tools can help you manage your projects more efficiently.
-
-      ## Conclusion
-      These tools can help you build better applications faster and more efficiently.
-    `,
-    image: 'https://images.unsplash.com/photo-1618788372246-79faff0c3742',
-    date: 'March 10, 2024',
-    readTime: '6 min read',
-    category: 'Development',
-    tags: ['AI', 'Development Tools', 'Web Development'],
+    slug: "ai-driven-development-tools",
+    title: "AI-Driven Development Tools",
+    description:
+      "Explore the latest AI-driven development tools that can help you build better applications faster.",
+    content: [
+      {
+        type: "paragraph",
+        content:
+          "AI-driven development tools are revolutionizing how we build applications.",
+      },
+      {
+        type: "heading",
+        content: "1. AI Code Generators",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "AI code generators can help you write code faster and more efficiently.",
+      },
+      {
+        type: "heading",
+        content: "2. AI-Powered Testing",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "AI-powered testing tools can help you catch bugs and issues before they become problems.",
+      },
+      {
+        type: "heading",
+        content: "3. AI-Driven Documentation",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "AI-driven documentation tools can help you generate documentation for your projects.",
+      },
+      {
+        type: "heading",
+        content: "4. AI-Driven Project Management",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "AI-driven project management tools can help you manage your projects more efficiently.",
+      },
+      {
+        type: "heading",
+        content: "Conclusion",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "These tools can help you build better applications faster and more efficiently.",
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1618788372246-79faff0c3742",
+    date: "March 10, 2024",
+    readTime: "6 min read",
+    category: "Development",
+    tags: ["AI", "Development Tools", "Web Development"],
     author: {
-      name: 'Dale Anderson',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-      role: 'Senior Developer',
-      bio: 'Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.',
+      name: "Dale Anderson",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+      role: "Senior Developer",
+      bio: "Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.",
       social: {
-        twitter: 'https://twitter.com/daleanderson',
-        github: 'https://github.com/daleanderson',
-        linkedin: 'https://linkedin.com/in/daleanderson'
-      }
+        twitter: "https://twitter.com/daleanderson",
+        github: "https://github.com/daleanderson",
+        linkedin: "https://linkedin.com/in/daleanderson",
+      },
     },
     views: 654,
     likes: 45,
-    comments: 8
+    comments: 8,
   },
   {
-    slug: 'microservices-best-practices',
-    title: 'Microservices Best Practices',
-    description: 'Learn the best practices for designing and implementing microservices architectures.',
-    content: `
-      Microservices architectures are becoming more popular due to their flexibility and scalability. Here are some best practices for designing and implementing microservices architectures.
-
-      ## 1. Service Decomposition
-      Decompose your application into smaller services that can be independently developed, deployed, and scaled.
-
-      ## 2. API Gateway
-      Use an API gateway to manage and route requests to your microservices.
-
-      ## 3. Event-Driven Communication
-      Use event-driven communication to enable loose coupling between microservices.
-
-      ## 4. Service Discovery
-      Use service discovery to locate and communicate with microservices.
-
-      ## Conclusion
-      Following these best practices can help you design and implement a scalable and maintainable microservices architecture.
-    `,
-    image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea',
-    date: 'March 5, 2024',
-    readTime: '10 min read',
-    category: 'Development',
-    tags: ['Microservices', 'Architecture', 'Web Development'],
+    slug: "microservices-best-practices",
+    title: "Microservices Best Practices",
+    description:
+      "Learn the best practices for designing and implementing microservices architectures.",
+    content: [
+      {
+        type: "paragraph",
+        content:
+          "Microservices architectures are becoming more popular due to their flexibility and scalability.",
+      },
+      {
+        type: "heading",
+        content: "1. Service Decomposition",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Decompose your application into smaller services that can be independently developed, deployed, and scaled.",
+      },
+      {
+        type: "heading",
+        content: "2. API Gateway",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Use an API gateway to manage and route requests to your microservices.",
+      },
+      {
+        type: "heading",
+        content: "3. Event-Driven Communication",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Use event-driven communication to enable loose coupling between microservices.",
+      },
+      {
+        type: "heading",
+        content: "4. Service Discovery",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Use service discovery to locate and communicate with microservices.",
+      },
+      {
+        type: "heading",
+        content: "Conclusion",
+        level: 2,
+      },
+      {
+        type: "paragraph",
+        content:
+          "Following these best practices can help you design and implement a scalable and maintainable microservices architecture.",
+      },
+    ],
+    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea",
+    date: "March 5, 2024",
+    readTime: "10 min read",
+    category: "Development",
+    tags: ["Microservices", "Architecture", "Web Development"],
     author: {
-      name: 'Dale Anderson',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-      role: 'Senior Developer',
-      bio: 'Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.',
+      name: "Dale Anderson",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+      role: "Senior Developer",
+      bio: "Full-stack developer with 10+ years of experience. Passionate about building scalable web applications and sharing knowledge with the community.",
       social: {
-        twitter: 'https://twitter.com/daleanderson',
-        github: 'https://github.com/daleanderson',
-        linkedin: 'https://linkedin.com/in/daleanderson'
-      }
+        twitter: "https://twitter.com/daleanderson",
+        github: "https://github.com/daleanderson",
+        linkedin: "https://linkedin.com/in/daleanderson",
+      },
     },
     views: 543,
     likes: 34,
-    comments: 6
-  }
+    comments: 6,
+  },
 ];
+
+function renderContent(content: ContentBlock[]) {
+  return content.map((block, index) => {
+    switch (block.type) {
+      case "paragraph":
+        return (
+          <motion.p
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-lg text-white/70 leading-relaxed mb-6 font-mono"
+          >
+            {block.content}
+          </motion.p>
+        );
+      case "heading":
+        const HeadingTag = block.level === 2 ? "h2" : "h3";
+        return (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className={`font-grotesk font-bold ${
+              block.level === 2
+                ? "text-3xl mt-12 mb-6 text-white"
+                : "text-xl mt-8 mb-4 text-white/90"
+            }`}
+          >
+            <HeadingTag>{block.content}</HeadingTag>
+          </motion.div>
+        );
+      case "code":
+        return (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8"
+          >
+            <CodeBlock
+              code={block.content}
+              language={block.language || "typescript"}
+              showLineNumbers
+            />
+          </motion.div>
+        );
+      case "image":
+        return (
+          <motion.figure
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="my-8"
+          >
+            <div className="relative aspect-[16/9] rounded-xl overflow-hidden">
+              <Image
+                src={block.content}
+                alt={block.caption || ""}
+                fill
+                className="object-cover"
+              />
+            </div>
+            {block.caption && (
+              <figcaption className="mt-3 text-center text-sm text-white/60 font-mono">
+                {block.caption}
+              </figcaption>
+            )}
+          </motion.figure>
+        );
+      case "quote":
+        return (
+          <motion.blockquote
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="border-l-4 border-primary pl-6 my-8 italic text-xl text-white/80"
+          >
+            {block.content}
+          </motion.blockquote>
+        );
+      case "list":
+        return (
+          <motion.ul
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-2 my-6 ml-6 list-disc text-white/70"
+          >
+            {block.items?.map((item, i) => (
+              <li key={i} className="text-lg font-mono">
+                {item}
+              </li>
+            ))}
+          </motion.ul>
+        );
+      case "video":
+        return (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="my-8"
+          >
+            <div className="relative aspect-video rounded-xl overflow-hidden">
+              <iframe
+                src={block.content}
+                title={block.caption || "Video"}
+                className="absolute inset-0 w-full h-full"
+                allowFullScreen
+              />
+            </div>
+            {block.caption && (
+              <p className="mt-3 text-center text-sm text-white/60 font-mono">
+                {block.caption}
+              </p>
+            )}
+          </motion.div>
+        );
+      default:
+        return null;
+    }
+  });
+}
 
 export default function Page() {
   const params = useParams();
-  const post = blogPosts.find(post => post.slug === params.slug);
-  const currentIndex = blogPosts.findIndex(p => p.slug === params.slug);
+  const post = blogPosts.find((post) => post.slug === params.slug);
+  const currentIndex = blogPosts.findIndex((p) => p.slug === params.slug);
   const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
-  const nextPost = currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+  const nextPost =
+    currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
   if (!post) {
-    return <div>Post not found</div>;
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
+          <p className="text-white/60 mb-8">
+            The blog post you're looking for doesn't exist.
+          </p>
+          <Button href="/blog" color="primary">
+            Back to Blog
+          </Button>
+        </div>
+      </div>
+    );
   }
-
-  // Function to render markdown content with code blocks
-  const renderContent = (content: string) => {
-    const parts = content.split('```');
-    return parts.map((part, index) => {
-      if (index % 2 === 0) {
-        // Regular text content
-        return part.split('\n').map((paragraph, pIndex) => {
-          if (paragraph.startsWith('###')) {
-            return (
-              <motion.h3
-                key={pIndex}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="text-xl font-bold font-grotesk mt-8 mb-4 text-white/90"
-              >
-                {paragraph.replace('###', '').trim()}
-              </motion.h3>
-            );
-          } else if (paragraph.startsWith('##')) {
-            return (
-              <motion.h2
-                key={pIndex}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="text-3xl font-bold font-grotesk mt-12 mb-6 text-white"
-              >
-                {paragraph.replace('##', '').trim()}
-              </motion.h2>
-            );
-          } else if (paragraph.trim().startsWith('-')) {
-            return (
-              <motion.li
-                key={pIndex}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="text-lg text-white/70 leading-relaxed ml-4 mb-2 font-mono"
-              >
-                {paragraph.replace('-', '').trim()}
-              </motion.li>
-            );
-          }
-          return (
-            paragraph.trim() && (
-              <motion.p
-                key={pIndex}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-lg text-white/70 leading-relaxed mb-6 font-mono"
-              >
-                {paragraph.trim()}
-              </motion.p>
-            )
-          );
-        });
-      } else {
-        // Code block
-        const [language, ...codeLines] = part.split('\n');
-        const code = codeLines.join('\n').trim();
-        return (
-          <CodeBlock
-            key={index}
-            code={code}
-            language={language.trim()}
-            showLineNumbers={true}
-          />
-        );
-      }
-    });
-  };
 
   return (
     <main className="min-h-screen bg-black text-white">
+      <CustomCursor />
+
       {/* Background Elements */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.white/[0.03])_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.white/[0.03])_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -505,8 +760,8 @@ export default function Page() {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
       </div>
 
-      {/* Hero Section */}
-      <section className="relative py-20">
+      {/* Article Header */}
+      <header className="relative py-5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Navigation */}
@@ -515,7 +770,7 @@ export default function Page() {
               animate={{ opacity: 1, y: 0 }}
               className="mb-12"
             >
-              <Link 
+              <Link
                 href="/blog"
                 color="foreground"
                 className="inline-flex items-center gap-2 text-sm font-mono hover:text-primary transition-colors"
@@ -525,18 +780,15 @@ export default function Page() {
               </Link>
             </motion.div>
 
-            {/* Header */}
+            {/* Article Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="space-y-6"
             >
-              <div className="flex items-center gap-3">
-                <Badge 
-                  size="sm"
-                  className="bg-primary/90 text-white"
-                >
+              <div className="flex flex-wrap items-center gap-4">
+                <Badge size="sm" className="bg-primary/90 text-white">
                   {post.category}
                 </Badge>
                 <div className="flex items-center gap-4 text-white/60 font-mono text-sm">
@@ -563,6 +815,7 @@ export default function Page() {
                 {post.description}
               </p>
 
+              {/* Author and Actions */}
               <div className="flex items-center justify-between pt-6">
                 <div className="flex items-center gap-4">
                   <Image
@@ -573,12 +826,66 @@ export default function Page() {
                     className="rounded-full"
                   />
                   <div>
-                    <div className="font-grotesk font-bold text-white">{post.author.name}</div>
-                    <div className="text-sm text-white/60 font-mono">{post.author.role}</div>
+                    <div className="font-grotesk font-bold text-white">
+                      {post.author.name}
+                    </div>
+                    <div className="text-sm text-white/60 font-mono">
+                      {post.author.role}
+                    </div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
+                  {post.demoUrl && (
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      color="default"
+                      className="text-white/60 hover:text-white"
+                      startContent={<ExternalLink className="w-4 h-4" />}
+                      href={post.demoUrl}
+                      target="_blank"
+                    >
+                      Demo
+                    </Button>
+                  )}
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    color="default"
+                    className={`text-white/60 hover:text-white ${isLiked ? "text-red-500" : ""}`}
+                    startContent={
+                      <Heart
+                        className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`}
+                      />
+                    }
+                    onClick={() => setIsLiked(!isLiked)}
+                  >
+                    {post.likes + (isLiked ? 1 : 0)}
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    color="default"
+                    className="text-white/60 hover:text-white"
+                    startContent={<MessageSquare className="w-4 h-4" />}
+                  >
+                    {post.comments}
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    color="default"
+                    className={`text-white/60 hover:text-white ${isBookmarked ? "text-primary" : ""}`}
+                    startContent={
+                      <Bookmark
+                        className={`w-4 h-4 ${isBookmarked ? "fill-current" : ""}`}
+                      />
+                    }
+                    onClick={() => setIsBookmarked(!isBookmarked)}
+                  >
+                    Save
+                  </Button>
                   <Button
                     size="sm"
                     variant="ghost"
@@ -588,21 +895,12 @@ export default function Page() {
                   >
                     Share
                   </Button>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    color="default"
-                    className="text-white/60 hover:text-white"
-                    startContent={<Bookmark className="w-4 h-4" />}
-                  >
-                    Save
-                  </Button>
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
-      </section>
+      </header>
 
       {/* Featured Image */}
       <motion.div
@@ -620,27 +918,26 @@ export default function Page() {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           </div>
         </div>
       </motion.div>
 
       {/* Content */}
-      <section className="container mx-auto px-4 py-20">
+      <section className="container mx-auto px-4   py-20">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-12">
             {/* Main Content */}
-            <motion.div
+            <motion.article
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="prose prose-invert max-w-none"
+              className="prose prose-invert max-w-none mt-10"
             >
               {renderContent(post.content)}
-            </motion.div>
+            </motion.article>
 
             {/* Sidebar */}
-            <motion.div
+            <motion.aside
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
@@ -657,8 +954,12 @@ export default function Page() {
                       height={80}
                       className="rounded-full mx-auto mb-4"
                     />
-                    <h3 className="font-grotesk font-bold text-lg">{post.author.name}</h3>
-                    <p className="text-sm text-white/60 font-mono">{post.author.role}</p>
+                    <h3 className="font-grotesk font-bold text-lg">
+                      {post.author.name}
+                    </h3>
+                    <p className="text-sm text-white/60 font-mono">
+                      {post.author.role}
+                    </p>
                   </div>
 
                   <p className="text-sm text-white/70 font-mono">
@@ -690,7 +991,7 @@ export default function Page() {
                       size="sm"
                       variant="ghost"
                       color="default"
-                      className="text-white/60 hover:text-white"
+                      className="text-white/60 hover:text-[#1877F2]"
                       href={post.author.social.github}
                       target="_blank"
                     >
@@ -700,46 +1001,35 @@ export default function Page() {
                 </div>
               </Card>
 
-              {/* Engagement */}
+              {/* Content Overview */}
               <Card className="bg-black/50 backdrop-blur-xl border-white/10">
                 <div className="p-6">
-                  <div className="grid grid-cols-3 gap-4">
-                    <Button
-                      size="sm"
-                      color="default"
-                      variant="ghost"
-                      className="w-full flex-col gap-2 h-auto py-4 group"
-                    >
-                      <Heart className="w-5 h-5 group-hover:text-red-500 transition-colors" />
-                      <div className="text-sm font-mono">
-                        <div className="font-bold">{post.likes}</div>
-                        <div className="text-white/60">Likes</div>
-                      </div>
-                    </Button>
-                    <Button
-                      size="sm"
-                      color="default"
-                      variant="ghost"
-                      className="w-full flex-col gap-2 h-auto py-4 group"
-                    >
-                      <MessageSquare className="w-5 h-5 group-hover:text-primary transition-colors" />
-                      <div className="text-sm font-mono">
-                        <div className="font-bold">{post.comments}</div>
-                        <div className="text-white/60">Comments</div>
-                      </div>
-                    </Button>
-                    <Button
-                      size="sm"
-                      color="default"
-                      variant="ghost"
-                      className="w-full flex-col gap-2 h-auto py-4 group"
-                    >
-                      <Share2 className="w-5 h-5 group-hover:text-blue-500 transition-colors" />
-                      <div className="text-sm font-mono">
-                        <div className="font-bold">Share</div>
-                        <div className="text-white/60">Post</div>
-                      </div>
-                    </Button>
+                  <h3 className="text-lg font-grotesk font-bold mb-4">
+                    Content Overview
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 text-white/60">
+                      <Code className="w-4 h-4" />
+                      <span className="text-sm font-mono">Code Snippets</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/60">
+                      <ImageIcon className="w-4 h-4" />
+                      <span className="text-sm font-mono">
+                        Images & Diagrams
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/60">
+                      <Quote className="w-4 h-4" />
+                      <span className="text-sm font-mono">Expert Quotes</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/60">
+                      <ListOrdered className="w-4 h-4" />
+                      <span className="text-sm font-mono">Key Takeaways</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/60">
+                      <Video className="w-4 h-4" />
+                      <span className="text-sm font-mono">Video Content</span>
+                    </div>
                   </div>
                 </div>
               </Card>
@@ -748,14 +1038,15 @@ export default function Page() {
               <div>
                 <h3 className="text-lg font-grotesk font-bold mb-4">Tags</h3>
                 <div className="flex flex-wrap gap-2">
-                  {post.tags.map(tag => (
-                    <Badge 
+                  {post.tags.map((tag) => (
+                    <Chip
+                      variant="flat"
                       key={tag}
                       size="sm"
-                      className="bg-white/5 text-white/70 hover:bg-white/10 transition-colors"
+                      className="bg-white/10 text-white/70 hover:bg-white/10 transition-colors"
                     >
                       {tag}
-                    </Badge>
+                    </Chip>
                   ))}
                 </div>
               </div>
@@ -763,23 +1054,27 @@ export default function Page() {
               {/* Table of Contents */}
               <Card className="bg-black/50 backdrop-blur-xl border-white/10">
                 <div className="p-6">
-                  <h3 className="text-lg font-grotesk font-bold mb-4">Contents</h3>
+                  <h3 className="text-lg font-grotesk font-bold mb-4">
+                    Table of Contents
+                  </h3>
                   <nav className="space-y-2">
-                    {post.content.split('\n').filter(line => line.startsWith('#')).map((heading, index) => (
-                      <a 
-                        key={index}
-                        href={`#${heading.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`}
-                        className={`block text-sm font-mono text-white/60 hover:text-primary transition-colors ${
-                          heading.startsWith('###') ? 'pl-4' : ''
-                        }`}
-                      >
-                        {heading.replace(/#/g, '').trim()}
-                      </a>
-                    ))}
+                    {post.content
+                      .filter((block) => block.type === "heading")
+                      .map((heading, index) => (
+                        <a
+                          key={index}
+                          href={`#${heading.content.toLowerCase().replace(/\s+/g, "-")}`}
+                          className={`block text-sm font-mono text-white/60 hover:text-primary transition-colors ${
+                            heading.level === 3 ? "pl-4" : ""
+                          }`}
+                        >
+                          {heading.content}
+                        </a>
+                      ))}
                   </nav>
                 </div>
               </Card>
-            </motion.div>
+            </motion.aside>
           </div>
         </div>
       </section>
@@ -824,4 +1119,4 @@ export default function Page() {
       </section>
     </main>
   );
-} 
+}
