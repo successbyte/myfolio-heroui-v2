@@ -16,6 +16,7 @@ import {
   GitBranch,
   LucideIcon 
 } from 'lucide-react';
+import { GridBackground } from '@/components/ui/grid-background';
 
 const achievements = [
   {
@@ -108,7 +109,8 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
+     <GridBackground>
+     <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.white/[0.03])_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.white/[0.03])_1px,transparent_1px)] bg-[size:4rem_4rem]" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -157,6 +159,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+     </GridBackground>
 
       {/* About Section */}
       <About />

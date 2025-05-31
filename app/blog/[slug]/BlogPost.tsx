@@ -1,6 +1,6 @@
 'use client';
 
-import { Badge } from '@heroui/react';
+import { Badge, Chip } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -24,57 +24,7 @@ interface BlogPost {
 }
 
 const blogPosts: BlogPost[] = [
-  {
-    slug: 'building-modern-web-applications-with-nextjs-13',
-    title: 'Building Modern Web Applications with Next.js 13',
-    description: 'Learn how to leverage the power of Next.js 13 to build fast, SEO-friendly web applications with great developer experience.',
-    content: `
-      Next.js 13 introduces groundbreaking features that revolutionize how we build web applications. From the new App Router to Server Components, these changes significantly improve both developer experience and application performance.
-
-      ## Key Features
-
-      ### 1. App Router
-      The new App Router provides a more intuitive way to handle routing in your application. It's built on top of React Server Components and supports layouts, nested routing, and more.
-
-      ### 2. Server Components
-      React Server Components allow you to write UI that can be rendered on the server and streamed to the client. This results in faster page loads and reduced JavaScript bundle sizes.
-
-      ### 3. Streaming
-      Next.js 13 supports streaming server rendering, allowing you to progressively render pages from the server. This means users see content sooner and enjoy a more responsive experience.
-
-      ## Getting Started
-
-      To start using Next.js 13, you can create a new project using:
-
-      \`\`\`bash
-      npx create-next-app@latest my-app --typescript --tailwind --app
-      \`\`\`
-
-      This will set up a new project with TypeScript, Tailwind CSS, and the new App Router.
-
-      ## Best Practices
-
-      1. Use Server Components by default
-      2. Implement proper loading and error states
-      3. Leverage the new data fetching methods
-      4. Optimize images using the Next.js Image component
-      5. Implement proper caching strategies
-
-      ## Conclusion
-
-      Next.js 13 represents a significant step forward in web development, providing developers with powerful tools to build better web applications.
-    `,
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97',
-    date: 'March 15, 2024',
-    readTime: '8 min read',
-    category: 'Development',
-    tags: ['Next.js', 'React', 'Web Development'],
-    author: {
-      name: 'Dale Anderson',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-      role: 'Senior Developer'
-    }
-  },
+ 
   // ... other blog posts ...
 ];
 
@@ -106,9 +56,9 @@ export default function BlogPost({ slug }: Props) {
 
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <Badge variant="flat" className="bg-primary/90 text-primary-foreground">
+              <Chip variant="flat" className=" text-primary-foreground">
                 {post.category}
-              </Badge>
+              </Chip>
               <span className="text-sm text-muted-foreground font-mono">{post.date}</span>
               <span className="text-sm text-muted-foreground font-mono">•</span>
               <span className="text-sm text-muted-foreground font-mono">{post.readTime}</span>
@@ -162,13 +112,13 @@ export default function BlogPost({ slug }: Props) {
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-wrap gap-2">
             {post.tags.map(tag => (
-              <Badge 
+              <Chip 
                 key={tag} 
                 variant="flat" 
-                className="bg-secondary/50 text-foreground border border-border"
+                className=" text-foreground border border-border"
               >
                 {tag}
-              </Badge>
+              </Chip>
             ))}
           </div>
         </div>

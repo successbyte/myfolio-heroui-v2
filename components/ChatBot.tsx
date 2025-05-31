@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@heroui/react';
+import { Badge, Chip } from '@heroui/react';
 
 type Message = {
   type: 'user' | 'bot' | 'suggestion';
@@ -65,7 +65,7 @@ export const ChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([
     { 
       type: 'bot', 
-      content: 'Hi! I&apos;m your portfolio assistant. What would you like to know about?' 
+      content: `Hi! I'm your portfolio assistant. What would you like to know about?` 
     }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -207,9 +207,9 @@ export const ChatBot = () => {
                         
                         <div className="flex flex-wrap gap-2 mt-2">
                           {portfolioInfo[message.category].tags.map((tag) => (
-                            <Badge key={tag} variant="flat" className="bg-secondary/50">
+                            <Chip key={tag} variant="flat" >
                               {tag}
-                            </Badge>
+                            </Chip>
                           ))}
                         </div>
                       </CardContent>

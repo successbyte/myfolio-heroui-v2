@@ -16,9 +16,15 @@ import {
   Sparkles,
   ArrowRight,
   CheckCircle2,
-  ShoppingBag
+  ShoppingBag,
+  Search,
+  Filter
 } from 'lucide-react';
 import {  Chip } from '@heroui/react';
+import { GridBackground } from '@/components/ui/grid-background';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 interface Product {
   id: string;
@@ -46,7 +52,7 @@ const products: Product[] = [
     title: 'Modern Portfolio Template',
     description: 'A sleek and responsive portfolio template built with Next.js 13, Tailwind CSS, and Framer Motion. Perfect for developers and designers who want to showcase their work with style.',
     price: 49,
-    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1000',
+    image: '/images/portfolio-project.png',
     category: 'Template',
     features: [
       'Responsive Design',
@@ -73,9 +79,9 @@ const products: Product[] = [
       image: '/images/avatar-1.png',
       role: 'Senior Developer'
     },
-    demoUrl: 'https://modern-portfolio.demo.com',
+    demoUrl: 'https://myfolio-heroui.vercel.app/',
     previewImages: [
-      'https://images.unsplash.com/photo-1487014679447-9f8336841d58?q=80&w=1000',
+      '/images/portfolio-project.png',
       'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=1000',
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000'
     ]
@@ -469,6 +475,27 @@ const OrderSuccessModal = ({ isOpen, onClose, product }: OrderSuccessModalProps)
   );
 };
 
+const categories = [
+  {
+    name: 'UI Templates',
+    icon: Zap,
+    count: 24,
+    description: 'Modern and responsive UI templates'
+  },
+  {
+    name: 'Components',
+    icon: ShoppingBag,
+    count: 48,
+    description: 'Reusable UI components and patterns'
+  },
+  {
+    name: 'Starter Kits',
+    icon: Star,
+    count: 16,
+    description: 'Full-stack starter templates'
+  }
+];
+
 export default function MarketplacePage() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -486,15 +513,145 @@ export default function MarketplacePage() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white relative">
+    <main className="min-h-screen bg-black text-white">
       <CustomCursor />
       
-      {/* Background Elements */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.white/[0.03])_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.white/[0.03])_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
+      <GridBackground>
+        <section className="relative py-20 overflow-hidden">
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.white/[0.03])_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.white/[0.03])_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+          </div>
+
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center max-w-4xl mx-auto mb-16"
+            >
+              <span className="inline-block text-sm font-mono text-primary/80 bg-primary/5 border border-primary/10 px-3 py-1 rounded-full mb-4">
+                Digital Marketplace
+              </span>
+              <h1 className="text-5xl md:text-6xl font-bold font-grotesk mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-white">
+                Premium Digital Assets
+              </h1>
+              <p className="text-lg text-muted-foreground font-mono">
+                Discover high-quality templates, components, and resources to accelerate your development workflow.
+              </p>
+            </motion.div>
+
+            {/* Search Section */}
+            <Card className="bg-black/50 backdrop-blur-xl border-white/10 mb-12">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row gap-4">
+                  <div className="relative flex-1">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                    <Input
+                      placeholder="Search templates, components..."
+                      className="pl-10 bg-black/30 border-white/10 text-white placeholder:text-muted-foreground"
+                    />
+                  </div>
+                  <Button variant="secondary" className="border-white/10 hover:border-primary/50">
+                    <Filter className="w-4 h-4 mr-2" />
+                    Filters
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Categories Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              {categories.map((category, index) => (
+                <motion.div
+                  key={category.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group"
+                >
+                  <Card className="bg-black/50 backdrop-blur-xl border-white/10 hover:border-primary/20 transition-all duration-300 h-full">
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <category.icon className="w-6 h-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-2">
+                            <h3 className="text-xl font-bold font-grotesk group-hover:text-primary transition-colors duration-300">
+                              {category.name}
+                            </h3>
+                            <span className="text-sm text-white/60">
+                              {category.count} items
+                            </span>
+                          </div>
+                          <p className="text-sm text-white/60 mb-4">
+                            {category.description}
+                          </p>
+                          <div className="flex items-center text-primary group-hover:translate-x-2 transition-transform duration-300">
+                            <span className="text-sm mr-2">Browse Collection</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Featured Item */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="relative group"
+            >
+              <Card className="bg-gradient-to-br from-black/50 to-primary/5 backdrop-blur-xl border-white/10 overflow-hidden">
+                <CardContent className="p-8">
+                  <div className="flex flex-col md:flex-row gap-8">
+                    <div className="w-full md:w-2/3">
+                      <span className="inline-block text-xs font-mono text-primary mb-4">
+                        Featured Template
+                      </span>
+                      <h2 className="text-3xl font-bold font-grotesk mb-4 group-hover:text-primary transition-colors duration-300">
+                        {products[0].title}
+                      </h2>
+                      <p className="text-muted-foreground mb-6">
+                        {products[0].description}
+                      </p>
+                      <div className="flex items-center gap-4">
+                        <Button 
+                          className="bg-primary/90 hover:bg-primary"
+                          onClick={() => {
+                            setSelectedProduct(products[0]);
+                            setIsPreviewModalOpen(true);
+                          }}
+                        >
+                          View Details
+                        </Button>
+                        <div className="flex items-center gap-2">
+                          <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                          <span className="text-white/60">{products[0].rating}/5 ({products[0].sales} sales)</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="w-full md:w-1/3 relative aspect-[4/3] rounded-lg overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-60" />
+                      <Image
+                        src={products[0].image}
+                        alt={products[0].title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        </section>
+      </GridBackground>
 
       <OrderSuccessModal
         isOpen={isOrderSuccessOpen}
@@ -518,68 +675,6 @@ export default function MarketplacePage() {
         price={selectedProduct?.price || 0}
         onSuccess={handlePaymentSuccess}
       />
-
-      {/* Header */}
-      <header className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
-            >
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Premium Quality Digital Products</span>
-            </motion.div>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-primary"
-            >
-              Build Faster & Better
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-white/70 max-w-2xl mx-auto"
-            >
-              Discover our collection of premium templates, components, and resources designed to accelerate your development workflow.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex items-center justify-center gap-4"
-            >
-              <div className="flex -space-x-2">
-                {[
-                  'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-                  'https://images.unsplash.com/photo-1438761681033-6461ffad8d80',
-                  'https://images.unsplash.com/photo-1500648767791-00dcc994a43e',
-                  'https://images.unsplash.com/photo-1494790108377-be9c29b29330'
-                ].map((avatar, i) => (
-                  <div key={i} className="relative w-8 h-8 rounded-full border-2 border-black overflow-hidden">
-                    <Image
-                      src={avatar}
-                      alt={`User ${i + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-              <span className="text-white/60">
-                Trusted by <span className="text-white font-medium">2,000+</span> developers
-              </span>
-            </motion.div>
-          </div>
-        </div>
-      </header>
 
       {/* Products Grid */}
       <section className="py-20">

@@ -114,7 +114,7 @@ export const Education = () => {
               className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-32 last:mb-0"
             >
               {/* Timeline Node */}
-              <div className="absolute left-1/2 top-12 transform -translate-x-1/2 z-10">
+              <div className="absolute left-1/2 top-12 transform -translate-x-1/2 hidden md:block z-10">
                 <motion.div 
                   className="w-6 h-6 rounded-full bg-primary relative"
                   initial={{ scale: 0 }}
