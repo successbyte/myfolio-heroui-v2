@@ -122,7 +122,7 @@ export const projects: Project[] = [
     slug: 'portfolio-template',
     title: 'Portfolio Template',
     description: 'Modern portfolio template with animations and dark mode.',
-    image: '/images/portfolio-project.png',
+    image: '/images/portfolio-project.jpeg',
     category: 'Frontend',
     features: [
       'Responsive design',
@@ -146,8 +146,8 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/yourusername/portfolio-template',
     demoUrl: 'https://portfolio-template.demo',
     screenshots: [
-      '/images/portfolio-project.png',
-      '/images/portfolio-project.png'
+      '/images/portfolio-project.jpeg',
+      '/images/portfolio-project.jpeg'
     ],
     content: {
       overview: 'A sleek and modern portfolio template built with Next.js and Framer Motion, featuring smooth animations, dark mode support, and responsive design. Perfect for developers and designers to showcase their work.',

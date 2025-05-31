@@ -95,7 +95,7 @@ export const Hero = () => {
                       <p className="font-grotesk">Available</p>
                     </div>
                   </div>
-                  <Progress value={0} className="h-2" />
+                  <Progress value={100} className="h-2" />
                 </CardBody>
               </Card>
 
