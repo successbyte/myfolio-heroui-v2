@@ -447,9 +447,9 @@ const OrderSuccessModal = ({ isOpen, onClose, product }: OrderSuccessModalProps)
                 </div>
 
                 <div className="bg-primary/10 rounded-lg p-6 border border-primary/20">
-                  <h4 className="font-medium text-primary mb-2">What's Next?</h4>
+                  <h4 className="font-medium text-primary mb-2">What&apos;s Next?</h4>
                   <p className="text-sm text-white/60 mb-4">
-                    You'll receive an email with download instructions and access to your purchase shortly.
+                    You&apos;ll receive an email with download instructions and access to your purchase shortly.
                   </p>
                   <div className="flex items-center gap-2 text-sm text-white/40">
                     <CheckCircle2 className="w-4 h-4 text-primary" />

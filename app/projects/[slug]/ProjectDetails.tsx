@@ -124,7 +124,7 @@ export function ProjectDetails({ slug }: ProjectDetailsProps) {
       <div className="min-h-screen my-16  bg-black text-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
-          <p className="text-white/60 mb-8">The project you're looking for doesn't exist.</p>
+          <p className="text-white/60 mb-8">The project you&apos;re looking for doesn&apos;t exist.</p>
           <Button href="/projects" color="primary">
             View All Projects
           </Button>

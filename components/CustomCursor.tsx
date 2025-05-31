@@ -140,7 +140,7 @@ export const CustomCursor = ({ className }: CustomCursorProps) => {
         </div>
       </motion.div>
 
-      <style jsx global>{`
+      <style >{`
         @media (max-width: 768px) {
           * {
             cursor: auto !important;

@@ -36,7 +36,7 @@ export default function ProjectPage() {
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
           <p className="text-white/60 mb-8">
-            The project you're looking for doesn't exist.
+            The project you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link href="/projects" className="text-primary">
             Back to Projects

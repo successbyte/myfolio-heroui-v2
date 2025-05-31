@@ -149,7 +149,7 @@ export default function Page() {
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
           <p className="text-white/60 mb-8">
-            The blog post you're looking for doesn't exist.
+            The blog post you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link href="/blog" className="text-primary">
             Back to Blog

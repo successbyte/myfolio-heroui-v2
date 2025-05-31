@@ -73,7 +73,7 @@ export const PaymentModal = ({ isOpen, onClose, productTitle, price, onSuccess }
                 </div>
                 <h3 className="text-2xl font-bold mb-2">Complete Purchase</h3>
                 <p className="text-white/60">
-                  You're about to purchase {productTitle}
+                  You&apos;re about to purchase {productTitle}
                 </p>
               </div>
 
