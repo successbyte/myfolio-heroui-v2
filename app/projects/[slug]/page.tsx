@@ -132,6 +132,24 @@ export default function ProjectPage() {
               <p className="text-white/70">{project.content.overview}</p>
             </div>
 
+            {/* Challenges and Solutions */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <div>
+                <h2 className="text-2xl font-bold font-grotesk mb-4">Challenges</h2>
+                <p className="text-white/70">{project.content.challenges}</p>
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold font-grotesk mb-4">Solutions</h2>
+                <p className="text-white/70">{project.content.solutions}</p>
+              </div>
+            </div>
+
+            {/* Results */}
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold font-grotesk mb-4">Results</h2>
+              <p className="text-white/70">{project.content.results}</p>
+            </div>
+
             {/* Features */}
             <div className="mb-12">
               <h2 className="text-2xl font-bold font-grotesk mb-6">Key Features</h2>

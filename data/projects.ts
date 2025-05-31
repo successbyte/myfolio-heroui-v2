@@ -5,9 +5,8 @@ export const projects: Project[] = [
     slug: 'e-commerce-platform',
     title: 'E-Commerce Platform',
     description: 'A modern e-commerce platform built with Next.js and Stripe integration.',
-    longDescription: 'A comprehensive e-commerce solution built with Next.js, featuring seamless payment processing with Stripe, real-time inventory management, and a beautiful responsive design. The platform offers a modern shopping experience with advanced features.',
     image: 'https://images.unsplash.com/photo-1674027392842-29f8354e236c?q=80&w=2232&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    tags: ['Next.js', 'TypeScript', 'Stripe', 'Tailwind'],
+    category: 'Full Stack',
     features: [
       'Server-side rendering for performance',
       'Real-time inventory tracking',
@@ -18,33 +17,35 @@ export const projects: Project[] = [
       'Advanced search and filtering',
       'Order management system'
     ],
-    techStack: {
-      frontend: ['Next.js', 'TypeScript', 'TailwindCSS', 'Framer Motion', 'React Query'],
-      backend: ['Node.js', 'Prisma', 'PostgreSQL', 'Redis'],
-      deployment: ['Vercel', 'AWS S3', 'CloudFront']
-    },
+    techStack: [
+      'Next.js',
+      'TypeScript',
+      'TailwindCSS',
+      'Framer Motion',
+      'Node.js',
+      'Prisma',
+      'PostgreSQL',
+      'Redis'
+    ],
     githubUrl: 'https://github.com/yourusername/modern-ecommerce',
     demoUrl: 'https://modern-ecommerce.demo',
     screenshots: [
-      {
-        url: 'https://images.unsplash.com/photo-1674027392842-29f8354e236c?q=80&w=2232&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        caption: 'Modern product catalog with filtering'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1674027392842-29f8354e236c?q=80&w=2232&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        caption: 'Seamless checkout experience'
-      }
+      'https://images.unsplash.com/photo-1674027392842-29f8354e236c?q=80&w=2232&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1674027392842-29f8354e236c?q=80&w=2232&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ],
-    featured: true,
-    views: 2341
+    content: {
+      overview: 'A comprehensive e-commerce solution built with Next.js, featuring seamless payment processing with Stripe, real-time inventory management, and a beautiful responsive design. The platform offers a modern shopping experience with advanced features.',
+      challenges: 'Implementing real-time inventory tracking and ensuring seamless payment processing were the main challenges.',
+      solutions: 'Utilized WebSocket for real-time updates and implemented robust error handling for payments.',
+      results: 'Successfully launched with 99.9% uptime and processed over 1000 transactions.'
+    }
   },
   {
     slug: 'ai-chatbot',
     title: 'AI Chatbot Assistant',
     description: 'Intelligent chatbot powered by OpenAI GPT-3 for customer support.',
-    longDescription: 'An advanced AI-powered chatbot that revolutionizes customer support with natural language understanding and real-time responses. Built with OpenAI\'s GPT-3, it provides instant, accurate assistance 24/7.',
     image: 'https://images.unsplash.com/photo-1662057168154-89300791ad6e?q=80&w=2320&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    tags: ['React', 'Node.js', 'OpenAI', 'Socket.io'],
+    category: 'Backend',
     features: [
       'GPT-3 powered responses',
       'Real-time chat interface',
@@ -55,33 +56,35 @@ export const projects: Project[] = [
       'CRM integration',
       'Performance monitoring'
     ],
-    techStack: {
-      frontend: ['React', 'TypeScript', 'TailwindCSS', 'Socket.io-client'],
-      backend: ['Node.js', 'Express', 'MongoDB', 'Redis'],
-      deployment: ['Docker', 'AWS Lambda']
-    },
+    techStack: [
+      'React',
+      'TypeScript',
+      'Node.js',
+      'OpenAI API',
+      'Socket.io',
+      'MongoDB',
+      'Redis',
+      'Docker'
+    ],
     githubUrl: 'https://github.com/yourusername/ai-chatbot',
     demoUrl: 'https://ai-chatbot.demo',
     screenshots: [
-      {
-        url: 'https://images.unsplash.com/photo-1662057168154-89300791ad6e?q=80&w=2320&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        caption: 'AI chat interface'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1662057168154-89300791ad6e?q=80&w=2320&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        caption: 'Analytics dashboard'
-      }
+      'https://images.unsplash.com/photo-1662057168154-89300791ad6e?q=80&w=2320&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1662057168154-89300791ad6e?q=80&w=2320&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ],
-    featured: true,
-    views: 1876
+    content: {
+      overview: 'An advanced AI-powered chatbot that revolutionizes customer support with natural language understanding and real-time responses. Built with OpenAI\'s GPT-3, it provides instant, accurate assistance 24/7.',
+      challenges: 'Ensuring accurate responses and maintaining context across conversations.',
+      solutions: 'Implemented sophisticated prompt engineering and context management system.',
+      results: 'Reduced customer support response time by 80% and handled 10,000+ queries.'
+    }
   },
   {
     slug: 'social-platform',
     title: 'Social Media Platform',
     description: 'Full-stack social media platform with real-time features.',
-    longDescription: 'A modern social media platform built with React and GraphQL, featuring real-time updates, rich media sharing, and interactive features. The platform includes comprehensive social networking capabilities.',
     image: 'https://images.unsplash.com/photo-1678329885843-eeb5a6fcfce5?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    tags: ['React', 'GraphQL', 'MongoDB', 'WebSocket'],
+    category: 'Full Stack',
     features: [
       'Real-time feed updates',
       'Rich media sharing',
@@ -92,33 +95,35 @@ export const projects: Project[] = [
       'Profile customization',
       'Search functionality'
     ],
-    techStack: {
-      frontend: ['React', 'TypeScript', 'TailwindCSS', 'Apollo Client'],
-      backend: ['Node.js', 'GraphQL', 'MongoDB', 'Redis'],
-      deployment: ['AWS ECS', 'CloudFront', 'S3']
-    },
+    techStack: [
+      'React',
+      'GraphQL',
+      'TypeScript',
+      'Node.js',
+      'MongoDB',
+      'Redis',
+      'AWS',
+      'WebSocket'
+    ],
     githubUrl: 'https://github.com/yourusername/social-platform',
     demoUrl: 'https://social-platform.demo',
     screenshots: [
-      {
-        url: 'https://images.unsplash.com/photo-1678329885843-eeb5a6fcfce5?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        caption: 'Social feed with updates'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1678329885843-eeb5a6fcfce5?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        caption: 'User profile interface'
-      }
+      'https://images.unsplash.com/photo-1678329885843-eeb5a6fcfce5?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1678329885843-eeb5a6fcfce5?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ],
-    featured: false,
-    views: 1543
+    content: {
+      overview: 'A modern social media platform built with React and GraphQL, featuring real-time updates, rich media sharing, and interactive features. The platform includes comprehensive social networking capabilities.',
+      challenges: 'Scaling real-time features and managing high concurrent users.',
+      solutions: 'Implemented efficient caching and optimized database queries.',
+      results: 'Successfully handles 100,000+ daily active users with sub-second response times.'
+    }
   },
   {
     slug: 'portfolio-template',
     title: 'Portfolio Template',
     description: 'Modern portfolio template with animations and dark mode.',
-    longDescription: 'A sleek and modern portfolio template built with Next.js and Framer Motion, featuring smooth animations, dark mode support, and responsive design. Perfect for developers and designers to showcase their work.',
     image: '/images/portfolio-project.png',
-    tags: ['Next.js', 'Framer Motion', 'Tailwind', 'TypeScript'],
+    category: 'Frontend',
     features: [
       'Responsive design',
       'Dark/Light modes',
@@ -129,24 +134,26 @@ export const projects: Project[] = [
       'SEO optimization',
       'Performance metrics'
     ],
-    techStack: {
-      frontend: ['Next.js', 'TypeScript', 'TailwindCSS', 'Framer Motion'],
-      backend: ['Node.js', 'Express', 'MongoDB'],
-      deployment: ['Vercel', 'Cloudinary']
-    },
+    techStack: [
+      'Next.js',
+      'TypeScript',
+      'TailwindCSS',
+      'Framer Motion',
+      'Node.js',
+      'Express',
+      'MongoDB'
+    ],
     githubUrl: 'https://github.com/yourusername/portfolio-template',
     demoUrl: 'https://portfolio-template.demo',
     screenshots: [
-      {
-        url: '/images/portfolio-project.png',
-        caption: 'Portfolio homepage'
-      },
-      {
-        url: '/images/portfolio-project.png',
-        caption: 'Projects showcase'
-      }
+      '/images/portfolio-project.png',
+      '/images/portfolio-project.png'
     ],
-    featured: false,
-    views: 1234
+    content: {
+      overview: 'A sleek and modern portfolio template built with Next.js and Framer Motion, featuring smooth animations, dark mode support, and responsive design. Perfect for developers and designers to showcase their work.',
+      challenges: 'Creating smooth animations while maintaining performance.',
+      solutions: 'Optimized animation performance using Framer Motion best practices.',
+      results: 'Achieved 100/100 Lighthouse performance score and positive user feedback.'
+    }
   }
 ]; 

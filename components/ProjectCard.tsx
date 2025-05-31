@@ -123,9 +123,9 @@ export function ProjectCard({ project, variant = 'default', className = '' }: Pr
               
               {/* Tech Stack Pills - Overlaid on Image */}
               <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
+                {project.techStack.slice(0, 4).map((tech: string) => (
                   <Chip 
-                    key={tag} 
+                    key={tech} 
                     className="
                       bg-black/30 backdrop-blur-md 
                       text-white/90 text-xs 
@@ -139,7 +139,7 @@ export function ProjectCard({ project, variant = 'default', className = '' }: Pr
                       transform translate-y-1 scale-95
                     "
                   >
-                    {tag}
+                    {tech}
                   </Chip>
                 ))}
               </div>
@@ -170,14 +170,14 @@ export function ProjectCard({ project, variant = 'default', className = '' }: Pr
                       <span className="text-xs uppercase tracking-wider font-medium">Tech Stack</span>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {project.techStack.frontend.slice(0, 3).map((tech) => (
+                      {project.techStack.slice(0, 3).map((tech) => (
                         <span key={tech} className="text-xs text-zinc-400 group-hover:text-white/60 transition-colors duration-300">
                           {tech}
                         </span>
                       ))}
-                      {project.techStack.frontend.length > 3 && (
+                      {project.techStack.length > 3 && (
                         <span className="text-xs text-zinc-500 group-hover:text-white/40 transition-colors duration-300">
-                          +{project.techStack.frontend.length - 3} more
+                          +{project.techStack.length - 3} more
                         </span>
                       )}
                     </div>
