@@ -58,7 +58,6 @@ export function CodeBlock({ code, language, showLineNumbers = true, title }: Cod
             variant="flat"
             color="default"
             className="bg-black/50 w-full font-mono !p-4"
-            showLineNumbers={showLineNumbers}
           >
             {code}
           </Snippet>
