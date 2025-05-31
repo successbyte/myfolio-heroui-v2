@@ -8,12 +8,18 @@ import { CreditCard, Lock } from 'lucide-react';
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  productTitle: string;
-  price: number;
   onSuccess: () => void;
+  price: number;
+  productTitle: string;
 }
 
-export const PaymentModal = ({ isOpen, onClose, productTitle, price, onSuccess }: PaymentModalProps) => {
+export const PaymentModal = ({
+  isOpen,
+  onClose,
+  onSuccess,
+  price,
+  productTitle
+}: PaymentModalProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -41,17 +47,16 @@ export const PaymentModal = ({ isOpen, onClose, productTitle, price, onSuccess }
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
           className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          exit={{ opacity: 0 }}
+          initial={{ opacity: 0 }}
           onMouseMove={(e) => {
             if (isMounted) {
-              // Force cursor update on modal mount
               const event = new MouseEvent('mousemove', {
+                bubbles: true,
                 clientX: e.clientX,
                 clientY: e.clientY,
-                bubbles: true
               });
               document.dispatchEvent(event);
             }
@@ -59,10 +64,10 @@ export const PaymentModal = ({ isOpen, onClose, productTitle, price, onSuccess }
         >
           {isMounted && <CustomCursor />}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
             className="bg-black/90 rounded-xl w-full max-w-lg p-8 border border-primary/20 relative overflow-hidden"
+            exit={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.9, opacity: 0 }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent opacity-50" />
             
@@ -73,41 +78,44 @@ export const PaymentModal = ({ isOpen, onClose, productTitle, price, onSuccess }
                 </div>
                 <h3 className="text-2xl font-bold mb-2">Complete Purchase</h3>
                 <p className="text-white/60">
-                  You&apos;re about to purchase {productTitle}
+                  {"You're about to purchase "}{productTitle}
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-white/60 mb-2">
+                  <label htmlFor="cardNumber" className="block text-sm font-medium text-white/60 mb-2">
                     Card Number
                   </label>
                   <input
-                    type="text"
-                    placeholder="1234 5678 9012 3456"
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary/50 text-white placeholder-white/30"
+                    id="cardNumber"
+                    placeholder="1234 5678 9012 3456"
+                    type="text"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-2">
+                    <label htmlFor="expiryDate" className="block text-sm font-medium text-white/60 mb-2">
                       Expiry Date
                     </label>
                     <input
-                      type="text"
-                      placeholder="MM/YY"
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary/50 text-white placeholder-white/30"
+                      id="expiryDate"
+                      placeholder="MM/YY"
+                      type="text"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-2">
+                    <label htmlFor="cvc" className="block text-sm font-medium text-white/60 mb-2">
                       CVC
                     </label>
                     <input
-                      type="text"
-                      placeholder="123"
                       className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary/50 text-white placeholder-white/30"
+                      id="cvc"
+                      placeholder="123"
+                      type="text"
                     />
                   </div>
                 </div>
