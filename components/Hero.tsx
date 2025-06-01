@@ -13,16 +13,25 @@ export const Hero = () => {
     threshold: 0.1,
   });
   
-  // Add state to track if we should start animations
   const [shouldAnimate, setShouldAnimate] = useState(false);
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
 
   useEffect(() => {
-    // Wait for loader timeout (3.7 seconds) before allowing animations
-    const timer = setTimeout(() => {
+    // Check if this is the first visit
+    const hasVisited = localStorage.getItem('hasVisitedBefore');
+    
+    if (!hasVisited) {
+      // First visit - apply the delay
+      const timer = setTimeout(() => {
+        setShouldAnimate(true);
+        localStorage.setItem('hasVisitedBefore', 'true');
+      }, 3700);
+      
+      return () => clearTimeout(timer);
+    } else {
+      // Not first visit - animate immediately
       setShouldAnimate(true);
-    }, 3700);
-
-    return () => clearTimeout(timer);
+    }
   }, []);
 
   return (
