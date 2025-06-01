@@ -53,8 +53,7 @@ folio2/
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd folio2
+   git clone https://github.com/SooryaCodes/myfolio-heroui-v2
    ```
 
 2. Install dependencies:
