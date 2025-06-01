@@ -28,6 +28,7 @@ const chatSuggestions = [
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -39,17 +40,22 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-        scrolled ? 'py-4 bg-background/80 backdrop-blur-lg border-b border-border' : 'py-6'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-[100] ${
+        scrolled || isMobileMenuOpen ? 'bg-background/80 backdrop-blur-lg border-b border-border' : ''
+      } transition-all duration-300`}
     >
       <div className="container">
-        <nav className="flex items-center justify-between">
+        <nav className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link 
             href="/" 
@@ -86,25 +92,65 @@ export const Navbar = () => {
                 </Link>
               );
             })}
-
-          
           </div>
 
           {/* Mobile Menu Button */}
           <button 
-            className="p-2 md:hidden rounded-full hover:bg-primary/10 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 md:hidden rounded-full hover:bg-primary/10 transition-colors relative z-50"
             aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={1.5} 
-                d="M4 6h16M4 12h16M4 18h16" 
-              />
+            <svg 
+              className="w-6 h-6" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              {isMobileMenuOpen ? (
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={1.5} 
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={1.5} 
+                  d="M4 6h16M4 12h16M4 18h16" 
+                />
+              )}
             </svg>
           </button>
         </nav>
+
+        {/* Mobile Menu - Moved outside nav but inside header */}
+        <div 
+          className={`md:hidden overflow-hidden transition-all duration-300 bg-background/80 backdrop-blur-lg ${
+            isMobileMenuOpen ? 'max-h-[400px] opacity-100 border-t border-border' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="py-4 flex flex-col gap-2">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    isActive 
+                      ? 'bg-primary text-primary-foreground' 
+                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </motion.header>
   );

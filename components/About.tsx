@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowDownToLine, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 const quickInfo = [
   { label: 'Age', value: '25' },
@@ -96,6 +97,8 @@ export const About = () => {
                 <ArrowDownToLine className="ml-2 h-4 w-4 group-hover:translate-y-0.5 transition-transform duration-300" />
               </Button>
               <Button 
+                as={Link}
+                href="/projects"
                 variant="secondary"
                 size="lg"
                 className="bg-transparent border border-white/10 hover:bg-white/5 transition-all duration-300 group"
