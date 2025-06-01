@@ -138,7 +138,7 @@ export const Skills = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-background border border-border rounded-lg p-8"
+            className="bg-background hidden md:block border border-border rounded-lg p-8"
           >
             <div className="flex items-center gap-4 mb-8">
               <div className="p-3 rounded-xl bg-muted">
