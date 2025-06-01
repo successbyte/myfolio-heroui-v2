@@ -1,98 +1,124 @@
-# Modern Developer Portfolio
+# Modern Portfolio Template with Hero UI
 
-A modern, responsive developer portfolio built with Next.js, TypeScript, and Tailwind CSS. Features a beautiful black and white theme with smooth animations and transitions.
+A sleek and modern portfolio template built with Next.js 15, TypeScript, and Hero UI components. This template provides a beautiful, responsive, and customizable portfolio website perfect for developers, designers, and creative professionals.
 
-## Features
+## ✨ Features
 
-- 🌙 Dark/Light theme support
-- 🎨 Modern minimalist design
-- 🎭 Smooth animations with Framer Motion
-- 📱 Fully responsive layout
-- ⚡ Next.js 14 with App Router
-- 🎯 TypeScript for type safety
-- 🎨 Tailwind CSS for styling
-- 🖼️ Dynamic project showcase
-- 📝 Blog section with MDX support
-- 🛍️ Digital marketplace
-- 📬 Contact form with validation
-- 🖱️ Custom cursor effects
-- 🌈 Gradient animations
-- 🎨 HeroUI components
+- 🎨 Built with [Hero UI](https://heroui.net/) - A modern and beautiful component library
+- ⚡ Powered by Next.js 15 with App Router
+- 🎭 Dark/Light mode support
+- 📱 Fully responsive design
+- 🔧 TypeScript support
+- 🎯 SEO optimized
+- 📝 Blog section support
+- 💼 Project showcase
+- 📄 About page
+- 📞 Contact form
+- 🛍️ Marketplace integration
+- 📚 Documentation section
 
-## Getting Started
+## 🚀 Project Structure
+
+```
+folio2/
+├── app/                    # Next.js app directory
+│   ├── about/             # About page
+│   ├── blog/              # Blog section
+│   ├── contact/           # Contact page
+│   ├── docs/              # Documentation pages
+│   ├── marketplace/       # Marketplace section
+│   └── projects/          # Projects showcase
+├── components/            # Reusable components
+├── contexts/              # React contexts
+├── data/                  # Static data/content
+├── lib/                   # Utility functions
+├── public/               # Static assets
+├── styles/               # Global styles
+├── types/                # TypeScript type definitions
+└── config/               # Configuration files
+```
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 15
+- **UI Components:** Hero UI
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+- **Code Highlighting:** React Syntax Highlighter
+- **Theme:** Next Themes
+- **Type Checking:** TypeScript
+
+## 📦 Installation
 
 1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/portfolio.git
-cd portfolio
-```
+   ```bash
+   git clone <repository-url>
+   cd folio2
+   ```
 
 2. Install dependencies:
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 3. Run the development server:
-```bash
-npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Project Structure
+## 🎨 Customization
 
-```
-├── app/                  # Next.js app directory
-│   ├── blog/            # Blog pages
-│   ├── marketplace/     # Marketplace pages
-│   ├── projects/        # Project pages
-│   └── page.tsx         # Home page
-├── components/          # React components
-├── public/             # Static assets
-│   ├── blog/           # Blog images
-│   ├── marketplace/    # Product images
-│   └── projects/       # Project images
-└── styles/             # Global styles
-```
+### Theme Customization
 
-## Technologies Used
+The project uses Tailwind CSS for styling. You can customize the theme in `tailwind.config.js`:
 
-- [Next.js](https://nextjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [HeroUI](https://heroui.com/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+- Colors
+- Typography
+- Spacing
+- Breakpoints
+- And more...
 
-## Customization
+### Content Customization
 
-1. Update the content in the components:
-   - `components/Hero.tsx`
-   - `components/Projects.tsx`
-   - `components/Blog.tsx`
-   - `components/Marketplace.tsx`
-   - `components/Contact.tsx`
+1. **Personal Information:**
+   - Update your personal information in the data files located in the `data/` directory
 
-2. Replace images in the `public` directory with your own.
+2. **Projects:**
+   - Add your projects in `data/projects.ts`
 
-3. Modify the theme colors in `tailwind.config.js`.
+3. **Blog Posts:**
+   - Create or modify blog posts in the `data/blog/` directory
 
-4. Update the fonts in `app/layout.tsx`.
+4. **Navigation:**
+   - Modify the navigation structure in `components/Navbar.tsx`
 
-## Contributing
+### Component Customization
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+All components are built using Hero UI. You can customize them by:
 
-## License
+1. Modifying the component props
+2. Extending the base styles
+3. Creating new variants using `tailwind-variants`
+4. Using Hero UI's theming system
+
+## 📄 Scripts
+
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+## 🙏 Acknowledgments
+
+This project is built with [Hero UI](https://heroui.net/), a powerful and beautiful component library that makes creating modern user interfaces a breeze. Special thanks to the Hero UI team for providing such an amazing library.
+
+## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+## 🤝 Contributing
 
-- [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) font
-- [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) font
-- [Heroicons](https://heroicons.com/) for icons
+Contributions are welcome! Please feel free to submit a Pull Request.
