@@ -104,7 +104,7 @@ export const LoaderScreen = ({ onLoadingComplete }: LoaderScreenProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: showContent ? 0.6 : 0 }}
             transition={{ duration: 0.5 }}
-            className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-primary/10"
+            className="absolute"
           />
 
           <div className="relative z-10 flex flex-col items-center max-w-2xl mx-auto px-4">

@@ -138,7 +138,7 @@ export const Skills = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-background hidden md:block border border-border rounded-lg p-8"
+            className="bg-background border border-border rounded-lg p-8"
           >
             <div className="flex items-center gap-4 mb-8">
               <div className="p-3 rounded-xl bg-muted">
@@ -176,7 +176,20 @@ export const Skills = () => {
                 );
               })}
             </div>
-           
+            <div className="hidden md:grid grid-cols-52 gap-1">
+              {Array.from({ length: 364 }).map((_, i) => {
+                const opacity = Math.random();
+                return (
+                  <div
+                    key={i}
+                    className="w-3 h-3 rounded-[2px] transition-colors duration-200 hover:scale-125"
+                    style={{
+                      backgroundColor: `rgb(var(--primary) / ${opacity})`,
+                    }}
+                  />
+                );
+              })}
+            </div>
 
             <div className="mt-6 flex justify-between items-center text-xs">
               <span className="text-muted-foreground">Less</span>

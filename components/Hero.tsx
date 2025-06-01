@@ -5,27 +5,38 @@ import { useInView } from "react-intersection-observer";
 import { Card, Chip, Progress, CardBody, CardHeader } from "@heroui/react";
 import { Button } from "@/components/ui/button";
 import { GridBackground } from "./ui/grid-background";
+import { useEffect, useState } from "react";
 
 export const Hero = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+  
+  // Add state to track if we should start animations
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+  useEffect(() => {
+    // Wait for loader timeout (3.7 seconds) before allowing animations
+    const timer = setTimeout(() => {
+      setShouldAnimate(true);
+    }, 3700);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <GridBackground >
-    <section
-      ref={ref}
-      className="relative min-h-screen flex items-start py-10 justify-center  overflow-hidden"
-    >
-     
-
-        <div className="container  z-50">
+    <GridBackground>
+      <section
+        ref={ref}
+        className="relative min-h-screen flex items-start py-10 justify-center overflow-hidden"
+      >
+        <div className="container z-50">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             {/* Status Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={inView && shouldAnimate ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
             >
               <Chip
@@ -46,7 +57,7 @@ export const Hero = () => {
             {/* Main Title */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={inView && shouldAnimate ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="space-y-4"
             >
@@ -66,7 +77,7 @@ export const Hero = () => {
             {/* Project Status Cards */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={inView && shouldAnimate ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
             >
@@ -161,7 +172,7 @@ export const Hero = () => {
             {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
+              animate={inView && shouldAnimate ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-wrap justify-center gap-4 mt-8"
             >
@@ -189,8 +200,8 @@ export const Hero = () => {
               </Button>
             </motion.div>
           </div>
-        </div>{" "}
-    </section>
-      </GridBackground>
+        </div>
+      </section>
+    </GridBackground>
   );
 };
