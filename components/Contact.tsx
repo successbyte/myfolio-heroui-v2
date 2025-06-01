@@ -1,9 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Input, Textarea, Select, SelectItem } from '@heroui/react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from '@/components/ui/card';
+import { useState } from 'react';
 
 const services = [
   { label: 'Web Development', value: 'web-development' },
@@ -22,7 +23,107 @@ const budgetRanges = [
   { label: 'More than $50,000', value: 'more-than-50000' }
 ];
 
+const ContactSuccessModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="bg-black/90 rounded-xl w-full max-w-lg p-8 border border-primary/20 relative overflow-hidden"
+          >
+            {/* Gradient Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent opacity-50" />
+            
+            {/* Success Icon */}
+            <div className="relative flex justify-center mb-6">
+              <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                >
+                  <svg
+                    className="w-8 h-8 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Success Message */}
+            <div className="relative text-center mb-8">
+              <h3 className="text-2xl font-bold font-grotesk mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
+                Message Sent Successfully!
+              </h3>
+              <p className="text-muted-foreground font-mono">
+                Thank you for reaching out. I'll get back to you within 24-48 hours.
+              </p>
+            </div>
+
+            {/* Timeline Indicators */}
+            <div className="relative mb-8">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-secondary/30 rounded-lg p-4 text-center">
+                  <p className="text-sm font-mono text-muted-foreground mb-1">Response Time</p>
+                  <p className="font-grotesk text-primary">24-48 hours</p>
+                </div>
+                <div className="bg-secondary/30 rounded-lg p-4 text-center">
+                  <p className="text-sm font-mono text-muted-foreground mb-1">Status</p>
+                  <p className="font-grotesk text-primary">Processing</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Close Button */}
+            <div className="relative">
+              <Button 
+                variant="primary"
+                size="lg"
+                className="w-full"
+                onClick={onClose}
+              >
+                Close
+              </Button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
 export const Contact = () => {
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSuccessModalOpen(true);
+    }, 1500);
+  };
+
   return (
     <section id="contact" className="relative py-20 overflow-hidden">
       {/* Background Elements */}
@@ -93,12 +194,39 @@ export const Contact = () => {
                   <CardTitle>Project Details</CardTitle>
                   <CardDescription>Tell me about your project and requirements</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit}>
+                  <CardContent className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <Input
+                        type="text"
+                        label="Name"
+                        placeholder="Your name"
+                        variant="bordered"
+                        radius="lg"
+                        classNames={{
+                          input: 'bg-background dark:bg-background',
+                          label: 'text-foreground dark:text-foreground',
+                          inputWrapper: 'border-border',
+                        }}
+                      />
+                      <Input
+                        type="email"
+                        label="Email"
+                        placeholder="your@email.com"
+                        variant="bordered"
+                        radius="lg"
+                        classNames={{
+                          input: 'bg-background dark:bg-background',
+                          label: 'text-foreground dark:text-foreground',
+                          inputWrapper: 'border-border',
+                        }}
+                      />
+                    </div>
+
                     <Input
                       type="text"
-                      label="Name"
-                      placeholder="Your name"
+                      label="Company"
+                      placeholder="Your company name (optional)"
                       variant="bordered"
                       radius="lg"
                       classNames={{
@@ -107,10 +235,47 @@ export const Contact = () => {
                         inputWrapper: 'border-border',
                       }}
                     />
+
+                    <Select 
+                      label="Service Type"
+                      placeholder="Select a service"
+                      variant="bordered"
+                      radius="lg"
+                      classNames={{
+                        trigger: 'bg-background dark:bg-background border-border',
+                        label: 'text-foreground dark:text-foreground',
+                        value: 'text-foreground dark:text-foreground',
+                      }}
+                    >
+                      {services.map((service) => (
+                        <SelectItem key={service.value}>
+                          {service.label}
+                        </SelectItem>
+                      ))}
+                    </Select>
+
+                    <Select
+                      label="Budget Range"
+                      placeholder="Select your budget"
+                      variant="bordered"
+                      radius="lg"
+                      classNames={{
+                        trigger: 'bg-background dark:bg-background border-border',
+                        label: 'text-foreground dark:text-foreground',
+                        value: 'text-foreground dark:text-foreground',
+                      }}
+                    >
+                      {budgetRanges.map((range) => (
+                        <SelectItem key={range.value}>
+                          {range.label}
+                        </SelectItem>
+                      ))}
+                    </Select>
+
                     <Input
-                      type="email"
-                      label="Email"
-                      placeholder="your@email.com"
+                      type="text"
+                      label="Timeline"
+                      placeholder="Expected project timeline"
                       variant="bordered"
                       radius="lg"
                       classNames={{
@@ -119,88 +284,32 @@ export const Contact = () => {
                         inputWrapper: 'border-border',
                       }}
                     />
-                  </div>
 
-                  <Input
-                    type="text"
-                    label="Company"
-                    placeholder="Your company name (optional)"
-                    variant="bordered"
-                    radius="lg"
-                    classNames={{
-                      input: 'bg-background dark:bg-background',
-                      label: 'text-foreground dark:text-foreground',
-                      inputWrapper: 'border-border',
-                    }}
-                  />
-
-                  <Select 
-                    label="Service Type"
-                    placeholder="Select a service"
-                    variant="bordered"
-                    radius="lg"
-                    classNames={{
-                      trigger: 'bg-background dark:bg-background border-border',
-                      label: 'text-foreground dark:text-foreground',
-                      value: 'text-foreground dark:text-foreground',
-                    }}
-                  >
-                    {services.map((service) => (
-                      <SelectItem key={service.value}>
-                        {service.label}
-                      </SelectItem>
-                    ))}
-                  </Select>
-
-                  <Select
-                    label="Budget Range"
-                    placeholder="Select your budget"
-                    variant="bordered"
-                    radius="lg"
-                    classNames={{
-                      trigger: 'bg-background dark:bg-background border-border',
-                      label: 'text-foreground dark:text-foreground',
-                      value: 'text-foreground dark:text-foreground',
-                    }}
-                  >
-                    {budgetRanges.map((range) => (
-                      <SelectItem key={range.value}>
-                        {range.label}
-                      </SelectItem>
-                    ))}
-                  </Select>
-
-                  <Input
-                    type="text"
-                    label="Timeline"
-                    placeholder="Expected project timeline"
-                    variant="bordered"
-                    radius="lg"
-                    classNames={{
-                      input: 'bg-background dark:bg-background',
-                      label: 'text-foreground dark:text-foreground',
-                      inputWrapper: 'border-border',
-                    }}
-                  />
-
-                  <Textarea
-                    label="Project Description"
-                    placeholder="Tell me about your project, goals, and any specific requirements"
-                    variant="bordered"
-                    radius="lg"
-                    minRows={4}
-                    classNames={{
-                      input: 'bg-background dark:bg-background',
-                      label: 'text-foreground dark:text-foreground',
-                      inputWrapper: 'border-border',
-                    }}
-                  />
-                </CardContent>
-                <CardFooter>
-                  <Button variant="primary" size="lg" className="w-full">
-                    Send Message
-                  </Button>
-                </CardFooter>
+                    <Textarea
+                      label="Project Description"
+                      placeholder="Tell me about your project, goals, and any specific requirements"
+                      variant="bordered"
+                      radius="lg"
+                      minRows={4}
+                      classNames={{
+                        input: 'bg-background dark:bg-background',
+                        label: 'text-foreground dark:text-foreground',
+                        inputWrapper: 'border-border',
+                      }}
+                    />
+                  </CardContent>
+                  <CardFooter>
+                    <Button 
+                      variant="primary" 
+                      size="lg" 
+                      className="w-full"
+                      type="submit"
+                      isLoading={isSubmitting}
+                    >
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </Button>
+                  </CardFooter>
+                </form>
               </Card>
             </motion.div>
 
@@ -267,6 +376,12 @@ export const Contact = () => {
           </div>
         </div>
       </div>
+
+      {/* Success Modal */}
+      <ContactSuccessModal 
+        isOpen={isSuccessModalOpen}
+        onClose={() => setIsSuccessModalOpen(false)}
+      />
     </section>
   );
 }; 
