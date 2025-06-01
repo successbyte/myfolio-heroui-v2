@@ -73,7 +73,7 @@ const ContactSuccessModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                 Message Sent Successfully!
               </h3>
               <p className="text-muted-foreground font-mono">
-                Thank you for reaching out. I'll get back to you within 24-48 hours.
+                Thank you for reaching out. I&apos;ll get back to you within 24-48 hours.
               </p>
             </div>
 
