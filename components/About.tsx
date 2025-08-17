@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowDownToLine, ExternalLink } from "lucide-react";
 import Link from "next/link";
-const CV = "/cv/cv.pdf";
+const CV = "/cv/Ehsan-Frontend-Developer.pdf";
 
 const quickInfo = [
   { label: "Age", value: "29" },
