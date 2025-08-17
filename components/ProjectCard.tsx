@@ -1,18 +1,24 @@
-import { useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Card, Chip } from '@heroui/react';
-import { ExternalLink, Github, ArrowRight } from 'lucide-react';
-import { Project } from '@/types/project';
+import { useState, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { Card, Chip } from "@heroui/react";
+import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { Project } from "@/types/project";
+import { useRouter } from "next/navigation";
 
 interface ProjectCardProps {
   project: Project;
-  variant?: 'default' | 'minimal';
+  variant?: "default" | "minimal";
   className?: string;
 }
 
-export function ProjectCard({ project, variant = 'default', className = '' }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  variant = "default",
+  className = "",
+}: ProjectCardProps) {
+  const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -21,14 +27,20 @@ export function ProjectCard({ project, variant = 'default', className = '' }: Pr
   const mouseY = useMotionValue(0);
 
   // Smooth spring animation
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], ["7deg", "-7deg"]), {
-    damping: 30,
-    stiffness: 150,
-  });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], ["-7deg", "7deg"]), {
-    damping: 30,
-    stiffness: 150,
-  });
+  const rotateX = useSpring(
+    useTransform(mouseY, [-0.5, 0.5], ["7deg", "-7deg"]),
+    {
+      damping: 30,
+      stiffness: 150,
+    }
+  );
+  const rotateY = useSpring(
+    useTransform(mouseX, [-0.5, 0.5], ["-7deg", "7deg"]),
+    {
+      damping: 30,
+      stiffness: 150,
+    }
+  );
 
   // Lighting effect based on mouse position
   const lightX = useTransform(mouseX, [-0.5, 0.5], ["150%", "-150%"]);
@@ -60,17 +72,18 @@ export function ProjectCard({ project, variant = 'default', className = '' }: Pr
       }}
       className={`w-full h-full ${className}`}
     >
-      <Link href={`/projects/${project.slug}`} className="block h-full">
-        <motion.div
-          style={{
-            rotateX: variant === 'default' ? rotateX : 0,
-            rotateY: variant === 'default' ? rotateY : 0,
-            transformStyle: "preserve-3d",
-          }}
-          className="w-full h-full"
-        >
-          <Card 
-            className={`
+      {/* <motion.div href={`/projects/${project.slug}`} className="block h-full"> */}
+      <motion.div
+        onClick={() => router.push(`/projects/${project.slug}`)}
+        className="block h-full cursor-pointer"
+        style={{
+          rotateX: variant === "default" ? rotateX : 0,
+          rotateY: variant === "default" ? rotateY : 0,
+          transformStyle: "preserve-3d",
+        }}
+      >
+        <Card
+          className={`
               relative h-full group 
               bg-gradient-to-br from-zinc-900/90 via-black/95 to-zinc-900/90
               backdrop-blur-xl 
@@ -89,44 +102,44 @@ export function ProjectCard({ project, variant = 'default', className = '' }: Pr
               after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)]
               after:opacity-0 after:transition-opacity after:duration-500
               group-hover:after:opacity-100
-              ${variant === 'minimal' ? 'border-0 bg-transparent backdrop-blur-none' : ''}
+              ${variant === "minimal" ? "border-0 bg-transparent backdrop-blur-none" : ""}
             `}
-          >
-            {/* Project Image */}
-            <div className="relative aspect-video overflow-hidden rounded-t-2xl">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className={`
+        >
+          {/* Project Image */}
+          <div className="relative aspect-video overflow-hidden rounded-t-2xl">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className={`
                   object-cover transition-all duration-700 ease-out
                   filter grayscale group-hover:grayscale-0
                   scale-[1.02] group-hover:scale-110
-                  ${variant === 'default' ? 'brightness-75 group-hover:brightness-100' : ''}
+                  ${variant === "default" ? "brightness-75 group-hover:brightness-100" : ""}
                 `}
-              />
-              <motion.div 
-                className={`
+            />
+            <motion.div
+              className={`
                   absolute inset-0 
                   bg-gradient-to-t from-black via-black/50 to-transparent 
                   opacity-70 group-hover:opacity-40 
                   transition-opacity duration-500
-                  ${variant === 'minimal' ? 'via-black/70' : ''}
+                  ${variant === "minimal" ? "via-black/70" : ""}
                 `}
-                style={{
-                  background: isHovered 
-                    ? `radial-gradient(circle at ${lightX}% ${lightY}%, rgba(255,255,255,0.15), transparent 80%),
+              style={{
+                background: isHovered
+                  ? `radial-gradient(circle at ${lightX}% ${lightY}%, rgba(255,255,255,0.15), transparent 80%),
                        linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5), transparent)`
-                    : undefined
-                }}
-              />
-              
-              {/* Tech Stack Pills - Overlaid on Image */}
-              <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                {project.techStack.slice(0, 4).map((tech: string) => (
-                  <Chip 
-                    key={tech} 
-                    className="
+                  : undefined,
+              }}
+            />
+
+            {/* Tech Stack Pills - Overlaid on Image */}
+            <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
+              {project.techStack.slice(0, 4).map((tech: string) => (
+                <Chip
+                  key={tech}
+                  className="
                       bg-black/30 backdrop-blur-md 
                       text-white/90 text-xs 
                       border border-white/10 
@@ -138,117 +151,122 @@ export function ProjectCard({ project, variant = 'default', className = '' }: Pr
                       group-hover:scale-105
                       transform translate-y-1 scale-95
                     "
-                  >
-                    {tech}
-                  </Chip>
-                ))}
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="relative p-6 z-10">
-              {/* Title */}
-              <motion.h3 
-                className="text-2xl font-bold font-grotesk text-white mb-3 group-hover:text-primary transition-colors duration-300"
-                style={{
-                  textShadow: isHovered ? '0 0 20px rgba(var(--primary-rgb), 0.3)' : 'none'
-                }}
-              >
-                {project.title}
-              </motion.h3>
-
-              {/* Description */}
-              <p className="text-zinc-400 text-sm mb-6 line-clamp-2 group-hover:text-white/80 transition-colors duration-300">
-                {project.description}
-              </p>
-
-              {variant === 'default' && (
-                <>
-                  {/* Tech Stack Preview */}
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-center gap-2 text-zinc-500">
-                      <span className="text-xs uppercase tracking-wider font-medium">Tech Stack</span>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {project.techStack.slice(0, 3).map((tech) => (
-                        <span key={tech} className="text-xs text-zinc-400 group-hover:text-white/60 transition-colors duration-300">
-                          {tech}
-                        </span>
-                      ))}
-                      {project.techStack.length > 3 && (
-                        <span className="text-xs text-zinc-500 group-hover:text-white/40 transition-colors duration-300">
-                          +{project.techStack.length - 3} more
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Links */}
-                  <div className="flex items-center justify-between mt-auto">
-                    <div className="flex items-center gap-4">
-                      {project.githubUrl && (
-                        <Link
-                          href={project.githubUrl}
-                          target="_blank"
-                          className="text-zinc-400 hover:text-primary transition-all duration-300 hover:scale-110"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Github className="w-5 h-5" />
-                        </Link>
-                      )}
-                      {project.demoUrl && (
-                        <Link
-                          href={project.demoUrl}
-                          target="_blank"
-                          className="text-zinc-400 hover:text-primary transition-all duration-300 hover:scale-110"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ExternalLink className="w-5 h-5" />
-                        </Link>
-                      )}
-                    </div>
-                    <motion.div 
-                      className="flex items-center gap-2 text-zinc-400 group-hover:text-primary transition-colors duration-300"
-                      whileHover={{ x: 5 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    >
-                      <span className="text-sm">View Details</span>
-                      <ArrowRight className="w-4 h-4 transition-transform duration-300" />
-                    </motion.div>
-                  </div>
-                </>
-              )}
-
-              {variant === 'minimal' && (
-                <motion.div 
-                  className="flex items-center gap-2 text-zinc-400 group-hover:text-primary transition-colors duration-300 mt-auto"
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  <span className="text-sm">View Project</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300" />
-                </motion.div>
-              )}
+                  {tech}
+                </Chip>
+              ))}
             </div>
+          </div>
 
-            {/* Dynamic Lighting Effect */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          {/* Content */}
+          <div className="relative p-6 z-10">
+            {/* Title */}
+            <motion.h3
+              className="text-2xl font-bold font-grotesk text-white mb-3 group-hover:text-primary transition-colors duration-300"
               style={{
-                background: `
+                textShadow: isHovered
+                  ? "0 0 20px rgba(var(--primary-rgb), 0.3)"
+                  : "none",
+              }}
+            >
+              {project.title}
+            </motion.h3>
+
+            {/* Description */}
+            <p className="text-zinc-400 text-sm mb-6 line-clamp-2 group-hover:text-white/80 transition-colors duration-300">
+              {project.description}
+            </p>
+
+            {variant === "default" && (
+              <>
+                {/* Tech Stack Preview */}
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center gap-2 text-zinc-500">
+                    <span className="text-xs uppercase tracking-wider font-medium">
+                      Tech Stack
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.techStack.slice(0, 3).map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-xs text-zinc-400 group-hover:text-white/60 transition-colors duration-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.techStack.length > 3 && (
+                      <span className="text-xs text-zinc-500 group-hover:text-white/40 transition-colors duration-300">
+                        +{project.techStack.length - 3} more
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Links */}
+                <div className="flex items-center justify-between mt-auto">
+                  <div className="flex items-center gap-4">
+                    {project.githubUrl && (
+                      <Link
+                        href={project.githubUrl}
+                        target="_blank"
+                        className="text-zinc-400 hover:text-primary transition-all duration-300 hover:scale-110"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Github className="w-5 h-5" />
+                      </Link>
+                    )}
+                    {project.demoUrl && (
+                      <Link
+                        href={project.demoUrl}
+                        target="_blank"
+                        className="text-zinc-400 hover:text-primary transition-all duration-300 hover:scale-110"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </Link>
+                    )}
+                  </div>
+                  <motion.div
+                    className="flex items-center gap-2 text-zinc-400 group-hover:text-primary transition-colors duration-300"
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    <span className="text-sm">View Details</span>
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300" />
+                  </motion.div>
+                </div>
+              </>
+            )}
+
+            {variant === "minimal" && (
+              <motion.div
+                className="flex items-center gap-2 text-zinc-400 group-hover:text-primary transition-colors duration-300 mt-auto"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <span className="text-sm">View Project</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-300" />
+              </motion.div>
+            )}
+          </div>
+
+          {/* Dynamic Lighting Effect */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            style={{
+              background: `
                   radial-gradient(
                     circle at ${lightX}% ${lightY}%, 
                     rgba(var(--primary-rgb), 0.15), 
                     transparent 80%
                   )
-                `
-              }}
-            />
-
-           
-          </Card>
-        </motion.div>
-      </Link>
+                `,
+            }}
+          />
+        </Card>
+      </motion.div>
+      {/* </motion.div> */}
     </motion.div>
   );
-} 
+}

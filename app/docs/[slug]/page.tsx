@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { Badge } from '@heroui/react';
-import { Card } from '@heroui/react';
-import { Button } from '@heroui/button';
-import { Link } from '@heroui/link';
-import { CodeBlock } from '@/components/ui/CodeBlock';
-import Image from 'next/image';
-import { useParams } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { 
+import { Badge } from "@heroui/react";
+import { Card } from "@heroui/react";
+import { Button } from "@heroui/button";
+import { Link } from "@heroui/link";
+import { CodeBlock } from "@/components/ui/CodeBlock";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import { motion } from "framer-motion";
+import {
   ArrowLeft,
   ChevronRight,
   ChevronLeft,
@@ -21,8 +21,8 @@ import {
   Search,
   Edit,
   Github,
-  Star
-} from 'lucide-react';
+  Star,
+} from "lucide-react";
 
 interface DocSection {
   title: string;
@@ -51,35 +51,37 @@ interface DocPage {
 
 const docPages: DocPage[] = [
   {
-    slug: 'getting-started',
-    title: 'Getting Started with Hero UI',
-    description: 'Learn how to install and set up Hero UI in your Next.js project.',
-    category: 'Introduction',
+    slug: "getting-started",
+    title: "Getting Started with Hero UI",
+    description:
+      "Learn how to install and set up Hero UI in your Next.js project.",
+    category: "Introduction",
     sections: [
       {
-        title: 'Installation',
-        content: 'Install Hero UI using your preferred package manager:',
+        title: "Installation",
+        content: "Install Hero UI using your preferred package manager:",
         code: [
           {
-            language: 'bash',
-            content: 'npm install @heroui/react'
+            language: "bash",
+            content: "npm install @heroui/react",
           },
           {
-            language: 'bash',
-            content: 'yarn add @heroui/react'
+            language: "bash",
+            content: "yarn add @heroui/react",
           },
           {
-            language: 'bash',
-            content: 'pnpm add @heroui/react'
-          }
-        ]
+            language: "bash",
+            content: "pnpm add @heroui/react",
+          },
+        ],
       },
       {
-        title: 'Configuration',
-        content: 'Configure Hero UI in your project by adding the following to your tailwind.config.js:',
+        title: "Configuration",
+        content:
+          "Configure Hero UI in your project by adding the following to your tailwind.config.js:",
         code: [
           {
-            language: 'javascript',
+            language: "javascript",
             content: `module.exports = {
   content: [
     './node_modules/@heroui/react/**/*.{js,ts,jsx,tsx}',
@@ -94,16 +96,16 @@ const docPages: DocPage[] = [
   plugins: [
     require('@heroui/plugin'),
   ],
-}`
-          }
-        ]
+}`,
+          },
+        ],
       },
       {
-        title: 'Basic Usage',
-        content: 'Import and use Hero UI components in your React components:',
+        title: "Basic Usage",
+        content: "Import and use Hero UI components in your React components:",
         code: [
           {
-            language: 'typescript',
+            language: "typescript",
             content: `import { Button } from '@heroui/button';
 import { Card } from '@heroui/react';
 
@@ -118,27 +120,27 @@ export default function Example() {
       </Button>
     </Card>
   );
-}`
-          }
-        ]
-      }
+}`,
+          },
+        ],
+      },
     ],
-    lastUpdated: '2024-03-15',
+    lastUpdated: "2024-03-15",
     contributors: [
       {
-        name: 'Andrew Paulson',
-        image: 'https://github.com/andrewpaulson.png',
-        github: 'https://github.com/andrewpaulson'
-      }
+        name: "Ehsanullah Haidary",
+        image: "https://github.com/andrewpaulson.png",
+        github: "https://github.com/andrewpaulson",
+      },
     ],
-    githubUrl: 'https://github.com/heroui/react',
-    stars: 1234
-  }
+    githubUrl: "https://github.com/heroui/react",
+    stars: 1234,
+  },
 ];
 
 export default function DocPage() {
   const params = useParams();
-  const doc = docPages.find(doc => doc.slug === params.slug);
+  const doc = docPages.find((doc) => doc.slug === params.slug);
 
   if (!doc) {
     return <div>Documentation not found</div>;
@@ -164,7 +166,7 @@ export default function DocPage() {
               className="hidden lg:block"
             >
               <div className="sticky top-20 space-y-6">
-                <Link 
+                <Link
                   href="/docs"
                   color="foreground"
                   className="inline-flex items-center gap-2 text-sm font-mono hover:text-primary transition-colors mb-6"
@@ -174,14 +176,14 @@ export default function DocPage() {
                 </Link>
 
                 <nav className="space-y-1">
-                  {docPages.map(page => (
+                  {docPages.map((page) => (
                     <Link
                       key={page.slug}
                       href={`/docs/${page.slug}`}
                       className={`block px-4 py-2 rounded-lg text-sm font-mono transition-colors ${
                         page.slug === params.slug
-                          ? 'bg-primary/10 text-primary'
-                          : 'text-white/60 hover:text-white hover:bg-white/5'
+                          ? "bg-primary/10 text-primary"
+                          : "text-white/60 hover:text-white hover:bg-white/5"
                       }`}
                     >
                       {page.title}
@@ -199,10 +201,7 @@ export default function DocPage() {
             >
               {/* Header */}
               <div className="mb-12">
-                <Badge 
-                  size="sm"
-                  className="bg-primary/90 text-white mb-4"
-                >
+                <Badge size="sm" className="bg-primary/90 text-white mb-4">
                   {doc.category}
                 </Badge>
 
@@ -258,10 +257,10 @@ export default function DocPage() {
                       On this page
                     </h3>
                     <nav className="space-y-2">
-                      {doc.sections.map(section => (
+                      {doc.sections.map((section) => (
                         <a
                           key={section.title}
-                          href={`#${section.title.toLowerCase().replace(/\s+/g, '-')}`}
+                          href={`#${section.title.toLowerCase().replace(/\s+/g, "-")}`}
                           className="block text-sm font-mono text-white/60 hover:text-primary transition-colors"
                         >
                           {section.title}
@@ -278,7 +277,7 @@ export default function DocPage() {
                       Contributors
                     </h3>
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {doc.contributors.map(contributor => (
+                      {doc.contributors.map((contributor) => (
                         <a
                           key={contributor.name}
                           href={contributor.github}
@@ -335,4 +334,4 @@ export default function DocPage() {
       </div>
     </main>
   );
-} 
+}

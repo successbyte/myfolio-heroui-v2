@@ -1,15 +1,15 @@
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ArrowDownToLine, ExternalLink } from 'lucide-react';
-import Link from 'next/link';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ArrowDownToLine, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 const quickInfo = [
-  { label: 'Age', value: '25' },
-  { label: 'Location', value: 'New York, USA' },
-  { label: 'Experience', value: '5+ Years' },
-  { label: 'Availability', value: 'Freelance' },
+  { label: "Age", value: "25" },
+  { label: "Location", value: "New York, USA" },
+  { label: "Experience", value: "5+ Years" },
+  { label: "Availability", value: "Freelance" },
 ];
 
 export const About = () => {
@@ -30,7 +30,7 @@ export const About = () => {
             className="space-y-8"
           >
             <div className="space-y-4">
-              <motion.span 
+              <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -38,7 +38,7 @@ export const About = () => {
               >
                 About Me
               </motion.span>
-              <motion.h2 
+              <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -50,7 +50,7 @@ export const About = () => {
 
             <div className="space-y-4">
               {[
-                "Hey, I'm Andrew Paulson, a full-stack developer with a keen eye for design and a love for creating beautiful, functional websites.",
+                "Hey, I'm Ehsanullah Haidary, a full-stack developer with a keen eye for design and a love for creating beautiful, functional websites.",
                 "With expertise in modern web technologies and a deep understanding of user experience, I bring ideas to life through clean, efficient code.",
               ].map((text, index) => (
                 <motion.p
@@ -77,26 +77,30 @@ export const About = () => {
                   whileHover={{ scale: 1.05 }}
                   className="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-lg hover:border-primary/50 transition-all duration-300"
                 >
-                  <p className="text-sm font-mono text-primary/80">{info.label}</p>
-                  <p className="text-lg font-grotesk font-bold text-white/90">{info.value}</p>
+                  <p className="text-sm font-mono text-primary/80">
+                    {info.label}
+                  </p>
+                  <p className="text-lg font-grotesk font-bold text-white/90">
+                    {info.value}
+                  </p>
                 </motion.div>
               ))}
             </div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="flex flex-wrap gap-4"
             >
-              <Button 
+              <Button
                 size="lg"
                 className="bg-white text-black hover:bg-white/90 transition-all duration-300 group"
               >
                 Download CV
                 <ArrowDownToLine className="ml-2 h-4 w-4 group-hover:translate-y-0.5 transition-transform duration-300" />
               </Button>
-              <Button 
+              <Button
                 as={Link}
                 href="/projects"
                 variant="secondary"
@@ -129,7 +133,6 @@ export const About = () => {
                 </div>
               </CardContent>
             </Card>
-
           </motion.div>
         </div>
       </div>

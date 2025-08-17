@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { CustomCursor } from '@/components/CustomCursor';
-import { PaymentModal } from '@/components/PaymentModal';
-import Image from 'next/image';
-import { 
-  Star, 
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { CustomCursor } from "@/components/CustomCursor";
+import { PaymentModal } from "@/components/PaymentModal";
+import Image from "next/image";
+import {
+  Star,
   Check,
   Code,
   Palette,
@@ -18,13 +18,13 @@ import {
   CheckCircle2,
   ShoppingBag,
   Search,
-  Filter
-} from 'lucide-react';
-import {  Chip } from '@heroui/react';
-import { GridBackground } from '@/components/ui/grid-background';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+  Filter,
+} from "lucide-react";
+import { Chip } from "@heroui/react";
+import { GridBackground } from "@/components/ui/grid-background";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface Product {
   id: string;
@@ -48,161 +48,168 @@ interface Product {
 
 const products: Product[] = [
   {
-    id: 'modern-portfolio',
-    title: 'Modern Portfolio Template',
-    description: 'A sleek and responsive portfolio template built with Next.js 13, Tailwind CSS, and Framer Motion. Perfect for developers and designers who want to showcase their work with style.',
+    id: "modern-portfolio",
+    title: "Modern Portfolio Template",
+    description:
+      "A sleek and responsive portfolio template built with Next.js 13, Tailwind CSS, and Framer Motion. Perfect for developers and designers who want to showcase their work with style.",
     price: 49,
-    image: '/images/portfolio-project.png',
-    category: 'Template',
+    image: "/images/portfolio-project.png",
+    category: "Template",
     features: [
-      'Responsive Design',
-      'Dark/Light Mode',
-      'Blog Section',
-      'Project Showcase',
-      'Contact Form',
-      'SEO Optimized',
-      'Performance Optimized',
-      'Easy Customization'
+      "Responsive Design",
+      "Dark/Light Mode",
+      "Blog Section",
+      "Project Showcase",
+      "Contact Form",
+      "SEO Optimized",
+      "Performance Optimized",
+      "Easy Customization",
     ],
     techStack: [
-      'Next.js 13',
-      'TypeScript',
-      'Tailwind CSS',
-      'Framer Motion',
-      'MDX',
-      'Hero UI'
+      "Next.js 13",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "MDX",
+      "Hero UI",
     ],
     rating: 4.9,
     sales: 234,
     author: {
-      name: 'Andrew Paulson',
-      image: '/images/avatar-1.png',
-      role: 'Senior Developer'
+      name: "Ehsanullah Haidary",
+      image: "/images/avatar-1.png",
+      role: "Senior Developer",
     },
-    demoUrl: 'https://myfolio-heroui.vercel.app/',
+    demoUrl: "https://myfolio-heroui.vercel.app/",
     previewImages: [
-      '/images/portfolio-project.png',
-      'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=1000',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000'
-    ]
+      "/images/portfolio-project.png",
+      "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=1000",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000",
+    ],
   },
   {
-    id: 'ui-component-library',
-    title: 'Premium UI Component Library',
-    description: 'A comprehensive collection of beautiful and reusable React components with animations, TypeScript support, and modern design patterns.',
+    id: "ui-component-library",
+    title: "Premium UI Component Library",
+    description:
+      "A comprehensive collection of beautiful and reusable React components with animations, TypeScript support, and modern design patterns.",
     price: 79,
-    image: 'https://images.unsplash.com/photo-1481487196290-c152efe083f5?q=80&w=1000',
-    category: 'Components',
+    image:
+      "https://images.unsplash.com/photo-1481487196290-c152efe083f5?q=80&w=1000",
+    category: "Components",
     features: [
-      '100+ Components',
-      'TypeScript Support',
-      'Animation Library',
-      'Theme Customization',
-      'Accessibility Ready',
-      'Documentation',
-      'Regular Updates',
-      'Premium Support'
+      "100+ Components",
+      "TypeScript Support",
+      "Animation Library",
+      "Theme Customization",
+      "Accessibility Ready",
+      "Documentation",
+      "Regular Updates",
+      "Premium Support",
     ],
     techStack: [
-      'React',
-      'TypeScript',
-      'Tailwind CSS',
-      'Framer Motion',
-      'Storybook',
-      'Jest'
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Storybook",
+      "Jest",
     ],
     rating: 4.8,
     sales: 567,
     author: {
-      name: 'Andrew Paulson',
-      image: '/images/avatar-1.png',
-      role: 'Senior Developer'
+      name: "Ehsanullah Haidary",
+      image: "/images/avatar-1.png",
+      role: "Senior Developer",
     },
-    demoUrl: 'https://ui-components.demo.com',
+    demoUrl: "https://ui-components.demo.com",
     previewImages: [
-      'https://images.unsplash.com/photo-1545235617-7a424c1a60cc?q=80&w=1000',
-      'https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?q=80&w=1000',
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000'
-    ]
+      "https://images.unsplash.com/photo-1545235617-7a424c1a60cc?q=80&w=1000",
+      "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?q=80&w=1000",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000",
+    ],
   },
   {
-    id: 'saas-starter',
-    title: 'SaaS Starter Template',
-    description: 'Launch your SaaS product faster with this complete starter template. Includes authentication, billing, user management, and more.',
+    id: "saas-starter",
+    title: "SaaS Starter Template",
+    description:
+      "Launch your SaaS product faster with this complete starter template. Includes authentication, billing, user management, and more.",
     price: 149,
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000',
-    category: 'Template',
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000",
+    category: "Template",
     features: [
-      'Authentication System',
-      'Stripe Integration',
-      'User Dashboard',
-      'Admin Panel',
-      'Email Templates',
-      'API Documentation',
-      'Analytics Integration',
-      'CI/CD Setup'
+      "Authentication System",
+      "Stripe Integration",
+      "User Dashboard",
+      "Admin Panel",
+      "Email Templates",
+      "API Documentation",
+      "Analytics Integration",
+      "CI/CD Setup",
     ],
     techStack: [
-      'Next.js 13',
-      'TypeScript',
-      'Prisma',
-      'tRPC',
-      'NextAuth.js',
-      'Stripe'
+      "Next.js 13",
+      "TypeScript",
+      "Prisma",
+      "tRPC",
+      "NextAuth.js",
+      "Stripe",
     ],
     rating: 4.9,
     sales: 189,
     author: {
-      name: 'Andrew Paulson',
-      image: '/images/avatar-1.png',
-      role: 'Senior Developer'
+      name: "Ehsanullah Haidary",
+      image: "/images/avatar-1.png",
+      role: "Senior Developer",
     },
-    demoUrl: 'https://saas-starter.demo.com',
+    demoUrl: "https://saas-starter.demo.com",
     previewImages: [
-      'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1000',
-      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1000',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000'
-    ]
+      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1000",
+      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1000",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000",
+    ],
   },
   {
-    id: 'ecommerce-template',
-    title: 'Modern E-commerce Template',
-    description: 'A full-featured e-commerce template with product management, cart functionality, and seamless checkout experience.',
+    id: "ecommerce-template",
+    title: "Modern E-commerce Template",
+    description:
+      "A full-featured e-commerce template with product management, cart functionality, and seamless checkout experience.",
     price: 129,
-    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1000',
-    category: 'Template',
+    image:
+      "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1000",
+    category: "Template",
     features: [
-      'Product Management',
-      'Shopping Cart',
-      'Stripe Checkout',
-      'Order Management',
-      'Search & Filters',
-      'Wishlist',
-      'Reviews System',
-      'Analytics'
+      "Product Management",
+      "Shopping Cart",
+      "Stripe Checkout",
+      "Order Management",
+      "Search & Filters",
+      "Wishlist",
+      "Reviews System",
+      "Analytics",
     ],
     techStack: [
-      'Next.js 13',
-      'TypeScript',
-      'Tailwind CSS',
-      'Prisma',
-      'Stripe',
-      'Redis'
+      "Next.js 13",
+      "TypeScript",
+      "Tailwind CSS",
+      "Prisma",
+      "Stripe",
+      "Redis",
     ],
     rating: 4.7,
     sales: 312,
     author: {
-      name: 'Andrew Paulson',
-      image: '/images/avatar-1.png',
-      role: 'Senior Developer'
+      name: "Ehsanullah Haidary",
+      image: "/images/avatar-1.png",
+      role: "Senior Developer",
     },
-    demoUrl: 'https://ecommerce.demo.com',
+    demoUrl: "https://ecommerce.demo.com",
     previewImages: [
-      'https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1000',
-      'https://images.unsplash.com/photo-1472393365320-db77a5abbecc?q=80&w=1000',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000'
-    ]
-  }
+      "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1000",
+      "https://images.unsplash.com/photo-1472393365320-db77a5abbecc?q=80&w=1000",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000",
+    ],
+  },
 ];
 
 interface PreviewModalProps {
@@ -212,7 +219,12 @@ interface PreviewModalProps {
   onPurchase: (product: Product) => void;
 }
 
-const PreviewModal = ({ isOpen, onClose, product, onPurchase }: PreviewModalProps) => {
+const PreviewModal = ({
+  isOpen,
+  onClose,
+  product,
+  onPurchase,
+}: PreviewModalProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -258,15 +270,15 @@ const PreviewModal = ({ isOpen, onClose, product, onPurchase }: PreviewModalProp
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <button 
-                  onClick={onClose} 
+                <button
+                  onClick={onClose}
                   className="p-2 text-white/60 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
                 >
                   <X className="w-6 h-6" />
                 </button>
               </div>
             </div>
-            
+
             <div className="p-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="space-y-6">
@@ -281,7 +293,10 @@ const PreviewModal = ({ isOpen, onClose, product, onPurchase }: PreviewModalProp
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     {product.previewImages.slice(1).map((img, idx) => (
-                      <div key={idx} className="aspect-video rounded-xl overflow-hidden border border-white/10">
+                      <div
+                        key={idx}
+                        className="aspect-video rounded-xl overflow-hidden border border-white/10"
+                      >
                         <Image
                           src={img}
                           alt={`${product.title} preview ${idx + 2}`}
@@ -310,21 +325,23 @@ const PreviewModal = ({ isOpen, onClose, product, onPurchase }: PreviewModalProp
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="space-y-8">
                   <div>
-                    <h4 className="text-lg font-semibold mb-4">About This Template</h4>
+                    <h4 className="text-lg font-semibold mb-4">
+                      About This Template
+                    </h4>
                     <p className="text-white/70 leading-relaxed">
                       {product.description}
                     </p>
                   </div>
-                  
+
                   <div>
                     <h4 className="text-lg font-semibold mb-4">Tech Stack</h4>
                     <div className="flex flex-wrap gap-2">
                       {product.techStack.map((tech) => (
-                        <span 
-                          key={tech} 
+                        <span
+                          key={tech}
                           className="px-3 py-1.5 text-sm font-medium bg-white/5 text-white/70 rounded-full border border-white/10"
                         >
                           {tech}
@@ -332,12 +349,15 @@ const PreviewModal = ({ isOpen, onClose, product, onPurchase }: PreviewModalProp
                       ))}
                     </div>
                   </div>
-                  
+
                   <div>
                     <h4 className="text-lg font-semibold mb-4">Features</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {product.features.map((feature) => (
-                        <div key={feature} className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                        <div
+                          key={feature}
+                          className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10"
+                        >
                           <Check className="w-5 h-5 text-primary" />
                           <span className="text-white/90">{feature}</span>
                         </div>
@@ -346,9 +366,13 @@ const PreviewModal = ({ isOpen, onClose, product, onPurchase }: PreviewModalProp
                   </div>
 
                   <div className="p-4 bg-primary/10 rounded-xl border border-primary/20">
-                    <h4 className="text-lg font-semibold mb-2 text-primary">Get Started Today</h4>
+                    <h4 className="text-lg font-semibold mb-2 text-primary">
+                      Get Started Today
+                    </h4>
                     <p className="text-white/70 mb-4">
-                      Purchase this template now and start building your amazing project with our well-documented and easy-to-customize code.
+                      Purchase this template now and start building your amazing
+                      project with our well-documented and easy-to-customize
+                      code.
                     </p>
                     <button
                       className="w-full px-6 py-3 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors"
@@ -376,7 +400,11 @@ interface OrderSuccessModalProps {
   product: Product | null;
 }
 
-const OrderSuccessModal = ({ isOpen, onClose, product }: OrderSuccessModalProps) => {
+const OrderSuccessModal = ({
+  isOpen,
+  onClose,
+  product,
+}: OrderSuccessModalProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -406,7 +434,7 @@ const OrderSuccessModal = ({ isOpen, onClose, product }: OrderSuccessModalProps)
             className="bg-black/90 rounded-xl w-full max-w-lg p-8 border border-primary/20 relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent opacity-50" />
-            
+
             <div className="relative z-10">
               <div className="flex flex-col items-center text-center mb-8">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
@@ -425,15 +453,21 @@ const OrderSuccessModal = ({ isOpen, onClose, product }: OrderSuccessModalProps)
                       <ShoppingBag className="w-8 h-8 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-white/80">{product.title}</h4>
-                      <p className="text-sm text-white/40">{product.category}</p>
+                      <h4 className="font-medium text-white/80">
+                        {product.title}
+                      </h4>
+                      <p className="text-sm text-white/40">
+                        {product.category}
+                      </p>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-3 pt-4 border-t border-white/10">
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-white/60">Order ID</span>
-                      <span className="font-mono">#{Math.random().toString(36).substr(2, 9).toUpperCase()}</span>
+                      <span className="font-mono">
+                        #{Math.random().toString(36).substr(2, 9).toUpperCase()}
+                      </span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-white/60">Date</span>
@@ -441,15 +475,20 @@ const OrderSuccessModal = ({ isOpen, onClose, product }: OrderSuccessModalProps)
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-white/60">Amount</span>
-                      <span className="font-bold text-lg">${product.price}</span>
+                      <span className="font-bold text-lg">
+                        ${product.price}
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-primary/10 rounded-lg p-6 border border-primary/20">
-                  <h4 className="font-medium text-primary mb-2">What&apos;s Next?</h4>
+                  <h4 className="font-medium text-primary mb-2">
+                    What&apos;s Next?
+                  </h4>
                   <p className="text-sm text-white/60 mb-4">
-                    You&apos;ll receive an email with download instructions and access to your purchase shortly.
+                    You&apos;ll receive an email with download instructions and
+                    access to your purchase shortly.
                   </p>
                   <div className="flex items-center gap-2 text-sm text-white/40">
                     <CheckCircle2 className="w-4 h-4 text-primary" />
@@ -477,23 +516,23 @@ const OrderSuccessModal = ({ isOpen, onClose, product }: OrderSuccessModalProps)
 
 const categories = [
   {
-    name: 'UI Templates',
+    name: "UI Templates",
     icon: Zap,
     count: 24,
-    description: 'Modern and responsive UI templates'
+    description: "Modern and responsive UI templates",
   },
   {
-    name: 'Components',
+    name: "Components",
     icon: ShoppingBag,
     count: 48,
-    description: 'Reusable UI components and patterns'
+    description: "Reusable UI components and patterns",
   },
   {
-    name: 'Starter Kits',
+    name: "Starter Kits",
     icon: Star,
     count: 16,
-    description: 'Full-stack starter templates'
-  }
+    description: "Full-stack starter templates",
+  },
 ];
 
 export default function MarketplacePage() {
@@ -515,7 +554,7 @@ export default function MarketplacePage() {
   return (
     <main className="min-h-screen bg-black text-white">
       <CustomCursor />
-      
+
       <GridBackground>
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 -z-10">
@@ -537,7 +576,8 @@ export default function MarketplacePage() {
                 Premium Digital Assets
               </h1>
               <p className="text-lg text-muted-foreground font-mono">
-                Discover high-quality templates, components, and resources to accelerate your development workflow.
+                Discover high-quality templates, components, and resources to
+                accelerate your development workflow.
               </p>
             </motion.div>
 
@@ -552,7 +592,10 @@ export default function MarketplacePage() {
                       className="pl-10 bg-black/30 border-white/10 text-white placeholder:text-muted-foreground"
                     />
                   </div>
-                  <Button variant="secondary" className="border-white/10 hover:border-primary/50">
+                  <Button
+                    variant="secondary"
+                    className="border-white/10 hover:border-primary/50"
+                  >
                     <Filter className="w-4 h-4 mr-2" />
                     Filters
                   </Button>
@@ -589,7 +632,9 @@ export default function MarketplacePage() {
                             {category.description}
                           </p>
                           <div className="flex items-center text-primary group-hover:translate-x-2 transition-transform duration-300">
-                            <span className="text-sm mr-2">Browse Collection</span>
+                            <span className="text-sm mr-2">
+                              Browse Collection
+                            </span>
                             <ArrowRight className="w-4 h-4" />
                           </div>
                         </div>
@@ -621,7 +666,7 @@ export default function MarketplacePage() {
                         {products[0].description}
                       </p>
                       <div className="flex items-center gap-4">
-                        <Button 
+                        <Button
                           className="bg-primary/90 hover:bg-primary"
                           onClick={() => {
                             setSelectedProduct(products[0]);
@@ -632,7 +677,9 @@ export default function MarketplacePage() {
                         </Button>
                         <div className="flex items-center gap-2">
                           <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
-                          <span className="text-white/60">{products[0].rating}/5 ({products[0].sales} sales)</span>
+                          <span className="text-white/60">
+                            {products[0].rating}/5 ({products[0].sales} sales)
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -671,7 +718,7 @@ export default function MarketplacePage() {
       <PaymentModal
         isOpen={isPaymentModalOpen}
         onClose={() => setIsPaymentModalOpen(false)}
-        productTitle={selectedProduct?.title || ''}
+        productTitle={selectedProduct?.title || ""}
         price={selectedProduct?.price || 0}
         onSuccess={handlePaymentSuccess}
       />
@@ -691,9 +738,9 @@ export default function MarketplacePage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl" />
                 <div className="relative bg-black/50 backdrop-blur-xl border border-white/10 hover:border-primary/20 rounded-xl overflow-hidden transition-all duration-300">
                   <div className="relative aspect-[16/9] overflow-hidden">
-                      <Image
-                        src={product.image}
-                        alt={product.title}
+                    <Image
+                      src={product.image}
+                      alt={product.title}
                       width={800}
                       height={450}
                       className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
@@ -711,12 +758,16 @@ export default function MarketplacePage() {
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
-                    </div>
+                  </div>
 
                   <div className="p-6 space-y-6">
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <Chip variant="flat" color="primary" className="bg-primary/10 text-primary">
+                        <Chip
+                          variant="flat"
+                          color="primary"
+                          className="bg-primary/10 text-primary"
+                        >
                           {product.category}
                         </Chip>
                         <div className="flex items-center gap-2 text-white/60">
@@ -728,15 +779,15 @@ export default function MarketplacePage() {
                       <h2 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
                         {product.title}
                       </h2>
-                      <p className="text-white/70">
-                        {product.description}
-                      </p>
+                      <p className="text-white/70">{product.description}</p>
                     </div>
 
                     <div>
-                      <h3 className="font-medium text-sm text-white/60 mb-3">Tech Stack</h3>
+                      <h3 className="font-medium text-sm text-white/60 mb-3">
+                        Tech Stack
+                      </h3>
                       <div className="flex flex-wrap gap-2">
-                        {product.techStack.map(tech => (
+                        {product.techStack.map((tech) => (
                           <Chip
                             key={tech}
                             variant="flat"
@@ -746,12 +797,14 @@ export default function MarketplacePage() {
                           </Chip>
                         ))}
                       </div>
-                      </div>
+                    </div>
 
                     <div>
-                      <h3 className="font-medium text-sm text-white/60 mb-3">Key Features</h3>
+                      <h3 className="font-medium text-sm text-white/60 mb-3">
+                        Key Features
+                      </h3>
                       <div className="grid grid-cols-2 gap-3">
-                        {product.features.slice(0, 4).map(feature => (
+                        {product.features.slice(0, 4).map((feature) => (
                           <div
                             key={feature}
                             className="flex items-center gap-2 text-sm text-white/70"
@@ -761,31 +814,33 @@ export default function MarketplacePage() {
                           </div>
                         ))}
                       </div>
-                      </div>
+                    </div>
 
-                      <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                        <div className="flex items-center gap-3">
-                          <Image
-                            src={product.author.image}
-                            alt={product.author.name}
-                            width={40}
-                            height={40}
+                    <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src={product.author.image}
+                          alt={product.author.name}
+                          width={40}
+                          height={40}
                           className="rounded-full ring-2 ring-white/10"
-                          />
-                          <div>
+                        />
+                        <div>
                           <div className="font-medium text-white">
-                              {product.author.name}
-                            </div>
-                          <div className="text-sm text-white/60">
-                              {product.author.role}
+                            {product.author.name}
                           </div>
+                          <div className="text-sm text-white/60">
+                            {product.author.role}
                           </div>
                         </div>
+                      </div>
 
                       <div className="flex items-center gap-4">
                         <div className="text-right">
                           <div className="text-sm text-white/60">Price</div>
-                          <div className="text-2xl font-bold text-white">${product.price}</div>
+                          <div className="text-2xl font-bold text-white">
+                            ${product.price}
+                          </div>
                         </div>
                         <button
                           className="px-6 py-2 bg-primary text-black font-medium rounded-lg hover:bg-primary/90 transition-colors"
@@ -815,9 +870,11 @@ export default function MarketplacePage() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4"
               >
                 <Shield className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Why Choose Us</span>
+                <span className="text-sm font-medium text-primary">
+                  Why Choose Us
+                </span>
               </motion.div>
-              
+
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -827,7 +884,7 @@ export default function MarketplacePage() {
               >
                 Built for Modern Developers
               </motion.h2>
-              
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -835,7 +892,8 @@ export default function MarketplacePage() {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-white/70 max-w-2xl mx-auto"
               >
-                Our products are crafted with the latest technologies and best practices to help you build better applications faster.
+                Our products are crafted with the latest technologies and best
+                practices to help you build better applications faster.
               </motion.p>
             </div>
 
@@ -843,24 +901,27 @@ export default function MarketplacePage() {
               {[
                 {
                   icon: <Code className="w-6 h-6" />,
-                  title: 'Clean Code',
-                  description: 'Well-structured and documented code following best practices'
+                  title: "Clean Code",
+                  description:
+                    "Well-structured and documented code following best practices",
                 },
                 {
                   icon: <Palette className="w-6 h-6" />,
-                  title: 'Modern Design',
-                  description: 'Beautiful and responsive designs that work on all devices'
+                  title: "Modern Design",
+                  description:
+                    "Beautiful and responsive designs that work on all devices",
                 },
                 {
                   icon: <Zap className="w-6 h-6" />,
-                  title: 'Performance',
-                  description: 'Optimized for speed and excellent user experience'
+                  title: "Performance",
+                  description:
+                    "Optimized for speed and excellent user experience",
                 },
                 {
                   icon: <Shield className="w-6 h-6" />,
-                  title: 'Support',
-                  description: 'Dedicated support and regular updates'
-                }
+                  title: "Support",
+                  description: "Dedicated support and regular updates",
+                },
               ].map((feature, index) => (
                 <motion.div
                   key={feature.title}
@@ -889,4 +950,4 @@ export default function MarketplacePage() {
       </section>
     </main>
   );
-} 
+}

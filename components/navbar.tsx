@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Dancing_Script } from 'next/font/google';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Dancing_Script } from "next/font/google";
 
-const dancing = Dancing_Script({ subsets: ['latin'] });
+const dancing = Dancing_Script({ subsets: ["latin"] });
 
 const navLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Marketplace', href: '/marketplace' },
-  { name: 'Contact', href: '/contact' },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Projects", href: "/projects" },
+  { name: "Blog", href: "/blog" },
+  { name: "Marketplace", href: "/marketplace" },
+  { name: "Contact", href: "/contact" },
 ];
 
 const chatSuggestions = [
@@ -36,8 +36,8 @@ export const Navbar = () => {
       setScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Close mobile menu when route changes
@@ -51,17 +51,19 @@ export const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-[100] ${
-        scrolled || isMobileMenuOpen ? 'bg-background/80 backdrop-blur-lg border-b border-border' : ''
+        scrolled || isMobileMenuOpen
+          ? "bg-background/80 backdrop-blur-lg border-b border-border"
+          : ""
       } transition-all duration-300`}
     >
       <div className="container">
         <nav className="flex items-center justify-between py-4">
           {/* Logo */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className={`text-3xl font-bold hover:text-primary transition-colors ${dancing.className}`}
           >
-            Andrew Paulson
+            Ehsanullah Haidary
           </Link>
 
           {/* Navigation Links */}
@@ -73,9 +75,9 @@ export const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors relative group ${
-                    isActive 
-                      ? 'text-primary-foreground' 
-                      : 'text-muted-foreground hover:text-foreground'
+                    isActive
+                      ? "text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {isActive && (
@@ -95,31 +97,31 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 md:hidden rounded-full hover:bg-primary/10 transition-colors relative z-50"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
-            <svg 
-              className="w-6 h-6" 
-              fill="none" 
-              stroke="currentColor" 
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
             >
               {isMobileMenuOpen ? (
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={1.5} 
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
                   d="M6 18L18 6M6 6l12 12"
                 />
               ) : (
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={1.5} 
-                  d="M4 6h16M4 12h16M4 18h16" 
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M4 6h16M4 12h16M4 18h16"
                 />
               )}
             </svg>
@@ -127,9 +129,11 @@ export const Navbar = () => {
         </nav>
 
         {/* Mobile Menu - Moved outside nav but inside header */}
-        <div 
+        <div
           className={`md:hidden overflow-hidden transition-all duration-300 bg-background/80 backdrop-blur-lg ${
-            isMobileMenuOpen ? 'max-h-[400px] opacity-100 border-t border-border' : 'max-h-0 opacity-0'
+            isMobileMenuOpen
+              ? "max-h-[400px] opacity-100 border-t border-border"
+              : "max-h-0 opacity-0"
           }`}
         >
           <div className="py-4 flex flex-col gap-2">
@@ -140,9 +144,9 @@ export const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    isActive 
-                      ? 'bg-primary text-primary-foreground' 
-                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+                    isActive
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                   }`}
                 >
                   {link.name}
