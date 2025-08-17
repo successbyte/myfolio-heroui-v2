@@ -4,15 +4,20 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowDownToLine, ExternalLink } from "lucide-react";
 import Link from "next/link";
+const CV = "/cv/cv.pdf";
 
 const quickInfo = [
-  { label: "Age", value: "25" },
-  { label: "Location", value: "New York, USA" },
-  { label: "Experience", value: "5+ Years" },
-  { label: "Availability", value: "Freelance" },
+  { label: "Age", value: "29" },
+  { label: "Location", value: "Herat, Afghanistan" },
+  { label: "Experience", value: "4+ Years" },
+  { label: "Availability", value: "Available" },
 ];
 
 export const About = () => {
+  const openCV = () => {
+    window.open(CV, "_blank");
+  };
+
   return (
     <section id="about" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
@@ -50,7 +55,7 @@ export const About = () => {
 
             <div className="space-y-4">
               {[
-                "Hey, I'm Ehsanullah Haidary, a full-stack developer with a keen eye for design and a love for creating beautiful, functional websites.",
+                "Hey, I'm Ehsanullah Haidary, a front-end web developer with a keen eye for design and a love for creating beautiful, functional websites.",
                 "With expertise in modern web technologies and a deep understanding of user experience, I bring ideas to life through clean, efficient code.",
               ].map((text, index) => (
                 <motion.p
@@ -95,6 +100,7 @@ export const About = () => {
             >
               <Button
                 size="lg"
+                onClick={openCV}
                 className="bg-white text-black hover:bg-white/90 transition-all duration-300 group"
               >
                 Download CV

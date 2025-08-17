@@ -18,13 +18,13 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  authors: [{ name: "Ehsanullah Haidary" }],
-  creator: "Ehsanullah Haidary",
+  authors: [{ name: "Andrew Paulson" }],
+  creator: "Andrew Paulson",
   description:
-    "A showcase of innovative web development and design projects by Ehsanullah Haidary",
+    "A showcase of innovative web development and design projects by Andrew Paulson",
   keywords:
     "web development, frontend, backend, full stack, React, Next.js, portfolio",
-  title: "Ehsanullah Haidary | Modern Developer Portfolio",
+  title: "Andrew Paulson | Modern Developer Portfolio",
 };
 
 export default function RootLayout({
