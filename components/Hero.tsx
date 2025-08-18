@@ -14,7 +14,6 @@ export const Hero = () => {
   });
 
   const [shouldAnimate, setShouldAnimate] = useState(false);
-  const [isFirstVisit, setIsFirstVisit] = useState(true);
 
   useEffect(() => {
     // Check if this is the first visit
@@ -78,8 +77,8 @@ export const Hero = () => {
                 with Code
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-mono">
-                A Front-End software developer who has contributed to many large
-                web apps and has solid experience with modern technologies🚀
+                A Front-End developer who has contributed to many large web apps
+                and has solid experience with modern technologies🚀
               </p>
             </motion.div>
 

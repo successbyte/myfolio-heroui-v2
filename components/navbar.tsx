@@ -63,7 +63,7 @@ export const Navbar = () => {
             href="/"
             className={`text-3xl font-bold hover:text-primary transition-colors ${dancing.className}`}
           >
-            Ehsanullah Haidary
+            <h1>Ehsanullah Haidary</h1>
           </Link>
 
           {/* Navigation Links */}
