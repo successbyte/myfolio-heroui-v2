@@ -58,7 +58,7 @@ export const Hero = () => {
                 }
                 className="py-2 px-4"
               >
-                Available for Work
+                Open to new projects
               </Chip>
             </motion.div>
 

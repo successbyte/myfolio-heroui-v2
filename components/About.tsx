@@ -9,8 +9,8 @@ const CV = "/cv/Ehsan-Frontend-Developer.pdf";
 const quickInfo = [
   { label: "Age", value: "29" },
   { label: "Location", value: "Herat, Afghanistan" },
-  { label: "Experience", value: "4+ Years" },
-  { label: "Availability", value: "Available" },
+  { label: "Experience", value: "4+ yrs" },
+  { label: "Availability", value: "Open to projects" },
 ];
 
 export const About = () => {
@@ -56,7 +56,7 @@ export const About = () => {
             <div className="space-y-4">
               {[
                 "Hey, I'm Ehsanullah Haidary, a front-end web developer with a keen eye for design and a love for creating beautiful, functional websites.",
-                "With expertise in modern web technologies and a deep understanding of user experience, I bring ideas to life through clean, efficient code.",
+                "Skilled in React, Vue, TypeScript, and modern UI libraries, I turn ideas into smooth user experiences with scalable, maintainable code.",
               ].map((text, index) => (
                 <motion.p
                   key={index}
@@ -129,7 +129,7 @@ export const About = () => {
               <CardContent className="p-8">
                 <div className="relative aspect-square rounded-xl overflow-hidden">
                   <Image
-                    src="/images/avatar-1.png"
+                    src="/images/profile.webp"
                     alt="Profile"
                     width={500}
                     height={500}
