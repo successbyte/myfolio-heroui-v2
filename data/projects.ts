@@ -5,7 +5,7 @@ export const projects: Project[] = [
     slug: "hmis-universal-system",
     title: "HMIS Universal System",
     description: "Unified Hospital & Restaurant Management Information System.",
-    image: "/images/hmis.png",
+    image: "/images/hmis.webp",
     category: "Enterprise / HMIS",
     company: "Lajward Technologies",
     period: "May 2025 - Present",
@@ -38,7 +38,7 @@ export const projects: Project[] = [
     screenshots: [
       "/images/hmis-2.png",
       "/images/hmis-3.png",
-      // "/images/hmis-1.png"
+      // "/images/hmis-1.webp"
     ],
     content: {
       overview:
@@ -84,7 +84,7 @@ export const projects: Project[] = [
     screenshots: [
       "/images/metal.png",
       "/images/metal-dark.png",
-      "/images/metal-4.png",
+      "/images/metal-4.webp",
       "/images/metal-1.png",
       "/images/metal-2.png",
       "/images/metal-3.png",
@@ -131,7 +131,7 @@ export const projects: Project[] = [
     screenshots: [
       "/images/adaptix.png",
       "/images/adaptix-1.png",
-      "/images/adaptix-2.png",
+      "/images/adaptix-2.webp",
       "/images/adaptix-3.png",
       "/images/adaptix-4.png",
     ],
@@ -190,7 +190,7 @@ export const projects: Project[] = [
     title: "Dribbble Clone",
     description:
       "Pixel-perfect Dribbble landing-page clone focused on responsive layout and accessibility.",
-    image: "/images/dribbble-1.png",
+    image: "/images/dribbble-1.webp",
     category: "UI / Frontend",
     company: "Alkharazmi",
     period: "Mar 2022 - Apr 2022",
@@ -212,12 +212,12 @@ export const projects: Project[] = [
       "Git",
       "GitHub",
     ],
-    githubUrl: "",
+    githubUrl: "https://github.com/successbyte/dribble-clone",
     demoUrl: "https://dribble-clone-ehsan.vercel.app/",
     screenshots: [
-      "/images/dribbble-1.png",
-      "/images/dribbble-2.png",
-      "/images/dribbble-3.png",
+      "/images/dribbble-1.webp",
+      "/images/dribbble-2.webp",
+      "/images/dribbble-3.webp",
     ],
     content: {
       overview:

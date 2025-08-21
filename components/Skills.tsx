@@ -19,7 +19,7 @@ const skills = [
   {
     category: "Front-End UI Libraries & Design Systems",
     description: "Building beautiful, responsive user interfaces",
-    image: "/images/libraries.png",
+    image: "/images/libraries.webp",
     items: [
       {
         name: "shadcn-ui",
