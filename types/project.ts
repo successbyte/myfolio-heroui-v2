@@ -17,6 +17,8 @@ export interface Project {
   description: string;
   image: string;
   category: string;
+  company: string;
+  period: string;
   techStack: string[];
   features: string[];
   demoUrl?: string;
@@ -29,4 +31,4 @@ export interface Project {
     solutions: string;
     results: string;
   };
-} 
+}

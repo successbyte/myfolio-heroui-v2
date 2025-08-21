@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useParams } from 'next/navigation';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Card, Chip } from '@heroui/react';
-import { projects } from '@/data/projects';
-import { CustomCursor } from '@/components/CustomCursor';
-import { GridBackground } from '@/components/ui/grid-background';
+import { useParams } from "next/navigation";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { Card, Chip } from "@heroui/react";
+import { projects } from "@/data/projects";
+import { CustomCursor } from "@/components/CustomCursor";
+import { GridBackground } from "@/components/ui/grid-background";
 import {
   ArrowLeft,
   Github,
@@ -20,15 +20,16 @@ import {
   ChevronRight,
   Star,
   CheckCircle2,
-  ArrowUpRight
-} from 'lucide-react';
+  ArrowUpRight,
+} from "lucide-react";
 
 export default function ProjectPage() {
   const params = useParams();
   const project = projects.find((p) => p.slug === params.slug);
   const currentIndex = projects.findIndex((p) => p.slug === params.slug);
   const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : null;
-  const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
+  const nextProject =
+    currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null;
 
   if (!project) {
     return (
@@ -72,13 +73,15 @@ export default function ProjectPage() {
                   <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                   Back to Projects
                 </Link>
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
                   className="flex items-center gap-4"
                 >
-                  <span className="text-sm text-white/40 font-mono">Project Category</span>
+                  <span className="text-sm text-white/40 font-mono">
+                    Project Category
+                  </span>
                   <span className="px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full border border-primary/20">
                     {project.category}
                   </span>
@@ -105,12 +108,14 @@ export default function ProjectPage() {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
                       </span>
-                      <span className="text-sm font-mono text-white/60">Project Showcase</span>
+                      <span className="text-sm font-mono text-white/60">
+                        Project Showcase
+                      </span>
                     </motion.div>
 
                     {/* Title */}
                     <div className="space-y-4">
-                      <motion.h1 
+                      <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
@@ -120,7 +125,7 @@ export default function ProjectPage() {
                           {project.title}
                         </span>
                       </motion.h1>
-                      <motion.p 
+                      <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
@@ -131,7 +136,7 @@ export default function ProjectPage() {
                     </div>
 
                     {/* Tech Pills */}
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
@@ -170,7 +175,7 @@ export default function ProjectPage() {
                     </motion.div>
 
                     {/* Action Buttons */}
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
@@ -239,12 +244,14 @@ export default function ProjectPage() {
                       "
                       priority
                     />
-                    <div className="
+                    <div
+                      className="
                       absolute inset-0 
                       bg-gradient-to-t from-black/80 via-black/20 to-transparent 
                       opacity-60 group-hover:opacity-40 
                       transition-opacity duration-500
-                    " />
+                    "
+                    />
                   </div>
 
                   {/* Decorative Elements */}
@@ -294,17 +301,23 @@ export default function ProjectPage() {
                       <span className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                         <Server className="w-6 h-6 text-primary" />
                       </span>
-                      <h2 className="text-3xl font-bold font-grotesk">Development Process</h2>
+                      <h2 className="text-3xl font-bold font-grotesk">
+                        Development Process
+                      </h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <Card className="bg-black/50 backdrop-blur-xl border-white/10 p-8 hover:border-primary/20 transition-colors">
                         <h3 className="text-xl font-bold mb-4">Challenges</h3>
-                        <p className="text-white/70">{project.content.challenges}</p>
+                        <p className="text-white/70">
+                          {project.content.challenges}
+                        </p>
                       </Card>
                       <Card className="bg-black/50 backdrop-blur-xl border-white/10 p-8 hover:border-primary/20 transition-colors">
                         <h3 className="text-xl font-bold mb-4">Solutions</h3>
-                        <p className="text-white/70">{project.content.solutions}</p>
+                        <p className="text-white/70">
+                          {project.content.solutions}
+                        </p>
                       </Card>
                     </div>
                   </motion.div>
@@ -337,12 +350,17 @@ export default function ProjectPage() {
                     <span className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                       <Blocks className="w-6 h-6 text-primary" />
                     </span>
-                    <h2 className="text-3xl font-bold font-grotesk">Project Gallery</h2>
+                    <h2 className="text-3xl font-bold font-grotesk">
+                      Project Gallery
+                    </h2>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {project.screenshots.map((screenshot, index) => (
-                      <div key={index} className="group relative aspect-video rounded-xl overflow-hidden">
+                      <div
+                        key={index}
+                        className="group relative aspect-video rounded-xl overflow-hidden"
+                      >
                         <Image
                           src={screenshot}
                           alt={`${project.title} screenshot ${index + 1}`}

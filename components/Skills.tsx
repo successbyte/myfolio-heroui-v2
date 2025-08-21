@@ -5,36 +5,76 @@ import Image from "next/image";
 
 const skills = [
   {
-    category: "Frontend",
-    description: "Building beautiful, responsive user interfaces",
+    category: "Front-End Languages & Frameworks",
+    description: "Enhancing user experience with robust applications",
     image: "/images/skills-frontend.jpeg",
     items: [
       { name: "React", level: 95, icon: "/tech/react.svg" },
-      { name: "Next.js", level: 90, icon: "/tech/nextjs.svg" },
+      { name: "Vue.js", level: 90, icon: "/tech/nextjs.svg" },
+      { name: "Next.js", level: 80, icon: "/tech/nextjs.svg" },
       { name: "TypeScript", level: 85, icon: "/tech/typescript.svg" },
-      { name: "Tailwind CSS", level: 90, icon: "/tech/tailwind.svg" },
+      { name: "JavaScript (ES6+)", level: 85, icon: "/tech/typescript.svg" },
     ],
   },
   {
-    category: "Backend",
-    description: "Creating robust server-side applications",
-    image: "/images/skills-backend.jpeg",
+    category: "Front-End UI Libraries & Design Systems",
+    description: "Building beautiful, responsive user interfaces",
+    image: "/images/libraries.png",
     items: [
-      { name: "Node.js", level: 85, icon: "/tech/node.svg" },
-      { name: "Python", level: 80, icon: "/tech/python.svg" },
-      { name: "PostgreSQL", level: 75, icon: "/tech/postgresql.svg" },
-      { name: "MongoDB", level: 80, icon: "/tech/mongodb.svg" },
+      {
+        name: "shadcn-ui",
+        level: 97,
+        icon: "/tech/ui.svg",
+      },
+      { name: "Tailwind CSS", level: 95, icon: "/tech/tailwind.svg" },
+      {
+        name: "Hero UI",
+        level: 80,
+        icon: "/tech/ui.svg",
+      },
+      {
+        name: "Chakra UI",
+        level: 85,
+        icon: "/tech/ui.svg",
+      },
+      {
+        name: "Quasar (Vue)",
+        level: 80,
+        icon: "/tech/ui.svg",
+      },
     ],
   },
   {
-    category: "Tools & DevOps",
-    description: "Streamlining development and deployment",
+    category: "Front-End Tools & Technologies",
+    description: "Developer workflows and testing for reliable delivery",
     image: "/images/skills-devops.jpeg",
     items: [
-      { name: "Git", level: 90, icon: "/tech/git.svg" },
-      { name: "Docker", level: 75, icon: "/tech/docker.svg" },
-      { name: "AWS", level: 70, icon: "/tech/aws.svg" },
-      { name: "CI/CD", level: 80, icon: "/tech/cicd.svg" },
+      { name: "Git & GitHub", level: 95, icon: "/tech/git.svg" },
+      {
+        name: "Project Management (Jira, Trello)",
+        level: 95,
+        icon: "/tech/docker.svg",
+      },
+      {
+        name: "Testing / Quality (Vitest, Prettier)",
+        level: 85,
+        icon: "/tech/test.svg",
+      },
+      {
+        name: "Package managers (npm, pnpm, Yarn)",
+        level: 90,
+        icon: "/tech/test.svg",
+      },
+      {
+        name: "Axios / Fetch (REST API)",
+        level: 85,
+        icon: "/tech/cicd.svg",
+      },
+      // {
+      //   name: "CI/CD (GitHub Actions / Vercel)",
+      //   level: 80,
+      //   icon: "/tech/cicd.svg",
+      // },
     ],
   },
 ];
@@ -133,7 +173,7 @@ export const Skills = () => {
           </div>
 
           {/* GitHub Activity */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -161,8 +201,10 @@ export const Skills = () => {
                 </p>
               </div>
             </div>
-            {/* Mobile version with fewer squares */}
-            <div className="md:hidden grid grid-cols-13 gap-1">
+            <div
+              className="md:hidden grid grid-cols-13 gap-1"
+              //  Mobile version with fewer squares
+            >
               {Array.from({ length: 91 }).map((_, i) => {
                 const opacity = Math.random();
                 return (
@@ -202,7 +244,7 @@ export const Skills = () => {
               </div>
               <span className="text-muted-foreground">More</span>
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </section>
