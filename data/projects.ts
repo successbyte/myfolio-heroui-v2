@@ -233,137 +233,124 @@ export const projects: Project[] = [
         "Delivered a responsive, accessible prototype useful as a visual/UX exercise and portfolio piece.",
     },
   },
-
-  // {
-  //   slug: "ai-chatbot",
-  //   title: "AI Chatbot Assistant",
-  //   description:
-  //     "Intelligent chatbot powered by OpenAI GPT-3 for customer support.",
-  //   image:
-  //     "https://images.unsplash.com/photo-1662057168154-89300791ad6e?q=80&w=2320&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   category: "Backend",
-  //   company: "Lajward Technologies",
-  //   period: "May 2025 - Present",
-  //   features: [
-  //     "GPT-3 powered responses",
-  //     "Real-time chat interface",
-  //     "Context awareness",
-  //     "Multi-language support",
-  //     "Chat history analytics",
-  //     "Custom training options",
-  //     "CRM integration",
-  //     "Performance monitoring",
-  //   ],
-  //   techStack: [
-  //     "React",
-  //     "TypeScript",
-  //     "Node.js",
-  //     "OpenAI API",
-  //     "Socket.io",
-  //     "MongoDB",
-  //     "Redis",
-  //     "Docker",
-  //   ],
-  //   githubUrl: "https://github.com/yourusername/ai-chatbot",
-  //   demoUrl: "https://ai-chatbot.demo",
-  //   screenshots: [
-  //     "https://images.unsplash.com/photo-1662057168154-89300791ad6e?q=80&w=2320&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //     "https://images.unsplash.com/photo-1662057168154-89300791ad6e?q=80&w=2320&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   ],
-  //   content: {
-  //     overview:
-  //       "An advanced AI-powered chatbot that revolutionizes customer support with natural language understanding and real-time responses. Built with OpenAI's GPT-3, it provides instant, accurate assistance 24/7.",
-  //     challenges:
-  //       "Ensuring accurate responses and maintaining context across conversations.",
-  //     solutions:
-  //       "Implemented sophisticated prompt engineering and context management system.",
-  //     results:
-  //       "Reduced customer support response time by 80% and handled 10,000+ queries.",
-  //   },
-  // },
-  // {
-  //   slug: "social-platform",
-  //   title: "Social Media Platform",
-  //   description: "Full-stack social media platform with real-time features.",
-  //   image:
-  //     "https://images.unsplash.com/photo-1678329885843-eeb5a6fcfce5?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   category: "Full Stack",
-  //   features: [
-  //     "Real-time feed updates",
-  //     "Rich media sharing",
-  //     "User connections",
-  //     "Direct messaging",
-  //     "Content moderation",
-  //     "Activity notifications",
-  //     "Profile customization",
-  //     "Search functionality",
-  //   ],
-  //   techStack: [
-  //     "React",
-  //     "GraphQL",
-  //     "TypeScript",
-  //     "Node.js",
-  //     "MongoDB",
-  //     "Redis",
-  //     "AWS",
-  //     "WebSocket",
-  //   ],
-  //   githubUrl: "https://github.com/yourusername/social-platform",
-  //   demoUrl: "https://social-platform.demo",
-  //   screenshots: [
-  //     "https://images.unsplash.com/photo-1678329885843-eeb5a6fcfce5?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //     "https://images.unsplash.com/photo-1678329885843-eeb5a6fcfce5?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  //   ],
-  //   content: {
-  //     overview:
-  //       "A modern social media platform built with React and GraphQL, featuring real-time updates, rich media sharing, and interactive features. The platform includes comprehensive social networking capabilities.",
-  //     challenges:
-  //       "Scaling real-time features and managing high concurrent users.",
-  //     solutions:
-  //       "Implemented efficient caching and optimized database queries.",
-  //     results:
-  //       "Successfully handles 100,000+ daily active users with sub-second response times.",
-  //   },
-  // },
-  // {
-  //   slug: "portfolio-template",
-  //   title: "Portfolio Template",
-  //   description: "Modern portfolio template with animations and dark mode.",
-  //   image: "/images/portfolio-project.jpeg",
-  //   category: "Frontend",
-  //   features: [
-  //     "Responsive design",
-  //     "Dark/Light modes",
-  //     "Page transitions",
-  //     "Project showcase",
-  //     "Blog integration",
-  //     "Contact system",
-  //     "SEO optimization",
-  //     "Performance metrics",
-  //   ],
-  //   techStack: [
-  //     "Next.js",
-  //     "TypeScript",
-  //     "TailwindCSS",
-  //     "Framer Motion",
-  //     "Node.js",
-  //     "Express",
-  //     "MongoDB",
-  //   ],
-  //   githubUrl: "https://github.com/yourusername/portfolio-template",
-  //   demoUrl: "https://portfolio-template.demo",
-  //   screenshots: [
-  //     "/images/portfolio-project.jpeg",
-  //     "/images/portfolio-project.jpeg",
-  //   ],
-  //   content: {
-  //     overview:
-  //       "A sleek and modern portfolio template built with Next.js and Framer Motion, featuring smooth animations, dark mode support, and responsive design. Perfect for developers and designers to showcase their work.",
-  //     challenges: "Creating smooth animations while maintaining performance.",
-  //     solutions:
-  //       "Optimized animation performance using Framer Motion best practices.",
-  //     results:
-  //       "Achieved 100/100 Lighthouse performance score and positive user feedback.",
-  //   },
-  // },
+  {
+    slug: "apple-clone",
+    title: "Apple Clone",
+    description:
+      "Pixel-perfect Apple landing page clone with clean documentation and accessible design.",
+    image: "/images/apple-clone.webp",
+    category: "Frontend",
+    company: "Alkharazmi",
+    period: "Jan 2022 - Feb 2022",
+    features: [
+      "Pixel-perfect Apple website clone",
+      "Clean documentation with code comments",
+      "Responsive design with Flexbox",
+      "Accessibility-focused implementation",
+    ],
+    techStack: [
+      "HTML5",
+      "CSS3",
+      "Flexbox",
+      "BEM methodology",
+      "Responsive Web Design",
+      "Accessibility best practices",
+      "SEO basics",
+      "Git",
+      "GitHub",
+    ],
+    githubUrl: "https://github.com/successbyte/apple-clone",
+    demoUrl: "https://apple-clone-ehsan.vercel.app/",
+    screenshots: ["/images/apple-clone-2.webp", "/images/apple-clone-3.webp"],
+    content: {
+      overview:
+        "A static clone of the Apple landing page, built to refine layout skills, documentation practices, and accessibility standards.",
+      challenges:
+        "Ensuring pixel-perfect alignment and responsiveness across devices while keeping the codebase maintainable.",
+      solutions:
+        "Applied BEM for scalable CSS, Flexbox for layout, and documented code thoroughly with inline comments.",
+      results:
+        "Delivered a clean, responsive, and accessible Apple clone suitable for portfolio presentation.",
+    },
+  },
+  {
+    slug: "fatawa-android",
+    title: "Fatawa (Android)",
+    description:
+      "Android Q&A app powered by SQLite with 11,000+ entries and advanced search/bookmark features.",
+    image: "/images/fatawa-1.jpg",
+    category: "Mobile",
+    company: "Freelance",
+    period: "Mar 2021 - May 2021",
+    features: [
+      "SQLite database with 11,000+ records",
+      "Full-text search in questions and answers",
+      "Bookmark questions & answers for later reading",
+      "Open answers in separate activity view",
+      "Adjust font size, copy to clipboard, and share Q&A",
+      "Option to add new answers if not found",
+    ],
+    techStack: [
+      "Java",
+      "Android Development",
+      "SQLite",
+      "Android SDK",
+      "XML (UI design)",
+    ],
+    githubUrl: "https://github.com/successbyte/Fatawa",
+    demoUrl: "",
+    screenshots: [
+      "/images/fatawa-1.jpg",
+      "/images/fatawa-2.jpg",
+      "/images/fatawa-3.jpg",
+    ],
+    content: {
+      overview:
+        "Fatawa is a Question/Answer mobile application built for Android. It leverages a local SQLite database with more than 11,000 records to provide instant search and offline access.",
+      challenges:
+        "Managing and optimizing a large SQLite dataset for fast searching while keeping the app responsive on mid-range devices.",
+      solutions:
+        "Implemented efficient indexing for search queries, designed a clean activity-based navigation flow, and added bookmarking for user convenience.",
+      results:
+        "Delivered a feature-rich offline Android app that supports advanced search, bookmarking, font customization, and sharing of Q&A content.",
+    },
+  },
+  {
+    slug: "daruloloom-android",
+    title: "Daruloloom (Android)",
+    description:
+      "Custom Android audio player app built for an Afghan organization with offline audio, background playback, and social media integration.",
+    image: "/images/dar.jpg",
+    category: "Mobile",
+    company: "Freelance",
+    period: "Jan 2021 - Feb 2021",
+    features: [
+      "Offline audio player with pre-inserted content",
+      "Play, pause, seek audios in-app and in background (Services)",
+      "Audio sharing functionality",
+      "Favorite (Bookmark) feature for audios",
+      "Next/Previous/Close controls in notification bar",
+      "Links to organization and developer’s social media",
+    ],
+    techStack: [
+      "Java",
+      "Android Development",
+      "Android SDK",
+      "SQLite",
+      "XML (UI design)",
+    ],
+    githubUrl: "https://github.com/successbyte/DaruloloomAliHerat",
+    demoUrl: "",
+    screenshots: ["/images/dar-1.jpg", "/images/dar-2.jpg"],
+    content: {
+      overview:
+        "Daruloloom is a unique Android audio player app developed for an Afghan organization. The app plays pre-inserted audios, supports offline use, and provides advanced background playback features.",
+      challenges:
+        "Needed to implement background playback with full media controls and integrate bookmarking while keeping the app lightweight.",
+      solutions:
+        "Used Android Services to manage audio playback in the background, implemented notification-based media controls, and designed a simple bookmarking system.",
+      results:
+        "Delivered a stable offline audio player that provides background playback, bookmarking, and social media integration tailored to the client’s requirements.",
+    },
+  },
 ];
