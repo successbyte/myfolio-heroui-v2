@@ -6,7 +6,7 @@ export const projects: Project[] = [
     title: "HMIS Universal System",
     description: "Unified Hospital & Restaurant Management Information System.",
     image: "/images/hmis.webp",
-    category: "Enterprise / HMIS",
+    category: "Frontend",
     company: "Lajward Technologies",
     period: "May 2025 - Present",
     features: [
@@ -24,7 +24,7 @@ export const projects: Project[] = [
       "Role-based permissions and secure data access",
     ],
     techStack: [
-      "React.js",
+      "React",
       "TypeScript",
       "TailwindCSS",
       "Shadcn-UI",
@@ -57,7 +57,7 @@ export const projects: Project[] = [
     description:
       "Industry-ready accounting system for sales, purchases, production and transactions.",
     image: "/images/metal-dark.png",
-    category: "Accounting / ERP",
+    category: "Full Stack",
     company: "Alkharazmi",
     period: "Jun 2024 - Apr 2025",
     features: [
@@ -71,6 +71,9 @@ export const projects: Project[] = [
     ],
     techStack: [
       "Vue.js",
+      "Laravel",
+      "PHP",
+      "PostgreSQL",
       "Quasar (Vue framework)",
       "JavaScript",
       "SCSS",
@@ -106,7 +109,7 @@ export const projects: Project[] = [
     description:
       "QR code generation & analytics platform (dynamic & static QR codes).",
     image: "/images/adaptix.png",
-    category: "Utilities / QR",
+    category: "Full Stack",
     company: "Alkharazmi",
     period: "Apr 2024 - May 2024",
     features: [
@@ -120,7 +123,7 @@ export const projects: Project[] = [
       "React",
       "TypeScript",
       "Firebase (Auth, Firestore)",
-      "Tailwind CSS",
+      "TailwindCSS",
       "HubSpot (payments/integration)",
       "Git",
       "GitHub",
@@ -152,7 +155,7 @@ export const projects: Project[] = [
     description:
       "ERP for car sellers — contracts, logistics, reporting and role-based permissions.",
     image: "/images/transport.webp",
-    category: "Transport / ERP",
+    category: "Frontend",
     company: "Alkharazmi",
     period: "Oct 2023 - Mar 2024",
     features: [
@@ -191,7 +194,7 @@ export const projects: Project[] = [
     description:
       "Pixel-perfect Dribbble landing-page clone focused on responsive layout and accessibility.",
     image: "/images/dribbble-1.webp",
-    category: "UI / Frontend",
+    category: "Frontend",
     company: "Alkharazmi",
     period: "Mar 2022 - Apr 2022",
     features: [
